@@ -14,7 +14,7 @@
 
     <com.google.android.material.appbar.AppBarLayout
         android:layout_width="match_parent"
-        android:layout_height="200dp"
+        android:layout_height="100dp"
         android:layout_gravity="center"
         android:elevation="0dp"
         android:id="@+id/tab_layout_bar">
@@ -35,7 +35,7 @@
         app:tabGravity="fill"
         app:tabMode="fixed"
         app:tabTextColor="@color/tabtextcolour"
-        app:tabIndicator="@color/tabtextcolour"
+        app:tabIndicatorColor="@color/tabIndicatorColour"
         android:background="@color/colorPrimary" />
 
     <androidx.viewpager.widget.ViewPager

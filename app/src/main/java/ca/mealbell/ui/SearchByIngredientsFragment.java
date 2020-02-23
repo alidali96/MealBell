@@ -1,5 +1,9 @@
 package ca.mealbell.ui;
 
+/**
+ * Created by: Fadi Findakly - Feb. 23, 2020
+ */
+
 
 import android.os.Bundle;
 
@@ -26,7 +30,10 @@ public class SearchByIngredientsFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_search_by_ingredients, container, false);
+        View view = inflater.inflate(R.layout.fragment_search_by_ingredients, container, false);
+
+
+        return view;
     }
 
 }

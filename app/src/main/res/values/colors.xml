@@ -5,11 +5,16 @@
 <!--    <color name="colorPrimaryDark">#00574B</color>-->
 <!--    <color name="colorAccent">#D81B60</color> -->
 
+<!--    Updated by: Ali Dali - Feb. 22, 2020-->
+<!--    Updated by: Fadi Findakly - Feb. 23, 2020-->
+
+
     <!-- Temporary Colors :) Feel FREE to Pick New Ones :D -->
     <color name="colorPrimary">#03ad53</color>
     <color name="colorPrimaryDark">#007c27</color>
     <color name="colorAccent">#46af4c</color>
 
     <color name="tabtextcolour">#ffffff</color>
+    <color name="tabIndicatorColour">#bfbfbf</color>
 
 </resources>
