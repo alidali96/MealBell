@@ -9,4 +9,7 @@
     <color name="colorPrimary">#03ad53</color>
     <color name="colorPrimaryDark">#007c27</color>
     <color name="colorAccent">#46af4c</color>
+
+    <color name="tabtextcolour">#ffffff</color>
+
 </resources>
