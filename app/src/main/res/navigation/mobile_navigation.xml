@@ -13,7 +13,7 @@
         tools:layout="@layout/fragment_home" />
     <fragment
         android:id="@+id/nav_search_recipes"
-        android:name="ca.mealbell.ui.SearchRecipesFragment"
-        android:label="@string/menu_search_recipes"
-        tools:layout="@layout/fragment_search_recipes" />
+        android:name="ca.mealbell.ui.RecipesResultsFragment"
+        android:label="@string/menu_recipes_results"
+        tools:layout="@layout/fragment_recipes_results" />
 </navigation>
