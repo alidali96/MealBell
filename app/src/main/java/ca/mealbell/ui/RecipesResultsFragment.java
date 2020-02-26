@@ -5,6 +5,7 @@ import android.graphics.Color;
 import android.os.Bundle;
 
 
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
@@ -18,7 +19,11 @@ import android.view.ViewGroup;
 
 import com.android.volley.Request;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import ca.mealbell.APIResponse;
+import ca.mealbell.Const;
 import ca.mealbell.MainAPI;
 import ca.mealbell.R;
 
@@ -36,6 +41,7 @@ import static ca.mealbell.MainActivity.fab;
 public class RecipesResultsFragment extends Fragment implements SwipeRefreshLayout.OnRefreshListener, APIResponse {
 
     private final String TAG = getClass().getTypeName();
+    private final Map<String, String> FOOD_API_HEADERS = new HashMap<>();
 
     SwipeRefreshLayout swipeRefreshLayout;
     RecyclerView recyclerView;
@@ -44,6 +50,17 @@ public class RecipesResultsFragment extends Fragment implements SwipeRefreshLayo
 
     public RecipesResultsFragment() {
         // Required empty public constructor
+    }
+
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        if (getArguments() != null) {
+            requestURL = getArguments().getString(Const.SEARCH_KEY);
+        }
+        // Add API headers
+        FOOD_API_HEADERS.put("x-rapidapi-host", "spoonacular-recipe-food-nutrition-v1.p.rapidapi.com");
+        FOOD_API_HEADERS.put("x-rapidapi-key", "ADD_YOUR_API_KEY_HERE");
     }
 
     @Override
@@ -67,7 +84,6 @@ public class RecipesResultsFragment extends Fragment implements SwipeRefreshLayo
         recyclerView.setLayoutManager(null);
         recyclerView.setAdapter(null);
 
-
         search();
 
         return view;
@@ -75,7 +91,7 @@ public class RecipesResultsFragment extends Fragment implements SwipeRefreshLayo
 
 
     private void search() {
-        MainAPI.getInstance(getContext()).newRequest(Request.Method.GET, requestURL, null, this);
+        MainAPI.getInstance(getContext()).setHeaders(FOOD_API_HEADERS).newRequest(Request.Method.GET, requestURL, null, this);
     }
 
     /**
@@ -83,23 +99,28 @@ public class RecipesResultsFragment extends Fragment implements SwipeRefreshLayo
      */
     @Override
     public void onRefresh() {
-        // TODO: add function to response on refresh
+        search();
+
         // stop refreshing after 2.5 seconds :D
-        new Handler().postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                swipeRefreshLayout.setRefreshing(false);
-            }
-        }, 2500);
+//        new Handler().postDelayed(new Runnable() {
+//            @Override
+//            public void run() {
+//                swipeRefreshLayout.setRefreshing(false);
+//            }
+//        }, 2500);
     }
 
     @Override
     public void onSuccess(String json, int status) {
-        Log.d(TAG, json);
+        // Stop refreshing
+        swipeRefreshLayout.setRefreshing(false);
+        Log.e(TAG, json);
     }
 
     @Override
     public void onFailure(String error, int status) {
+        // Stop refreshing
+        swipeRefreshLayout.setRefreshing(false);
         Log.e(TAG, error);
     }
 }

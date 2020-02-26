@@ -1,5 +1,8 @@
 package ca.mealbell;
 
+import java.util.HashMap;
+import java.util.Map;
+
 /**
  * This class will contain all constants values
  *
