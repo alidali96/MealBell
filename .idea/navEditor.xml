@@ -22,12 +22,26 @@
                   </entry>
                   <entry key="nav_search_recipes">
                     <value>
+                      <LayoutPositions />
+                    </value>
+                  </entry>
+                  <entry key="searchRecipesByIngredients">
+                    <value>
                       <LayoutPositions>
                         <option name="myPosition">
                           <Point>
-                            <option name="x" value="256" />
-                            <option name="y" value="12" />
+                            <option name="x" value="228" />
+                            <option name="y" value="571" />
                           </Point>
+                        </option>
+                        <option name="myPositions">
+                          <map>
+                            <entry key="action_searchRecipesByIngredients_to_nav_result_recipes">
+                              <value>
+                                <LayoutPositions />
+                              </value>
+                            </entry>
+                          </map>
                         </option>
                       </LayoutPositions>
                     </value>

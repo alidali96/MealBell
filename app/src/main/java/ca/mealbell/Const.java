@@ -7,7 +7,10 @@ package ca.mealbell;
 public class Const {
 
     // API base url
-    public static final String API_URL = "https://spoonacular-recipe-food-nutrition-v1.p.rapidapi.com";
+    public static final String API_URL = "https://spoonacular-recipe-food-nutrition-v1.p.rapidapi.com/";
+
+    // Bundle KEYs
+    public static final String SEARCH_KEY = "SEARCH";
 
 
 }

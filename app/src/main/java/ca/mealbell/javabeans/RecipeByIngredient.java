@@ -3,15 +3,23 @@ package ca.mealbell.javabeans;
 import java.io.Serializable;
 
 /**
- * This class responsible to hold returned json from request (API_URL + '/recipes/findByIngredients')
+ * <p>This class responsible to hold returned json from request (API_URL + '/recipes/findByIngredients')</p>
+ *
+ * <h3>JSON Sample</h3>
+ *
+ * "id":641803<br>
+ * "title":"Easy & Delish! ~ Apple Crumble"<br>
+ * "image":"https://spoonacular.com/recipeImages/Easy---Delish--Apple-Crumble-641803.jpg"<br>
+ * "usedIngredientCount":3<br>
+ * "missedIngredientCount":4<br>
+ * "likes":1<br>
+ *
  * @author Ali Dali
- * @date 22-02-2020
+ * @since 22-02-2020
  */
 public class RecipeByIngredient implements Serializable {
 
     /**
-     * This is a sample of json
-     *
      * "id":641803
      * "title":"Easy & Delish! ~ Apple Crumble"
      * "image":"https://spoonacular.com/recipeImages/Easy---Delish--Apple-Crumble-641803.jpg"
@@ -63,9 +71,10 @@ public class RecipeByIngredient implements Serializable {
 
     /**
      * This will print all information about a recipe by ingredients (search result)
+     *
      * @return Recipe Information
      * @author Ali Dali
-     * @date 22-02-2020
+     * @since 22-02-2020
      */
     @Override
     public String toString() {
