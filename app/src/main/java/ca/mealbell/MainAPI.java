@@ -6,6 +6,7 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 
+import com.android.volley.AuthFailureError;
 import com.android.volley.NetworkResponse;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
@@ -15,11 +16,14 @@ import com.android.volley.toolbox.Volley;
 
 import org.json.JSONObject;
 
+import java.util.Map;
+
 /**
  * This class is responsible to create all requests
+ *
  * @author Ali Dali
- * @since 22-02-2020
  * @version 1.0
+ * @since 22-02-2020
  */
 public class MainAPI {
 
@@ -37,12 +41,17 @@ public class MainAPI {
     private RequestQueue queue;
     private Context context;
     private int statusCode;
+    private Map<String, String> headers;
 
     private MainAPI(Context context) {
         this.context = context;
         queue = Volley.newRequestQueue(context);
     }
 
+    public MainAPI setHeaders(Map<String, String> headers) {
+        this.headers = headers;
+        return this;
+    }
 
     /**
      * @param url      (API) Request URL
@@ -51,8 +60,8 @@ public class MainAPI {
      * @param callback Class that is responsible for the request response (onSuccess/onFailure)
      * @param <T>      Any Class that implements interface (APIResponse)
      * @author Ali Dali
-     * @since 22-02-2020
      * @version 1.0
+     * @since 22-02-2020
      */
     public <T extends APIResponse> void newRequest(@NonNull final int method, @NonNull final String url, final JSONObject json, @NonNull final T callback) {
         JsonObjectRequest request = new JsonObjectRequest(method, url, json, new Response.Listener<JSONObject>() {
@@ -72,6 +81,12 @@ public class MainAPI {
                 Log.wtf("MainAPI", error.toString() + " toString");
             }
         }) {
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                if (headers == null) return super.getHeaders();
+                return headers;
+            }
+
             @Override
             protected Response<JSONObject> parseNetworkResponse(NetworkResponse response) {
                 statusCode = response.statusCode;
