@@ -1,6 +1,7 @@
 package ca.mealbell.ui;
 
 
+
 import android.content.Context;
 import android.os.Bundle;
 
@@ -60,6 +61,7 @@ public class SearchByIngredientsFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
+
         final View view = inflater.inflate(R.layout.fragment_search_by_ingredients, container, false);
 
         // Hide fab
@@ -101,8 +103,10 @@ public class SearchByIngredientsFragment extends Fragment {
             }
         });
 
+
         return view;
     }
+
 
     /**
      * Add all ingredients to the query
@@ -169,4 +173,3 @@ class IngredientsHolder extends RecyclerView.ViewHolder {
         textView = itemView.findViewById(R.id.ingredient);
     }
 }
-
