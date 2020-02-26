@@ -10,8 +10,12 @@
     <!-- menu items -->
     <string name="menu_home">Meal Bell</string>
 
-
+    <!-- fragments -->
+    <string name="search_by_ingredients_title">Search By Ingredients</string>
     <!-- Testing Purposes -->
     <string name="menu_recipes_results">Recipes Results</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 
 </resources>
