@@ -9,10 +9,12 @@
 
     <!-- menu items -->
     <string name="menu_home">Meal Bell</string>
+    <string name="menu_search">Search Recipes</string>
 
 
     <!-- fragments -->
     <string name="search_by_ingredients_title">Search By Ingredients</string>
+    <string name="search_by_nutrition_title">Search By Nutrition</string>
     <!-- Testing Purposes -->
     <string name="menu_recipes_results">Recipes Results</string>
 

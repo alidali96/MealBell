@@ -99,7 +99,7 @@ public class SearchByIngredientsFragment extends Fragment {
                 // Send Search URL in bundle to Results Layout
                 Bundle args = new Bundle();
                 args.putString(Const.SEARCH_KEY, getSearchURL());
-                Navigation.findNavController(view).navigate(R.id.action_searchRecipesByIngredients_to_nav_result_recipes, args);
+                Navigation.findNavController(view).navigate(R.id.action_nav_serach_recipes_to_recipesResultsFragment, args);
             }
         });
 

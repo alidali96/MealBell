@@ -51,8 +51,8 @@ public class SearchRecipesFragment extends Fragment {
         ViewPagerAdapter adapter = new ViewPagerAdapter(getChildFragmentManager());
 
         // add fragments to the viewPager
-        adapter.addFragment(new SearchByIngredientsFragment(), "Serach By Ingredients");
-        adapter.addFragment(new SearchByNutritionFragment(), "Serach By Nutritions");
+        adapter.addFragment(new SearchByIngredientsFragment(), getString(R.string.search_by_ingredients_title));
+        adapter.addFragment(new SearchByNutritionFragment(), getString(R.string.search_by_nutrition_title));
 
         // viewPager setup
         tabLayoutViewPager.setAdapter(adapter);
