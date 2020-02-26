@@ -8,11 +8,11 @@
             android:id="@+id/nav_home"
             android:icon="@drawable/ic_home_black_24dp"
             android:title="@string/menu_home" />
-        <item
-            android:id="@+id/nav_search_recipes"
-            android:icon="@drawable/ic_search_black_24dp"
-            android:title="@string/menu_search_recipes" />
 
+        <item
+            android:id="@+id/nav_serach_recipes"
+            android:icon="@drawable/ic_search_black_24dp"
+            android:title="@string/menu_search" />
     </group>
 
 </menu>
