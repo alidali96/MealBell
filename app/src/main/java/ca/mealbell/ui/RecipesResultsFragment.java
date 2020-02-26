@@ -4,15 +4,22 @@ package ca.mealbell.ui;
 import android.graphics.Color;
 import android.os.Bundle;
 
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import android.os.Handler;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.android.volley.Request;
+
+import ca.mealbell.APIResponse;
+import ca.mealbell.Const;
+import ca.mealbell.MainAPI;
 import ca.mealbell.R;
 
 import static ca.mealbell.MainActivity.fab;
@@ -23,18 +30,29 @@ import static ca.mealbell.MainActivity.fab;
  *
  * @author Ali Dali
  * @since 22-02-2020
+ * @updated 26-02-2020
  * @see SwipeRefreshLayout
  */
-public class RecipesResultsFragment extends Fragment implements SwipeRefreshLayout.OnRefreshListener {
+public class RecipesResultsFragment extends Fragment implements SwipeRefreshLayout.OnRefreshListener, APIResponse {
+
+    private final String TAG = getClass().getTypeName();
 
     SwipeRefreshLayout swipeRefreshLayout;
     RecyclerView recyclerView;
 
+    String requestURL;
 
     public RecipesResultsFragment() {
         // Required empty public constructor
     }
 
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        if(getArguments() != null) {
+            requestURL = getArguments().getString(Const.SEARCH_KEY);
+        }
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -57,8 +75,13 @@ public class RecipesResultsFragment extends Fragment implements SwipeRefreshLayo
         recyclerView.setLayoutManager(null);
         recyclerView.setAdapter(null);
 
+        search();
 
         return view;
+    }
+
+    private void search() {
+        MainAPI.getInstance(getContext()).newRequest(Request.Method.GET, requestURL, null, this);
     }
 
     /**
@@ -74,5 +97,15 @@ public class RecipesResultsFragment extends Fragment implements SwipeRefreshLayo
                 swipeRefreshLayout.setRefreshing(false);
             }
         }, 2500);
+    }
+
+    @Override
+    public void onSuccess(String json, int status) {
+        Log.d(TAG, json);
+    }
+
+    @Override
+    public void onFailure(String error, int status) {
+        Log.e(TAG, error);
     }
 }
