@@ -34,9 +34,5 @@
         android:id="@+id/searchByNutritionFragment"
         android:name="ca.mealbell.ui.SearchByNutritionFragment"
         android:label="@string/search_by_nutrition_title"
-        tools:layout="@layout/fragment_search_by_nutrition" /><![CDATA[
-
-    >>>>>>> Ingredients
-
-]]>
+        tools:layout="@layout/fragment_search_by_nutrition" />
 </navigation>
