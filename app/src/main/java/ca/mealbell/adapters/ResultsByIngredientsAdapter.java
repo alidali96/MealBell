@@ -10,6 +10,8 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.squareup.picasso.Picasso;
+
 import java.util.List;
 
 import ca.mealbell.R;
@@ -36,6 +38,7 @@ public class ResultsByIngredientsAdapter extends RecyclerView.Adapter<ResultsByI
     public void onBindViewHolder(@NonNull ResultsByIngredientsHolder holder, int position) {
         RecipeByIngredient recipe = recipes.get(position);
 
+        Picasso.get().load(recipe.getImage()).placeholder(R.drawable.dish).into(holder.image);
         holder.title.setText(recipe.getTitle());
         holder.usedIngredients.setText(recipe.getUsedIngredientCount());
         holder.missedIngredients.setText(recipe.getMissedIngredientCount());
