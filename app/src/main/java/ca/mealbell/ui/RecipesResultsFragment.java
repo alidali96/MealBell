@@ -11,8 +11,6 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
-import android.os.Handler;
-
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -36,15 +34,19 @@ import ca.mealbell.javabeans.RecipeByIngredient;
 
 import static ca.mealbell.MainActivity.fab;
 
+enum SearchType {
+    Ingredient,
+    Nutrition
+}
 
 /**
  * This Fragment will show list of recipes (search results)
  *
  * @author Ali Dali
- * @see SwipeRefreshLayout
- * @since 22-02-2020
  * @updated 26-02-2020
  * @updated 01-03-2020
+ * @see SwipeRefreshLayout
+ * @since 22-02-2020
  */
 public class RecipesResultsFragment extends Fragment implements SwipeRefreshLayout.OnRefreshListener, APIResponse {
 
@@ -52,11 +54,15 @@ public class RecipesResultsFragment extends Fragment implements SwipeRefreshLayo
     private final Map<String, String> FOOD_API_HEADERS = new HashMap<>();
 
     private ArrayList<RecipeByIngredient> recipeByIngredients = new ArrayList<>();
+//    private ArrayList<RecipeByNutrition> recipeByNutrition = new ArrayList<>();
+
+    private SearchType searchType;
 
     SwipeRefreshLayout swipeRefreshLayout;
     RecyclerView recyclerView;
 
     ResultsByIngredientsAdapter ingredientsAdapter;
+//    ResultsByNutritionAdapter nutritionAdapter;
 
     Gson gson;
     String requestURL;
@@ -69,7 +75,8 @@ public class RecipesResultsFragment extends Fragment implements SwipeRefreshLayo
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
-            requestURL = getArguments().getString(Const.SEARCH_KEY);
+            requestURL = getArguments().getString(Const.SEARCH_URL);
+            searchType = SearchType.values()[getArguments().getInt(Const.SEARCH_TYPE, 0)];
         }
         // Initialize Gson
         gson = new Gson();
@@ -95,7 +102,11 @@ public class RecipesResultsFragment extends Fragment implements SwipeRefreshLayo
 
 
         // Set Adapters
-        ingredientsAdapter = new ResultsByIngredientsAdapter(getContext(), recipeByIngredients);
+        if (searchType == SearchType.Ingredient) {
+            ingredientsAdapter = new ResultsByIngredientsAdapter(getContext(), recipeByIngredients);
+        } else {
+//            nutritionAdapter = new ResultsByNutritionAdapter(getContext(), recipeByNutrition);
+        }
 
         // Set RecyclerView
         recyclerView = view.findViewById(R.id.recycler_view);
@@ -109,8 +120,10 @@ public class RecipesResultsFragment extends Fragment implements SwipeRefreshLayo
     }
 
 
+    /**
+     * Make API Request
+     */
     private void search() {
-        // TODO: Change it to newArrayRequest
         MainAPI.getInstance(getContext()).setHeaders(FOOD_API_HEADERS).newRequest(Request.Method.GET, requestURL, null, this);
     }
 
@@ -120,14 +133,6 @@ public class RecipesResultsFragment extends Fragment implements SwipeRefreshLayo
     @Override
     public void onRefresh() {
         search();
-
-        // stop refreshing after 2.5 seconds :D
-//        new Handler().postDelayed(new Runnable() {
-//            @Override
-//            public void run() {
-//                swipeRefreshLayout.setRefreshing(false);
-//            }
-//        }, 2500);
     }
 
     @Override
@@ -136,10 +141,17 @@ public class RecipesResultsFragment extends Fragment implements SwipeRefreshLayo
         swipeRefreshLayout.setRefreshing(false);
         Log.e(TAG, json);
 
-        Type ingredientsType = new TypeToken<ArrayList<RecipeByIngredient>>(){}.getType();
-        recipeByIngredients = gson.fromJson(json, ingredientsType);
+        if (searchType == SearchType.Ingredient) {
+            Type ingredientsType = new TypeToken<ArrayList<RecipeByIngredient>>() {
+            }.getType();
+            recipeByIngredients = gson.fromJson(json, ingredientsType);
 
-        ingredientsAdapter.updateList(recipeByIngredients);
+            ingredientsAdapter.updateList(recipeByIngredients);
+        } else {
+            // TODO: Nutrition
+
+
+        }
     }
 
     @Override
