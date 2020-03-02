@@ -111,7 +111,7 @@ public class RecipesResultsFragment extends Fragment implements SwipeRefreshLayo
 
     private void search() {
         // TODO: Change it to newArrayRequest
-        MainAPI.getInstance(getContext()).jsonObjectRequest(Request.Method.GET, requestURL, null, this);
+        MainAPI.getInstance(getContext()).setHeaders(FOOD_API_HEADERS).newRequest(Request.Method.GET, requestURL, null, this);
     }
 
     /**
@@ -136,7 +136,7 @@ public class RecipesResultsFragment extends Fragment implements SwipeRefreshLayo
         swipeRefreshLayout.setRefreshing(false);
         Log.e(TAG, json);
 
-        Type ingredientsType = new TypeToken<RecipeByIngredient>(){}.getType();
+        Type ingredientsType = new TypeToken<ArrayList<RecipeByIngredient>>(){}.getType();
         recipeByIngredients = gson.fromJson(json, ingredientsType);
 
         ingredientsAdapter.updateList(recipeByIngredients);

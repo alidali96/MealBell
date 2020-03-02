@@ -9,9 +9,18 @@
         android:id="@+id/card_view"
         android:layout_width="0dp"
         android:layout_height="0dp"
+        android:layout_margin="5dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:backgroundTint="@color/colorDarkBlue"
+        app:cardCornerRadius="5dp"
+        app:cardElevation="10dp"
+        app:cardPreventCornerOverlap="false"
+        app:cardUseCompatPadding="false"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintHorizontal_bias="0.428"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.0" />
@@ -20,7 +29,10 @@
         android:id="@+id/image"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:elevation="2dp"
+        android:adjustViewBounds="true"
+        android:cropToPadding="false"
+        android:elevation="11dp"
+        android:scaleType="fitCenter"
         app:layout_constraintEnd_toEndOf="@id/card_view"
         app:layout_constraintStart_toStartOf="@id/card_view"
         app:layout_constraintTop_toTopOf="@id/card_view"
@@ -33,8 +45,10 @@
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
-        android:elevation="2dp"
+        android:elevation="11dp"
         android:text="Recipe"
+        android:textColor="@color/design_default_color_background"
+        android:textSize="18sp"
         app:layout_constraintEnd_toStartOf="@+id/likes"
         app:layout_constraintStart_toStartOf="@id/card_view"
         app:layout_constraintTop_toBottomOf="@id/image" />
@@ -46,10 +60,12 @@
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:layout_marginBottom="8dp"
-        android:elevation="2dp"
+        android:elevation="11dp"
         android:text="Used"
+        android:textColor="@color/design_default_color_background"
+        android:textSize="18sp"
         app:layout_constraintBottom_toBottomOf="@id/card_view"
-        app:layout_constraintStart_toStartOf="@+id/card_view"
+        app:layout_constraintStart_toEndOf="@+id/used_icon"
         app:layout_constraintTop_toBottomOf="@+id/title" />
 
     <TextView
@@ -59,10 +75,12 @@
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:layout_marginBottom="8dp"
-        android:elevation="2dp"
+        android:elevation="11dp"
         android:text="Missed"
+        android:textColor="@color/design_default_color_background"
+        android:textSize="18sp"
         app:layout_constraintBottom_toBottomOf="@id/card_view"
-        app:layout_constraintStart_toEndOf="@+id/used"
+        app:layout_constraintStart_toEndOf="@+id/missed_icon"
         app:layout_constraintTop_toBottomOf="@+id/title" />
 
     <TextView
@@ -70,8 +88,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
-        android:elevation="2dp"
+        android:elevation="11dp"
         android:text="Likes"
+        android:textColor="@color/design_default_color_background"
+        android:textSize="18sp"
         app:layout_constraintEnd_toStartOf="@id/like_icon"
         app:layout_constraintStart_toEndOf="@id/title"
         app:layout_constraintTop_toBottomOf="@+id/image" />
@@ -83,9 +103,35 @@
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
-        android:elevation="2dp"
+        android:elevation="11dp"
         app:layout_constraintEnd_toEndOf="@id/card_view"
         app:layout_constraintStart_toEndOf="@+id/likes"
         app:layout_constraintTop_toBottomOf="@+id/image"
         app:srcCompat="@drawable/ic_love" />
+
+    <ImageView
+        android:id="@+id/used_icon"
+        android:layout_width="24dp"
+        android:layout_height="24dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="8dp"
+        android:elevation="11dp"
+        app:layout_constraintBottom_toBottomOf="@+id/card_view"
+        app:layout_constraintStart_toStartOf="@id/card_view"
+        app:layout_constraintTop_toBottomOf="@+id/title"
+        app:srcCompat="@drawable/ic_tick" />
+
+    <ImageView
+        android:id="@+id/missed_icon"
+        android:layout_width="24dp"
+        android:layout_height="24dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="8dp"
+        android:elevation="11dp"
+        app:layout_constraintBottom_toBottomOf="@id/card_view"
+        app:layout_constraintStart_toEndOf="@id/used"
+        app:layout_constraintTop_toBottomOf="@id/title"
+        app:srcCompat="@drawable/ic_cancel" />
 </androidx.constraintlayout.widget.ConstraintLayout>
