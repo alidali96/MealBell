@@ -1,7 +1,6 @@
 package ca.mealbell.ui;
 
 
-
 import android.content.Context;
 import android.os.Bundle;
 
@@ -20,7 +19,14 @@ import android.view.inputmethod.EditorInfo;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
+
+import com.google.android.flexbox.AlignContent;
+import com.google.android.flexbox.AlignItems;
+import com.google.android.flexbox.FlexWrap;
+import com.google.android.flexbox.FlexboxLayout;
+import com.google.android.flexbox.FlexboxLayoutManager;
 
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
@@ -46,6 +52,7 @@ public class SearchByIngredientsFragment extends Fragment {
 
     RecyclerView recyclerView;
     IngredientsAdapter adapter;
+    ViewGroup testLayout;
     //    SearchView searchView;
     EditText searchView;
     Button submitButton;
@@ -59,7 +66,7 @@ public class SearchByIngredientsFragment extends Fragment {
 
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+    public View onCreateView(LayoutInflater inflater, final ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
 
@@ -70,11 +77,12 @@ public class SearchByIngredientsFragment extends Fragment {
 
         // Attach with layout
         recyclerView = view.findViewById(R.id.ingredients_list);
+        testLayout = view.findViewById(R.id.ingredients_layout);
         searchView = view.findViewById(R.id.search);
         submitButton = view.findViewById(R.id.submit);
 
         // Set RecyclerView adapter and LayoutManager
-        LinearLayoutManager linearLayout = new LinearLayoutManager(getContext());
+        final LinearLayoutManager linearLayout = new LinearLayoutManager(getContext());
         linearLayout.setOrientation(RecyclerView.HORIZONTAL);
         adapter = new IngredientsAdapter(getContext(), ingredients);
         recyclerView.setLayoutManager(linearLayout);
@@ -87,6 +95,13 @@ public class SearchByIngredientsFragment extends Fragment {
                 // (Android Keyboard || External Keyboard && Text !Empty)
                 if ((actionId == EditorInfo.IME_ACTION_DONE || event.getKeyCode() == KeyEvent.KEYCODE_ENTER) && !v.getText().toString().isEmpty()) {
                     ingredients.add(v.getText().toString());
+//                    LayoutInflater inflater = (LayoutInflater) getActivity().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+//                    final View rowView = inflater.inflate(R.layout.ingredient_holder, null);
+                    View rowView = LayoutInflater.from(getContext()).inflate(R.layout.ingredient_holder, container, false);
+                    if (rowView != null)
+                        testLayout.addView(rowView);
+                    else
+                        Log.e(TAG, "NULL VIEW");
                     adapter.notifyItemInserted(ingredients.size() - 1);
                     v.setText(null);
                     return true;
@@ -115,6 +130,7 @@ public class SearchByIngredientsFragment extends Fragment {
 
     /**
      * Add all ingredients to the query
+     *
      * @return the api request URL
      */
     private String getSearchURL() {
