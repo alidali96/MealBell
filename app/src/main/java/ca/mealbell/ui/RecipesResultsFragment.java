@@ -111,7 +111,7 @@ public class RecipesResultsFragment extends Fragment implements SwipeRefreshLayo
 
     private void search() {
         // TODO: Change it to newArrayRequest
-        MainAPI.getInstance(getContext()).setHeaders(FOOD_API_HEADERS).newRequest(Request.Method.GET, requestURL, null, this);
+        MainAPI.getInstance(getContext()).jsonObjectRequest(Request.Method.GET, requestURL, null, this);
     }
 
     /**
