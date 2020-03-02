@@ -1,7 +1,6 @@
 package ca.mealbell.ui;
 
 
-
 import android.content.Context;
 import android.os.Bundle;
 
@@ -19,7 +18,15 @@ import android.view.ViewGroup;
 import android.view.inputmethod.EditorInfo;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
+
+import com.google.android.flexbox.AlignContent;
+import com.google.android.flexbox.AlignItems;
+import com.google.android.flexbox.FlexWrap;
+import com.google.android.flexbox.FlexboxLayout;
+import com.google.android.flexbox.FlexboxLayoutManager;
 
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
@@ -45,6 +52,7 @@ public class SearchByIngredientsFragment extends Fragment {
 
     RecyclerView recyclerView;
     IngredientsAdapter adapter;
+    ViewGroup testLayout;
     //    SearchView searchView;
     EditText searchView;
     Button submitButton;
@@ -58,7 +66,7 @@ public class SearchByIngredientsFragment extends Fragment {
 
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+    public View onCreateView(LayoutInflater inflater, final ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
 
@@ -69,12 +77,19 @@ public class SearchByIngredientsFragment extends Fragment {
 
         // Attach with layout
         recyclerView = view.findViewById(R.id.ingredients_list);
+        testLayout = view.findViewById(R.id.ingredients_layout);
         searchView = view.findViewById(R.id.search);
         submitButton = view.findViewById(R.id.submit);
 
-        // Set RecyclerView adapter and LayoutManager
+        // Set RecyclerView LayoutManager
+//        final LinearLayoutManager linearLayout = new LinearLayoutManager(getContext());
+//        linearLayout.setOrientation(RecyclerView.HORIZONTAL);
+        FlexboxLayoutManager flexboxLayout = new FlexboxLayoutManager(getContext());
+        flexboxLayout.setFlexWrap(FlexWrap.WRAP);
+
+        // Set RecyclerView Adapter
         adapter = new IngredientsAdapter(getContext(), ingredients);
-        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+        recyclerView.setLayoutManager(flexboxLayout);
         recyclerView.setAdapter(adapter);
 
         // Search Click Listener
@@ -98,8 +113,10 @@ public class SearchByIngredientsFragment extends Fragment {
             public void onClick(View v) {
                 // Send Search URL in bundle to Results Layout
                 Bundle args = new Bundle();
-                args.putString(Const.SEARCH_KEY, getSearchURL());
+                args.putString(Const.SEARCH_URL, getSearchURL());
+                args.putInt(Const.SEARCH_TYPE, Const.INGREDIENT);
                 Navigation.findNavController(view).navigate(R.id.action_nav_serach_recipes_to_recipesResultsFragment, args);
+                Log.e(TAG, getSearchURL());
             }
         });
 
@@ -110,6 +127,7 @@ public class SearchByIngredientsFragment extends Fragment {
 
     /**
      * Add all ingredients to the query
+     *
      * @return the api request URL
      */
     private String getSearchURL() {
@@ -147,7 +165,14 @@ class IngredientsAdapter extends RecyclerView.Adapter<IngredientsHolder> {
 
     @Override
     public void onBindViewHolder(@NonNull final IngredientsHolder holder, int position) {
-        holder.textView.setText(ingredients.get(position));
+        holder.ingredient.setText(ingredients.get(position));
+        holder.remove.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ingredients.remove(holder.getAdapterPosition());
+                notifyItemRemoved(holder.getAdapterPosition());
+            }
+        });
         holder.itemView.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
             public boolean onLongClick(View v) {
@@ -166,10 +191,12 @@ class IngredientsAdapter extends RecyclerView.Adapter<IngredientsHolder> {
 
 class IngredientsHolder extends RecyclerView.ViewHolder {
 
-    TextView textView;
+    TextView ingredient;
+    ImageView remove;
 
     public IngredientsHolder(@NonNull View itemView) {
         super(itemView);
-        textView = itemView.findViewById(R.id.ingredient);
+        ingredient = itemView.findViewById(R.id.ingredient);
+        remove = itemView.findViewById(R.id.remove_icon);
     }
 }
