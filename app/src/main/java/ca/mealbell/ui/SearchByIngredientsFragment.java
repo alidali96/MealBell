@@ -19,6 +19,7 @@ import android.view.ViewGroup;
 import android.view.inputmethod.EditorInfo;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import java.io.UnsupportedEncodingException;
@@ -73,8 +74,10 @@ public class SearchByIngredientsFragment extends Fragment {
         submitButton = view.findViewById(R.id.submit);
 
         // Set RecyclerView adapter and LayoutManager
+        LinearLayoutManager linearLayout = new LinearLayoutManager(getContext());
+        linearLayout.setOrientation(RecyclerView.HORIZONTAL);
         adapter = new IngredientsAdapter(getContext(), ingredients);
-        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+        recyclerView.setLayoutManager(linearLayout);
         recyclerView.setAdapter(adapter);
 
         // Search Click Listener
@@ -149,7 +152,14 @@ class IngredientsAdapter extends RecyclerView.Adapter<IngredientsHolder> {
 
     @Override
     public void onBindViewHolder(@NonNull final IngredientsHolder holder, int position) {
-        holder.textView.setText(ingredients.get(position));
+        holder.ingredient.setText(ingredients.get(position));
+        holder.remove.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ingredients.remove(holder.getAdapterPosition());
+                notifyItemRemoved(holder.getAdapterPosition());
+            }
+        });
         holder.itemView.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
             public boolean onLongClick(View v) {
@@ -168,10 +178,12 @@ class IngredientsAdapter extends RecyclerView.Adapter<IngredientsHolder> {
 
 class IngredientsHolder extends RecyclerView.ViewHolder {
 
-    TextView textView;
+    TextView ingredient;
+    ImageView remove;
 
     public IngredientsHolder(@NonNull View itemView) {
         super(itemView);
-        textView = itemView.findViewById(R.id.ingredient);
+        ingredient = itemView.findViewById(R.id.ingredient);
+        remove = itemView.findViewById(R.id.remove_icon);
     }
 }
