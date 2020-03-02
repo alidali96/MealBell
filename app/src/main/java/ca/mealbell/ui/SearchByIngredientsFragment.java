@@ -81,11 +81,15 @@ public class SearchByIngredientsFragment extends Fragment {
         searchView = view.findViewById(R.id.search);
         submitButton = view.findViewById(R.id.submit);
 
-        // Set RecyclerView adapter and LayoutManager
-        final LinearLayoutManager linearLayout = new LinearLayoutManager(getContext());
-        linearLayout.setOrientation(RecyclerView.HORIZONTAL);
+        // Set RecyclerView LayoutManager
+//        final LinearLayoutManager linearLayout = new LinearLayoutManager(getContext());
+//        linearLayout.setOrientation(RecyclerView.HORIZONTAL);
+        FlexboxLayoutManager flexboxLayout = new FlexboxLayoutManager(getContext());
+        flexboxLayout.setFlexWrap(FlexWrap.WRAP);
+
+        // Set RecyclerView Adapter
         adapter = new IngredientsAdapter(getContext(), ingredients);
-        recyclerView.setLayoutManager(linearLayout);
+        recyclerView.setLayoutManager(flexboxLayout);
         recyclerView.setAdapter(adapter);
 
         // Search Click Listener
@@ -95,13 +99,6 @@ public class SearchByIngredientsFragment extends Fragment {
                 // (Android Keyboard || External Keyboard && Text !Empty)
                 if ((actionId == EditorInfo.IME_ACTION_DONE || event.getKeyCode() == KeyEvent.KEYCODE_ENTER) && !v.getText().toString().isEmpty()) {
                     ingredients.add(v.getText().toString());
-//                    LayoutInflater inflater = (LayoutInflater) getActivity().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-//                    final View rowView = inflater.inflate(R.layout.ingredient_holder, null);
-                    View rowView = LayoutInflater.from(getContext()).inflate(R.layout.ingredient_holder, container, false);
-                    if (rowView != null)
-                        testLayout.addView(rowView);
-                    else
-                        Log.e(TAG, "NULL VIEW");
                     adapter.notifyItemInserted(ingredients.size() - 1);
                     v.setText(null);
                     return true;
