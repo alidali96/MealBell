@@ -12,11 +12,18 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.squareup.picasso.Picasso;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import ca.mealbell.R;
 import ca.mealbell.javabeans.RecipeByIngredient;
 
+/**
+ * Adapter for recipes results (by ingredients)
+ *
+ * @author Ali Dali
+ * @since 01-03-2020
+ */
 public class ResultsByIngredientsAdapter extends RecyclerView.Adapter<ResultsByIngredientsAdapter.ResultsByIngredientsHolder> {
 
     List<RecipeByIngredient> recipes;
@@ -40,9 +47,9 @@ public class ResultsByIngredientsAdapter extends RecyclerView.Adapter<ResultsByI
 
         Picasso.get().load(recipe.getImage()).placeholder(R.drawable.dish).into(holder.image);
         holder.title.setText(recipe.getTitle());
-        holder.usedIngredients.setText(recipe.getUsedIngredientCount());
-        holder.missedIngredients.setText(recipe.getMissedIngredientCount());
-        holder.likes.setText(recipe.getLikes());
+        holder.usedIngredients.setText(recipe.getUsedIngredientCount() + "");
+        holder.missedIngredients.setText(recipe.getMissedIngredientCount() + "");
+        holder.likes.setText(recipe.getLikes() + "");
     }
 
     @Override
@@ -50,10 +57,23 @@ public class ResultsByIngredientsAdapter extends RecyclerView.Adapter<ResultsByI
         return recipes.size();
     }
 
+    /**
+     * Update adapter list (recipes)
+     * @param newRecipes
+     */
+    public void updateList(ArrayList<RecipeByIngredient> newRecipes) {
+        recipes = newRecipes;
+        notifyDataSetChanged();
+    }
 
 
-
-
+    /**
+     * Results holder
+     *
+     * @author Ali Dali
+     * @since 01-03-2020
+     * @version 1.0
+     */
     class ResultsByIngredientsHolder extends RecyclerView.ViewHolder {
 
         ImageView image;

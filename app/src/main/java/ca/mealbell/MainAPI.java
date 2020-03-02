@@ -11,9 +11,11 @@ import com.android.volley.NetworkResponse;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 
+import org.json.JSONArray;
 import org.json.JSONObject;
 
 import java.util.Map;
@@ -63,10 +65,10 @@ public class MainAPI {
      * @version 1.0
      * @since 22-02-2020
      */
-    public <T extends APIResponse> void newRequest(@NonNull final int method, @NonNull final String url, final JSONObject json, @NonNull final T callback) {
-        JsonObjectRequest request = new JsonObjectRequest(method, url, json, new Response.Listener<JSONObject>() {
+    public <T extends APIResponse> void newRequest(@NonNull final int method, @NonNull final String url, final JSONArray json, @NonNull final T callback) {
+        JsonArrayRequest request = new JsonArrayRequest(method, url, json, new Response.Listener<JSONArray>() {
             @Override
-            public void onResponse(JSONObject response) {
+            public void onResponse(JSONArray response) {
                 callback.onSuccess(response.toString(), statusCode);
             }
         }, new Response.ErrorListener() {
@@ -88,7 +90,7 @@ public class MainAPI {
             }
 
             @Override
-            protected Response<JSONObject> parseNetworkResponse(NetworkResponse response) {
+            protected Response<JSONArray> parseNetworkResponse(NetworkResponse response) {
                 statusCode = response.statusCode;
                 return super.parseNetworkResponse(response);
             }
