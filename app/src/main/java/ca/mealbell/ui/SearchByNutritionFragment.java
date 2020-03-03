@@ -137,7 +137,7 @@ public class SearchByNutritionFragment extends Fragment {
             public void onClick(View v) {
                 // Create a bundle to pass information to the recipe results fragment
                 Bundle args = new Bundle();
-                args.putString(Const.SEARCH_KEY, getSearchURL());
+                args.putString(Const.SEARCH_URL, getSearchURL());
                 Navigation.findNavController(view).navigate(R.id.action_nav_serach_recipes_to_recipesResultsFragment, args); // why???
             }
         });

@@ -30,7 +30,9 @@ import ca.mealbell.Const;
 import ca.mealbell.MainAPI;
 import ca.mealbell.R;
 import ca.mealbell.adapters.ResultsByIngredientsAdapter;
+import ca.mealbell.adapters.ResultsByNutritionAdapter;
 import ca.mealbell.javabeans.RecipeByIngredient;
+import ca.mealbell.javabeans.RecipeByNutrition;
 
 import static ca.mealbell.MainActivity.fab;
 
@@ -54,7 +56,7 @@ public class RecipesResultsFragment extends Fragment implements SwipeRefreshLayo
     private final Map<String, String> FOOD_API_HEADERS = new HashMap<>();
 
     private ArrayList<RecipeByIngredient> recipeByIngredients = new ArrayList<>();
-//    private ArrayList<RecipeByNutrition> recipeByNutrition = new ArrayList<>();
+    private ArrayList<RecipeByNutrition> recipeByNutrition = new ArrayList<>();
 
     private SearchType searchType;
 
@@ -62,7 +64,7 @@ public class RecipesResultsFragment extends Fragment implements SwipeRefreshLayo
     RecyclerView recyclerView;
 
     ResultsByIngredientsAdapter ingredientsAdapter;
-//    ResultsByNutritionAdapter nutritionAdapter;
+    ResultsByNutritionAdapter nutritionAdapter;
 
     Gson gson;
     String requestURL;
@@ -105,7 +107,7 @@ public class RecipesResultsFragment extends Fragment implements SwipeRefreshLayo
         if (searchType == SearchType.Ingredient) {
             ingredientsAdapter = new ResultsByIngredientsAdapter(getContext(), recipeByIngredients);
         } else {
-//            nutritionAdapter = new ResultsByNutritionAdapter(getContext(), recipeByNutrition);
+            //nutritionAdapter = new ResultsByNutritionAdapter(getContext(), recipeByNutrition);
         }
 
         // Set RecyclerView
