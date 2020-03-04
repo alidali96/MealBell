@@ -85,7 +85,8 @@ public class RecipesResultsFragment extends Fragment implements SwipeRefreshLayo
 
         // Add API headers
         FOOD_API_HEADERS.put("x-rapidapi-host", "spoonacular-recipe-food-nutrition-v1.p.rapidapi.com");
-        FOOD_API_HEADERS.put("x-rapidapi-key", "YOUR_API_KEY_GOES_HERE");
+        FOOD_API_HEADERS.put("x-rapidapi-key", "a939a7b9e7msh1c26761347024cbp18f6b1jsn61154bf53dbe");
+//        FOOD_API_HEADERS.put("x-rapidapi-key", "YOUR_API_KEY_GOES_HERE");
     }
 
     @Override

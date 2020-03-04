@@ -52,7 +52,6 @@ public class SearchByIngredientsFragment extends Fragment {
 
     RecyclerView recyclerView;
     IngredientsAdapter adapter;
-    ViewGroup testLayout;
     //    SearchView searchView;
     EditText searchView;
     Button submitButton;
@@ -77,7 +76,6 @@ public class SearchByIngredientsFragment extends Fragment {
 
         // Attach with layout
         recyclerView = view.findViewById(R.id.ingredients_list);
-        testLayout = view.findViewById(R.id.ingredients_layout);
         searchView = view.findViewById(R.id.search);
         submitButton = view.findViewById(R.id.submit);
 
