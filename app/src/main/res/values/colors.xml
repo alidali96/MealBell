@@ -16,5 +16,11 @@
 
     <color name="tabtextcolour">#ffffff</color>
     <color name="tabIndicatorColour">#bfbfbf</color>
+    <color name="colorRed">#A40020</color>
+    <color name="colorGold">#FEC813</color>
+    <color name="colorLightBlue">#8598E3</color>
+    <color name="colorOrange">#FEB618</color>
+    <color name="colorDarkBlue">#2B3443</color>
+    <color name="colorPurple">#4E3D9C</color>
 
 </resources>
