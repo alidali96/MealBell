@@ -16,6 +16,8 @@
     <!-- fragments -->
     <string name="search_by_ingredients_title">Search By Ingredients</string>
     <string name="search_by_nutrition_title">Search By Nutrition</string>
+    <string name="create_meal_plan">Create Meal Plan</string>
+
     <!-- Testing Purposes -->
     <string name="menu_recipes_results">Recipes Results</string>
 
