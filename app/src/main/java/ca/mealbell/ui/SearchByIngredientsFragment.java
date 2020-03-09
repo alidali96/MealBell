@@ -1,13 +1,10 @@
 package ca.mealbell.ui;
 
 
-import android.content.Context;
 import android.os.Bundle;
 
-import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.Navigation;
-import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.util.Log;
@@ -18,23 +15,18 @@ import android.view.ViewGroup;
 import android.view.inputmethod.EditorInfo;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.google.android.flexbox.AlignContent;
-import com.google.android.flexbox.AlignItems;
 import com.google.android.flexbox.FlexWrap;
-import com.google.android.flexbox.FlexboxLayout;
 import com.google.android.flexbox.FlexboxLayoutManager;
 
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 import java.util.ArrayList;
-import java.util.List;
 
 import ca.mealbell.Const;
 import ca.mealbell.R;
+import ca.mealbell.adapters.IngredientsAdapter;
 
 import static ca.mealbell.MainActivity.fab;
 
@@ -144,57 +136,3 @@ public class SearchByIngredientsFragment extends Fragment {
 
 }
 
-class IngredientsAdapter extends RecyclerView.Adapter<IngredientsHolder> {
-
-    List<String> ingredients;
-    Context context;
-
-    IngredientsAdapter(Context context, ArrayList<String> ingredients) {
-        this.context = context;
-        this.ingredients = ingredients;
-    }
-
-    @NonNull
-    @Override
-    public IngredientsHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(context).inflate(R.layout.ingredient_holder, parent, false);
-        return new IngredientsHolder(view);
-    }
-
-    @Override
-    public void onBindViewHolder(@NonNull final IngredientsHolder holder, int position) {
-        holder.ingredient.setText(ingredients.get(position));
-        holder.remove.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                ingredients.remove(holder.getAdapterPosition());
-                notifyItemRemoved(holder.getAdapterPosition());
-            }
-        });
-        holder.itemView.setOnLongClickListener(new View.OnLongClickListener() {
-            @Override
-            public boolean onLongClick(View v) {
-                ingredients.remove(holder.getAdapterPosition());
-                notifyItemRemoved(holder.getAdapterPosition());
-                return false;
-            }
-        });
-    }
-
-    @Override
-    public int getItemCount() {
-        return ingredients.size();
-    }
-}
-
-class IngredientsHolder extends RecyclerView.ViewHolder {
-
-    TextView ingredient;
-    ImageView remove;
-
-    public IngredientsHolder(@NonNull View itemView) {
-        super(itemView);
-        ingredient = itemView.findViewById(R.id.ingredient);
-        remove = itemView.findViewById(R.id.remove_icon);
-    }
-}

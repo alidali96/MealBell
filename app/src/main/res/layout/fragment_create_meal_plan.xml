@@ -1,10 +1,163 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".ui.CreateMealPlanFragment">
 
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
 
-</FrameLayout>
+        <SeekBar
+            android:id="@+id/calories_target"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="10dp"
+            android:max="4000"
+            android:progress="2000"
+            android:progressTint="@color/colorAccent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <com.google.android.flexbox.FlexboxLayout
+            android:id="@+id/diet"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="10dp"
+            app:flexDirection="row"
+            app:flexWrap="wrap"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/calories_target">
+
+            <CheckBox
+                android:id="@+id/checkedTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:text="Gluten Free"
+                tools:layout_editor_absoluteX="5dp"
+                tools:layout_editor_absoluteY="5dp" />
+
+            <CheckBox
+                android:id="@+id/checkedTextView6"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:text="Gluten Free"
+                tools:layout_editor_absoluteX="105dp"
+                tools:layout_editor_absoluteY="5dp" />
+
+            <CheckBox
+                android:id="@+id/checkedTextView4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:text="Gluten Free"
+                tools:layout_editor_absoluteX="209dp"
+                tools:layout_editor_absoluteY="5dp" />
+
+            <CheckBox
+                android:id="@+id/checkedTextView5"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:text="Gluten Free"
+                tools:layout_editor_absoluteX="5dp"
+                tools:layout_editor_absoluteY="32dp" />
+
+            <CheckBox
+                android:id="@+id/checkedTextView3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:text="Gluten Free"
+                tools:layout_editor_absoluteX="105dp"
+                tools:layout_editor_absoluteY="32dp" />
+
+            <CheckBox
+                android:id="@+id/checkedTextView2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:text="Gluten Free"
+                tools:layout_editor_absoluteX="209dp"
+                tools:layout_editor_absoluteY="32dp" />
+
+            <CheckBox
+                android:id="@+id/checkedTextView7"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:text="Gluten Free"
+                tools:layout_editor_absoluteX="209dp"
+                tools:layout_editor_absoluteY="32dp" />
+
+            <CheckBox
+                android:id="@+id/checkedTextView8"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:text="Gluten Free"
+                tools:layout_editor_absoluteX="209dp"
+                tools:layout_editor_absoluteY="32dp" />
+
+            <CheckBox
+                android:id="@+id/checkedTextView9"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:text="Gluten Free"
+                tools:layout_editor_absoluteX="209dp"
+                tools:layout_editor_absoluteY="32dp" />
+
+        </com.google.android.flexbox.FlexboxLayout>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/exclude_list"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/diet">
+
+        </androidx.recyclerview.widget.RecyclerView>
+
+        <EditText
+            android:id="@+id/exclude"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:backgroundTint="@color/colorAccent"
+            android:hint="Olive..."
+            android:singleLine="true"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/exclude_list">
+
+        </EditText>
+
+        <Button
+            android:id="@+id/submit"
+            style="@style/Widget.AppCompat.Button.Colored"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="32dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="32dp"
+            android:text="GENERATE PLAN"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/exclude" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</ScrollView>

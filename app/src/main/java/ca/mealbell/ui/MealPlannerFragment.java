@@ -16,7 +16,7 @@ import static ca.mealbell.MainActivity.fab;
 
 
 /**
- * Generate Meal Plans
+ * Generated Meal Plans
  *
  * @author Ali Dali
  * @version 1.0
