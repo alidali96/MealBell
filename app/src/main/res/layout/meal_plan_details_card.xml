@@ -15,7 +15,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <LinearLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/first"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
@@ -32,47 +32,72 @@
             android:id="@+id/meal"
             android:layout_width="100dp"
             android:layout_height="100dp"
-            android:layout_gravity="start|center_vertical"
+            app:layout_constraintBottom_toBottomOf="@id/first"
+            app:layout_constraintStart_toStartOf="@id/first"
+            app:layout_constraintTop_toTopOf="@id/first"
             app:srcCompat="@drawable/meal" />
 
 
+        <TextView
+            android:id="@+id/title"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:ellipsize="end"
+            android:maxLines="2"
+            android:padding="2dp"
+            android:text="Meal Number One"
+            android:textSize="24sp"
+            app:layout_constraintBottom_toTopOf="@id/info"
+            app:layout_constraintEnd_toEndOf="@id/first"
+            app:layout_constraintStart_toEndOf="@id/meal"
+            app:layout_constraintTop_toTopOf="parent" />
+
+
         <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical">
+            android:id="@+id/info"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:padding="2dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="@id/first"
+            app:layout_constraintStart_toEndOf="@id/meal">
+
+            <ImageView
+                android:id="@+id/person"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:src="@drawable/person" />
 
             <TextView
-                android:id="@+id/title"
-                android:layout_width="match_parent"
+                android:id="@+id/servings"
+                android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:ellipsize="end"
-                android:maxLines="2"
-                android:padding="8dp"
-                android:text="Meal Number One"
-                android:textSize="24sp" />
+                android:gravity="center_vertical"
+                android:paddingStart="5dp"
+                android:paddingEnd="5dp"
+                android:text="5" />
 
+            <ImageView
+                android:id="@+id/timer"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:layout_marginStart="10dp"
+                android:src="@drawable/timer" />
 
-            <LinearLayout
-                android:layout_width="match_parent"
+            <TextView
+                android:id="@+id/ready_in_minutes"
+                android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:layout_weight="3"
-                android:orientation="horizontal">
+                android:gravity="center_vertical"
+                android:paddingStart="5dp"
+                android:paddingEnd="5dp"
+                android:text="30" />
 
-                <ImageView
-                    android:layout_width="25dp"
-                    android:layout_height="25dp"
-                    android:src="@drawable/person" />
 
-                <TextView
-                    android:id="@+id/servings"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="5" />
-
-            </LinearLayout>
         </LinearLayout>
-    </LinearLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
     <LinearLayout
         android:id="@+id/second"
