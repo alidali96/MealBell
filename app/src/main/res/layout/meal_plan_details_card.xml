@@ -15,151 +15,15 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/first"
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/meals_recycler_view"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
-        android:elevation="2dp"
-        android:orientation="horizontal"
+
+        app:layout_constraintBottom_toTopOf="@id/nutrients"
         app:layout_constraintEnd_toEndOf="@id/card_view"
         app:layout_constraintStart_toStartOf="@id/card_view"
-        app:layout_constraintTop_toTopOf="@id/card_view">
-
-        <ImageView
-            android:id="@+id/meal"
-            android:layout_width="100dp"
-            android:layout_height="100dp"
-            app:layout_constraintBottom_toBottomOf="@id/first"
-            app:layout_constraintStart_toStartOf="@id/first"
-            app:layout_constraintTop_toTopOf="@id/first"
-            app:srcCompat="@drawable/meal" />
-
-
-        <TextView
-            android:id="@+id/title"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:ellipsize="end"
-            android:maxLines="2"
-            android:padding="2dp"
-            android:text="Meal Number One"
-            android:textSize="24sp"
-            app:layout_constraintBottom_toTopOf="@id/info"
-            app:layout_constraintEnd_toEndOf="@id/first"
-            app:layout_constraintStart_toEndOf="@id/meal"
-            app:layout_constraintTop_toTopOf="parent" />
-
-
-        <LinearLayout
-            android:id="@+id/info"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:padding="2dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="@id/first"
-            app:layout_constraintStart_toEndOf="@id/meal">
-
-            <ImageView
-                android:id="@+id/person"
-                android:layout_width="25dp"
-                android:layout_height="25dp"
-                android:src="@drawable/person" />
-
-            <TextView
-                android:id="@+id/servings"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:gravity="center_vertical"
-                android:paddingStart="5dp"
-                android:paddingEnd="5dp"
-                android:text="5" />
-
-            <ImageView
-                android:id="@+id/timer"
-                android:layout_width="25dp"
-                android:layout_height="25dp"
-                android:layout_marginStart="10dp"
-                android:src="@drawable/timer" />
-
-            <TextView
-                android:id="@+id/ready_in_minutes"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:gravity="center_vertical"
-                android:paddingStart="5dp"
-                android:paddingEnd="5dp"
-                android:text="30" />
-
-
-        </LinearLayout>
-
-    </androidx.constraintlayout.widget.ConstraintLayout>
-
-    <LinearLayout
-        android:id="@+id/second"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
-        android:elevation="2dp"
-        android:orientation="horizontal"
-        app:layout_constraintEnd_toEndOf="@id/card_view"
-        app:layout_constraintStart_toStartOf="@id/card_view"
-        app:layout_constraintTop_toBottomOf="@id/first">
-
-        <ImageView
-            android:id="@+id/meal2"
-            android:layout_width="100dp"
-            android:layout_height="100dp"
-            android:layout_gravity="start|center_vertical"
-            app:srcCompat="@drawable/meal" />
-
-        <TextView
-            android:id="@+id/title2"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:ellipsize="end"
-            android:maxLines="2"
-            android:padding="8dp"
-            android:text="Meal Number One"
-            android:textSize="24sp" />
-    </LinearLayout>
-
-    <LinearLayout
-        android:id="@+id/third"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
-        android:elevation="2dp"
-        android:orientation="horizontal"
-        app:layout_constraintEnd_toEndOf="@id/card_view"
-        app:layout_constraintStart_toStartOf="@id/card_view"
-        app:layout_constraintTop_toBottomOf="@id/second">
-
-        <ImageView
-            android:id="@+id/meal3"
-            android:layout_width="100dp"
-            android:layout_height="100dp"
-            android:layout_gravity="start|center_vertical"
-            app:srcCompat="@drawable/meal" />
-
-        <TextView
-            android:id="@+id/title3"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:ellipsize="end"
-            android:maxLines="2"
-            android:padding="8dp"
-            android:text="Meal Number One"
-            android:textSize="24sp" />
-    </LinearLayout>
+        app:layout_constraintTop_toTopOf="@id/card_view" />
 
     <com.google.android.flexbox.FlexboxLayout
         android:id="@+id/nutrients"
@@ -174,7 +38,7 @@
         app:layout_constraintBottom_toBottomOf="@id/card_view"
         app:layout_constraintEnd_toEndOf="@id/card_view"
         app:layout_constraintStart_toStartOf="@id/card_view"
-        app:layout_constraintTop_toBottomOf="@id/third">
+        app:layout_constraintTop_toBottomOf="@id/meals_recycler_view">
 
         <LinearLayout
             android:layout_width="wrap_content"
