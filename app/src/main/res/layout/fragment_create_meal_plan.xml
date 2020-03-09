@@ -30,92 +30,102 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="10dp"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="8dp"
             android:layout_marginEnd="10dp"
             app:flexDirection="row"
             app:flexWrap="wrap"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/calories_target">
 
+<!--            <string name="diet_gluten_free">Gluten Free</string>-->
+<!--            <string name="diet_vegan">Vegan</string>-->
+<!--            <string name="diet_vegetarian">Vegetarian</string>-->
+<!--            <string name="diet_lacto_vegetarian">Lacto-Vegetarian</string>-->
+<!--            <string name="diet_ovo_vegetarian">Ovo-Vegetarian</string>-->
+<!--            <string name="diet_ketogenic">Ketogenic</string>-->
+<!--            <string name="diet_pescetarian">Pescetarian</string>-->
+<!--            <string name="diet_paleo">Paleo</string>-->
+<!--            <string name="diet_primal">Primal</string>-->
             <CheckBox
-                android:id="@+id/checkedTextView"
+                android:id="@+id/diet_gluten_free"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_margin="5dp"
-                android:text="Gluten Free"
+                android:text="@string/diet_gluten_free"
                 tools:layout_editor_absoluteX="5dp"
                 tools:layout_editor_absoluteY="5dp" />
 
             <CheckBox
-                android:id="@+id/checkedTextView6"
+                android:id="@+id/diet_vegan"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_margin="5dp"
-                android:text="Gluten Free"
+                android:text="@string/diet_vegan"
                 tools:layout_editor_absoluteX="105dp"
                 tools:layout_editor_absoluteY="5dp" />
 
             <CheckBox
-                android:id="@+id/checkedTextView4"
+                android:id="@+id/diet_vegetarian"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_margin="5dp"
-                android:text="Gluten Free"
+                android:text="@string/diet_vegetarian"
                 tools:layout_editor_absoluteX="209dp"
                 tools:layout_editor_absoluteY="5dp" />
 
             <CheckBox
-                android:id="@+id/checkedTextView5"
+                android:id="@+id/diet_paleo"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_margin="5dp"
-                android:text="Gluten Free"
+                android:text="@string/diet_paleo"
+                tools:layout_editor_absoluteX="209dp"
+                tools:layout_editor_absoluteY="32dp" />
+
+            <CheckBox
+                android:id="@+id/diet_lacto_vegetarian"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:text="@string/diet_lacto_vegetarian"
                 tools:layout_editor_absoluteX="5dp"
                 tools:layout_editor_absoluteY="32dp" />
 
             <CheckBox
-                android:id="@+id/checkedTextView3"
+                android:id="@+id/diet_ovo_vegetarian"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_margin="5dp"
-                android:text="Gluten Free"
+                android:text="@string/diet_ovo_vegetarian"
                 tools:layout_editor_absoluteX="105dp"
                 tools:layout_editor_absoluteY="32dp" />
 
             <CheckBox
-                android:id="@+id/checkedTextView2"
+                android:id="@+id/diet_primal"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_margin="5dp"
-                android:text="Gluten Free"
+                android:text="@string/diet_primal"
                 tools:layout_editor_absoluteX="209dp"
                 tools:layout_editor_absoluteY="32dp" />
 
             <CheckBox
-                android:id="@+id/checkedTextView7"
+                android:id="@+id/diet_ketogenic"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_margin="5dp"
-                android:text="Gluten Free"
+                android:text="@string/diet_ketogenic"
                 tools:layout_editor_absoluteX="209dp"
                 tools:layout_editor_absoluteY="32dp" />
 
             <CheckBox
-                android:id="@+id/checkedTextView8"
+                android:id="@+id/diet_pescetarian"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_margin="5dp"
-                android:text="Gluten Free"
-                tools:layout_editor_absoluteX="209dp"
-                tools:layout_editor_absoluteY="32dp" />
-
-            <CheckBox
-                android:id="@+id/checkedTextView9"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_margin="5dp"
-                android:text="Gluten Free"
+                android:text="@string/diet_pescetarian"
                 tools:layout_editor_absoluteX="209dp"
                 tools:layout_editor_absoluteY="32dp" />
 
