@@ -25,12 +25,12 @@ import ca.mealbell.javabeans.Meal;
  */
 public class MealAdapter extends RecyclerView.Adapter<MealHolder> {
 
-    List<Meal> meals;
     Context context;
+    List<Meal> meals;
 
-    public MealAdapter(List<Meal> meals, Context context) {
-        this.meals = meals;
+    public MealAdapter(Context context, List<Meal> meals) {
         this.context = context;
+        this.meals = meals;
     }
 
     @NonNull
