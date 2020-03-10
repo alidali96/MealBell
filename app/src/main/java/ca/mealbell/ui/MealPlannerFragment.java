@@ -69,11 +69,28 @@ public class MealPlannerFragment extends Fragment {
         Meal meal3 = new Meal(3,"Meal 3", 20,12,image, new String[]{});
         MealPlan mealPlan = new MealPlan(new Meal[]{meal, meal2, meal3}, new Nutrients(500,100,22.4,123.45));
 
+        String image2 = "https://upload.wikimedia.org/wikipedia/commons/thumb/6/6d/Good_Food_Display_-_NCI_Visuals_Online.jpg/1200px-Good_Food_Display_-_NCI_Visuals_Online.jpg";
+        Meal meal4 = new Meal(1,"Meal 4", 44,5,image2, new String[]{});
+        Meal meal5 = new Meal(2,"Meal 5", 12,2,image2, new String[]{});
+        Meal meal6 = new Meal(3,"Meal 6", 33,4,image2, new String[]{});
+        MealPlan mealPlan2 = new MealPlan(new Meal[]{meal4, meal5, meal6}, new Nutrients(1250,80,122.4,450));
+
+        mealPlans.add(mealPlan2);
         mealPlans.add(mealPlan);
+        mealPlans.add(mealPlan);
+        mealPlans.add(mealPlan);
+        mealPlans.add(mealPlan);
+        mealPlans.add(mealPlan2);
+        mealPlans.add(mealPlan2);
+        mealPlans.add(mealPlan2);
+        mealPlans.add(mealPlan2);
+        mealPlans.add(mealPlan2);
+        mealPlans.add(mealPlan2);
+        mealPlans.add(mealPlan2);
+        mealPlans.add(mealPlan2);
 
 
-
-        adapter = new MealPlanAdapter(getContext(), mealPlans);
+        adapter = new MealPlanAdapter(getContext(), mealPlans, getChildFragmentManager());
         recyclerView = view.findViewById(R.id.meal_plans_recycler_view);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         recyclerView.setAdapter(adapter);

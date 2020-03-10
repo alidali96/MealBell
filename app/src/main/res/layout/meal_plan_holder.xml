@@ -1,4 +1,34 @@
 <?xml version="1.0" encoding="utf-8"?>
 <com.ramotion.foldingcell.FoldingCell xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent"/>
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/folding_cell_meal"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:clipChildren="false"
+    android:clipToPadding="false"
+    android:orientation="vertical"
+    app:backSideColor="@color/colorAccent">
+
+    <FrameLayout
+        android:id="@+id/meal_plan_details_card_holder"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:visibility="gone" />
+
+    <FrameLayout
+        android:id="@+id/meal_plan_card_holder"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:visibility="visible">
+
+    </FrameLayout>
+
+    <TextView
+        android:id="@+id/textView3"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="New Cell"
+        android:textAlignment="center"
+        android:textSize="18sp" />
+
+</com.ramotion.foldingcell.FoldingCell>
