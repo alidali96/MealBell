@@ -85,7 +85,7 @@ public class RecipesResultsFragment extends Fragment implements SwipeRefreshLayo
 
         // Add API headers
         FOOD_API_HEADERS.put("x-rapidapi-host", "spoonacular-recipe-food-nutrition-v1.p.rapidapi.com");
-        FOOD_API_HEADERS.put("x-rapidapi-key", "YOUR_API_KEY_GOES_HERE");
+        FOOD_API_HEADERS.put("x-rapidapi-key", "fd162a08c4mshdc6272c968e7ee8p1367dcjsne4431e0cbaea");
     }
 
     @Override
@@ -103,18 +103,24 @@ public class RecipesResultsFragment extends Fragment implements SwipeRefreshLayo
         swipeRefreshLayout.setColorSchemeColors(Color.GREEN, Color.RED);    // Pick Awesome Colors !)
 
 
+        // Set RecyclerView
+        recyclerView = view.findViewById(R.id.recycler_view);
+
         // Set Adapters
         if (searchType == SearchType.Ingredient) {
             ingredientsAdapter = new ResultsByIngredientsAdapter(getContext(), recipeByIngredients);
+            recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+            recyclerView.setAdapter(ingredientsAdapter);
         } else {
-            //nutritionAdapter = new ResultsByNutritionAdapter(getContext(), recipeByNutrition);
+            nutritionAdapter = new ResultsByNutritionAdapter(getContext(), recipeByNutrition);
+            recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+            recyclerView.setAdapter(nutritionAdapter);
         }
 
-        // Set RecyclerView
-        recyclerView = view.findViewById(R.id.recycler_view);
-        // TODO: Set adapter and layout manager
-        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-        recyclerView.setAdapter(ingredientsAdapter);
+
+//        // TODO: Set adapter and layout manager
+//        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+//        recyclerView.setAdapter(ingredientsAdapter);
 
         search();
 
@@ -134,6 +140,7 @@ public class RecipesResultsFragment extends Fragment implements SwipeRefreshLayo
      */
     @Override
     public void onRefresh() {
+
         search();
     }
 
@@ -151,8 +158,11 @@ public class RecipesResultsFragment extends Fragment implements SwipeRefreshLayo
             ingredientsAdapter.updateList(recipeByIngredients);
         } else {
             // TODO: Nutrition
+            Type nutritionType = new TypeToken<ArrayList<RecipeByNutrition>>() {
+            }.getType();
+            recipeByNutrition = gson.fromJson(json, nutritionType);
 
-
+            nutritionAdapter.updateList(recipeByNutrition);
         }
     }
 

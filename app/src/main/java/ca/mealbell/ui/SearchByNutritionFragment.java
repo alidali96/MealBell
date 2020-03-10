@@ -138,6 +138,7 @@ public class SearchByNutritionFragment extends Fragment {
                 // Create a bundle to pass information to the recipe results fragment
                 Bundle args = new Bundle();
                 args.putString(Const.SEARCH_URL, getSearchURL());
+                args.putInt(Const.SEARCH_TYPE, Const.NUTRITION);
                 Navigation.findNavController(view).navigate(R.id.action_nav_serach_recipes_to_recipesResultsFragment, args); // why???
             }
         });
