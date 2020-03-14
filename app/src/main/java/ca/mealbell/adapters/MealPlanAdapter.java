@@ -47,15 +47,7 @@ public class MealPlanAdapter extends RecyclerView.Adapter<MealPlanHolder> {
         MealPlan mealPlan = mealPlans.get(position);
         ArrayList<Meal> meals = new ArrayList<>();
         Collections.addAll(meals, mealPlan.getMeals());
-//        for (int i = 0; i < 3; i++) {
-//            Picasso.get().load(mealPlan.getMeals()[i].getImage()).placeholder(R.drawable.meal).into(holder.images[i]);
-//            holder.titles[i].setText(mealPlan.getMeals()[i].getTitle());
-//        }
-//
-//        holder.calories.setText(mealPlan.getNutrients().getCalories() + "");
-//        holder.protein.setText(mealPlan.getNutrients().getProtein() + "");
-//        holder.fat.setText(mealPlan.getNutrients().getFat() + "");
-//        holder.carbohydrates.setText(mealPlan.getNutrients().getCarbohydrates() + "");
+
 
         // TODO: Create Meal Plan Fragment
 //        int mealPlanCardID = holder.mealPlanCardHolder.getId();
