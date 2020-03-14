@@ -47,7 +47,7 @@ public class MealPlanDetailsFragment extends Fragment {
 
         recyclerView = view.findViewById(R.id.meals_recycler_view);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-        adapter = new MealAdapter(getContext(), meals);
+//        adapter = new MealAdapter(getContext(), meals);
         recyclerView.setAdapter(adapter);
 
         return view;

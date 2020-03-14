@@ -50,70 +50,7 @@ public class MealPlanAdapter extends RecyclerView.Adapter<MealPlanHolder> {
 
 
         // TODO: Create Meal Plan Fragment
-//        int mealPlanCardID = holder.mealPlanCardHolder.getId();
-//        int mealPlanDetailsID = holder.mealPlanDetailsCardHolder.getId();
-//
-//        Fragment oldFragment = fragmentManager.findFragmentById(mealPlanCardID);
-//        if(oldFragment != null) {
-//            fragmentManager.beginTransaction().remove(oldFragment);
-//        }
-//
-//        Fragment oldFragment2 = fragmentManager.findFragmentById(mealPlanDetailsID);
-//        if(oldFragment2 != null) {
-//            fragmentManager.beginTransaction().remove(oldFragment2);
-//        }
-
-
-//        FrameLayout frameLayout = new FrameLayout(context);
-//        frameLayout.setId(position + 1);
-//        frameLayout.setId(View.generateViewId());
-
-//        holder.linearLayout.addView(frameLayout);
-
-//        Fragment oldFragment = fragmentManager.findFragmentById(frameLayout.getId());
-//        if(oldFragment != null) {
-//            fragmentManager.beginTransaction().remove(oldFragment);
-//        }
-//
-//
-
-//        holder.mealPlanCardHolder.setId(position + 1);
-//        fragmentManager.beginTransaction().replace(holder.mealPlanCardHolder.getId(), new MealPlanFragment(mealPlan, position + 1)).commit();
-
-
-//        int firstID = holder.mealPlanCardHolder.getId();
-
-        holder.mealPlanCardHolder.setId(position + 1);
-//        holder.mealPlanDetailsCardHolder.setId(position * mealPlans.size() + 1);
-
-
-//        if (holder.mealPlanCardHolder != null) {
-        fragmentManager.beginTransaction().replace(holder.mealPlanCardHolder.getId(), new MealPlanFragment(mealPlan, position + 1), position + 1 + "").commit();
-////        fragmentManager.beginTransaction().replace(holder.mealPlanDetailsCardHolder.getId(), new MealPlanDetailsFragment(meals)).commit();
-        Log.e(this.getClass().getTypeName(), holder.mealPlanCardHolder.getId() + "");
-//        } else {
-//            Log.e(this.getClass().getTypeName(), holder.mealPlanCardHolder.getId() + " NULL");
-//        }
-
-
-//        fragmentManager.beginTransaction().add(new MealPlanFragment(mealPlan), "MEAL_PLAN").commit();
-
-//        holder.replaceFragment(fragmentManager, new MealPlanFragment(mealPlan));
-
-
-//        MealPlanFragment mealPlanFragment = (MealPlanFragment) holder.fragment;
-//        if (mealPlanFragment != null) {
-//            mealPlanFragment.getView().setId(position + 1);
-//            mealPlanFragment.mealPlan = mealPlan;
-//            Log.e("RESULT", "WORKED");
-//        } else {
-//            Log.e("RESULT", "FRAGMENT NULL");
-//        }
-
-
-//        holder.mealPlan = mealPlan;
-//        holder.position = position;
-//        holder.addFragment(mealPlan, position + 1);
+        holder.setMealPlan(mealPlan);
     }
 
     @Override

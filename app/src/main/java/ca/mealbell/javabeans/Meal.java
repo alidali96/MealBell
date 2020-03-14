@@ -12,7 +12,7 @@ import java.util.Arrays;
  * "title": "Blueberry, Chocolate & Cocao Superfood Pancakes - Gluten-Free/Paleo/Vegan"<br>
  * "readyInMinutes": 30<br>
  * "servings": 2<br>
- * "image": "blueberry-chocolate-cocao-superfood-pancakes-gluten-free-paleo-vegan-1100990.jpg"<br>
+ * "imageC": "blueberry-chocolate-cocao-superfood-pancakes-gluten-free-paleo-vegan-1100990.jpg"<br>
  * "imageUrls": ["blueberry-chocolate-cocao-superfood-pancakes-gluten-free-paleo-vegan-1100990.jpg"]<br>
  *
  * @author Ali Dali
