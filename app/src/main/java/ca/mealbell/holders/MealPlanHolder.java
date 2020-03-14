@@ -2,6 +2,7 @@ package ca.mealbell.holders;
 
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -15,7 +16,6 @@ import com.squareup.picasso.Picasso;
 import java.util.ArrayList;
 import java.util.Collections;
 
-import ca.mealbell.MealPlanFragment;
 import ca.mealbell.R;
 import ca.mealbell.adapters.MealAdapter;
 import ca.mealbell.javabeans.Meal;
@@ -30,16 +30,15 @@ public class MealPlanHolder extends RecyclerView.ViewHolder implements View.OnCl
     public FoldingCell foldingCell;
 
     // MEAL PLAN CARD
-    public ImageView imageC;
-    public ImageView imageC2;
-    public ImageView imageC3;
+    public ImageView image;
+    public ImageView image2;
+    public ImageView image3;
     public ImageView[] images = new ImageView[3];
 
-    public TextView titleC;
-    public TextView titleC2;
-    public TextView titleC3;
+    public TextView title;
+    public TextView title2;
+    public TextView title3;
     public TextView[] titles = new TextView[3];
-    FragmentManager fragmentManager;
 
     // MEAL PLAN DETAILS
     public TextView calories;
@@ -47,82 +46,83 @@ public class MealPlanHolder extends RecyclerView.ViewHolder implements View.OnCl
     public TextView fat;
     public TextView carbohydrates;
 
+    public View mealPlanContainer;
+    public LinearLayout open;
+    public LinearLayout close;
+
     RecyclerView recyclerView;
     MealAdapter adapter;
 
-    ArrayList<Meal> meals;
-    MealPlan mealPlan;
 
-    public MealPlanHolder(@NonNull View itemView, FragmentManager fragmentManager) {
+    public MealPlanHolder(@NonNull View itemView) {
         super(itemView);
-        this.fragmentManager = fragmentManager;
 
-        foldingCell = itemView.findViewById(R.id.folding_cell_meal);
+        attachViews(itemView);
+    }
 
-//        // Toggle FoldingCell
-//        mealPlanCardHolder.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                foldingCell.toggle(false);
-//            }
-//        });
-//
-//        mealPlanDetailsCardHolder.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                foldingCell.toggle(false);
-//            }
-//        });
+    public void attachViews(View view) {
+        // Folding Cell
+        foldingCell = view.findViewById(R.id.folding_cell_meal);
 
-        imageC = itemView.findViewById(R.id.image);
-        imageC2 = itemView.findViewById(R.id.image2);
-        imageC3 = itemView.findViewById(R.id.image3);
-        titleC = itemView.findViewById(R.id.title);
-        titleC2 = itemView.findViewById(R.id.title2);
-        titleC3 = itemView.findViewById(R.id.title3);
+        // Images
+        image = view.findViewById(R.id.image);
+        image2 = view.findViewById(R.id.image2);
+        image3 = view.findViewById(R.id.image3);
+        images[0] = image;
+        images[1] = image2;
+        images[2] = image3;
 
-        images[0] = imageC;
-        images[1] = imageC2;
-        images[2] = imageC3;
-        titles[0] = titleC;
-        titles[1] = titleC2;
-        titles[2] = titleC3;
+        // Titles
+        title = view.findViewById(R.id.title);
+        title2 = view.findViewById(R.id.title2);
+        title3 = view.findViewById(R.id.title3);
+        titles[0] = title;
+        titles[1] = title2;
+        titles[2] = title3;
 
 
-        calories = itemView.findViewById(R.id.calories);
-        protein = itemView.findViewById(R.id.protein);
-        fat = itemView.findViewById(R.id.fat);
-        carbohydrates = itemView.findViewById(R.id.carbohydrates);
+        // Nutrition
+        calories = view.findViewById(R.id.calories);
+        protein = view.findViewById(R.id.protein);
+        fat = view.findViewById(R.id.fat);
+        carbohydrates = view.findViewById(R.id.carbohydrates);
 
-        recyclerView = itemView.findViewById(R.id.meals_recycler_view);
-        recyclerView.setLayoutManager(new LinearLayoutManager(itemView.getContext()));
 
-        itemView.setOnClickListener(this);
+        // Click Listener (open / close)
+        mealPlanContainer = view.findViewById(R.id.meal_plan_container);
+        mealPlanContainer.setOnClickListener(this);
+
+//        open = view.findViewById(R.id.open);
+//        open.setOnClickListener(this);
+
+        close = view.findViewById(R.id.close);
+        close.setOnClickListener(this);
+
+        // Recycler View (details)
+        recyclerView = view.findViewById(R.id.meals_recycler_view);
+        recyclerView.setLayoutManager(new LinearLayoutManager(view.getContext()));
 
     }
 
     public void setMealPlan(MealPlan mealPlan) {
-        // POPULATE
+        // Populate Meal Card
         for (int i = 0; i < 3; i++) {
             Picasso.get().load(mealPlan.getMeals()[i].getImage()).placeholder(R.drawable.meal).into(images[i]);
             titles[i].setText(mealPlan.getMeals()[i].getTitle());
         }
 
+        // Populate Meal Details
         calories.setText(mealPlan.getNutrients().getCalories() + "");
         protein.setText(mealPlan.getNutrients().getProtein() + "");
         fat.setText(mealPlan.getNutrients().getFat() + "");
         carbohydrates.setText(mealPlan.getNutrients().getCarbohydrates() + "");
 
-        meals = new ArrayList<>();
+        // Get Meals from Meal Plan
+        ArrayList<Meal> meals = new ArrayList<>();
         Collections.addAll(meals, mealPlan.getMeals());
-
-        adapter = new MealAdapter(itemView.getContext(), this, meals);
+        // Set Adapter for Meal Plan Details
+        adapter = new MealAdapter(itemView.getContext(),  meals);
         recyclerView.setAdapter(adapter);
-    }
-
-    public void addFragment(MealPlan mealPlan, int position) {
-        // Tried to add Fragment dynamically to the layout
-        fragmentManager.beginTransaction().add(foldingCell.getId(), new MealPlanFragment(mealPlan, position)).commit();
     }
 
     @Override

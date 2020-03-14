@@ -27,12 +27,10 @@ public class MealAdapter extends RecyclerView.Adapter<MealHolder> {
 
     Context context;
     List<Meal> meals;
-    View.OnClickListener onClickListener;
 
-    public MealAdapter(Context context, View.OnClickListener onClickListener, List<Meal> meals) {
+    public MealAdapter(Context context,  List<Meal> meals) {
         this.context = context;
         this.meals = meals;
-        this.onClickListener = onClickListener;
     }
 
     @NonNull
@@ -51,8 +49,7 @@ public class MealAdapter extends RecyclerView.Adapter<MealHolder> {
         holder.servings.setText(meal.getServings() + "");
         holder.readyInMinutes.setText(meal.getReadyInMinutes() + "");
 
-        // TODO: Set on click listener
-        holder.itemView.setOnClickListener(onClickListener);
+        // TODO: Set on click listener on each Meal
     }
 
     @Override

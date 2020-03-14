@@ -10,19 +10,19 @@
     app:backSideColor="@color/colorAccent">
 
 
-
-
     <include
         android:id="@+id/meal_plan_details_container"
+        layout="@layout/meal_plan_details_card"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:visibility="gone"
-        layout="@layout/fragment_meal_plan_details"/>
+        android:layout_height="wrap_content"
+        android:visibility="gone" />
 
     <include
         android:id="@+id/meal_plan_container"
+        layout="@layout/meal_plan_card"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        layout="@layout/fragment_meal_plan"/>
+        android:layout_height="wrap_content"
+        android:visibility="visible" />
+
 
 </com.ramotion.foldingcell.FoldingCell>

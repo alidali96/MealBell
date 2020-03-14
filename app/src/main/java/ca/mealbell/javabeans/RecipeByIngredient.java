@@ -9,7 +9,7 @@ import java.io.Serializable;
  *
  * "id":641803<br>
  * "title":"Easy & Delish! ~ Apple Crumble"<br>
- * "imageC":"https://spoonacular.com/recipeImages/Easy---Delish--Apple-Crumble-641803.jpg"<br>
+ * "image":"https://spoonacular.com/recipeImages/Easy---Delish--Apple-Crumble-641803.jpg"<br>
  * "usedIngredientCount":3<br>
  * "missedIngredientCount":4<br>
  * "likes":1<br>
@@ -22,7 +22,7 @@ public class RecipeByIngredient implements Serializable {
     /**
      * "id":641803
      * "title":"Easy & Delish! ~ Apple Crumble"
-     * "imageC":"https://spoonacular.com/recipeImages/Easy---Delish--Apple-Crumble-641803.jpg"
+     * "image":"https://spoonacular.com/recipeImages/Easy---Delish--Apple-Crumble-641803.jpg"
      * "usedIngredientCount":3
      * "missedIngredientCount":4
      * "likes":1

@@ -9,6 +9,10 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import ca.mealbell.R;
 
+/**
+ * @author Ali Dali
+ * @since 09-03-2020
+ */
 public class MealHolder extends RecyclerView.ViewHolder {
 
     public ImageView image;

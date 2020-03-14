@@ -9,7 +9,7 @@ import java.io.Serializable;
  *
  *"id":551315<br>
  *"title":"More Power Gingerbread Smoothie"<br>
- *"imageC":"https://spoonacular.com/recipeImages/More-Power-Gingerbread-Smoothie-551315.jpg"<br>
+ *"image":"https://spoonacular.com/recipeImages/More-Power-Gingerbread-Smoothie-551315.jpg"<br>
  *"imageType":"jpg"<br>
  *"calories":645<br>
  *"protein":"37g"<br>

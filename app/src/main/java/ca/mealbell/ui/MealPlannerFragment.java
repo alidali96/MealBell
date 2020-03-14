@@ -78,19 +78,13 @@ public class MealPlannerFragment extends Fragment {
         mealPlans.add(mealPlan2);
         mealPlans.add(mealPlan);
         mealPlans.add(mealPlan);
-        mealPlans.add(mealPlan);
-        mealPlans.add(mealPlan);
         mealPlans.add(mealPlan2);
         mealPlans.add(mealPlan2);
-        mealPlans.add(mealPlan2);
-        mealPlans.add(mealPlan2);
-        mealPlans.add(mealPlan2);
-        mealPlans.add(mealPlan2);
-        mealPlans.add(mealPlan2);
-        mealPlans.add(mealPlan2);
+        // END TEST
 
 
-        adapter = new MealPlanAdapter(getContext(), mealPlans, getChildFragmentManager());
+
+        adapter = new MealPlanAdapter(getContext(), mealPlans);
         recyclerView = view.findViewById(R.id.meal_plans_recycler_view);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         recyclerView.setAdapter(adapter);
