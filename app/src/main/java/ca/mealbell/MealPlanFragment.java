@@ -5,6 +5,7 @@ import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -37,14 +38,16 @@ public class MealPlanFragment extends Fragment {
     public TextView carbohydrates;
 
 
-    MealPlan mealPlan;
+    public MealPlan mealPlan;
+    int id;
 
     public MealPlanFragment() {
         // Required empty public constructor
     }
 
-    public MealPlanFragment(MealPlan mealPlan) {
+    public MealPlanFragment(MealPlan mealPlan, int id) {
         this.mealPlan = mealPlan;
+        this.id = id;
     }
 
 
@@ -53,6 +56,11 @@ public class MealPlanFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_meal_plan, container, false);
+
+        view.setId(id);
+        Log.e(this.getClass().getTypeName(), view.getId() + "");
+
+
 
         // ATTACH
         image = view.findViewById(R.id.image);
@@ -78,6 +86,9 @@ public class MealPlanFragment extends Fragment {
         titles[2] = title3;
 
 
+        if(mealPlan == null)
+            return view;
+
         // POPULATE
         for (int i = 0; i < 3; i++) {
             Picasso.get().load(mealPlan.getMeals()[i].getImage()).placeholder(R.drawable.meal).into(images[i]);
@@ -88,6 +99,7 @@ public class MealPlanFragment extends Fragment {
         protein.setText(mealPlan.getNutrients().getProtein() + "");
         fat.setText(mealPlan.getNutrients().getFat() + "");
         carbohydrates.setText(mealPlan.getNutrients().getCarbohydrates() + "");
+
 
         return view;
     }
