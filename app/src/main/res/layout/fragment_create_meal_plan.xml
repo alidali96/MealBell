@@ -10,53 +10,66 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
+        <TextView
+            android:id="@+id/calories_target_label"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="8dp"
+            android:text="Calories Target:"
+            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
         <com.github.florent37.androidslidr.Slidr
             android:id="@+id/calories_target"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="10dp"
+            android:layout_marginStart="8dp"
             android:layout_marginTop="10dp"
-            android:layout_marginEnd="10dp"
-            android:max="4000"
-            android:progress="2000"
+            android:layout_marginEnd="8dp"
 
             android:progressTint="@color/colorAccent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/calories_target_label"
             app:slidr_draw_bubble="true"
             app:slidr_region_leftColor="#4CAF50"
             app:slidr_regions_centerText="false"
             app:slidr_regions_textFollowRegionColor="false"
-            app:slidr_step_colorizeAfterLast="true"
+            app:slidr_step_colorizeAfterLast="true">
 
-            />
-        <!--        <SeekBar-->
-        <!--            android:layout_width="0dp"-->
-        <!--            android:layout_height="wrap_content"-->
-        <!--            android:layout_marginStart="10dp"-->
-        <!--            android:layout_marginTop="10dp"-->
-        <!--            android:layout_marginEnd="10dp"-->
-        <!--            android:max="4000"-->
-        <!--            android:progress="2000"-->
-        <!--            android:progressTint="@color/colorAccent"-->
-        <!--            app:layout_constraintEnd_toEndOf="parent"-->
-        <!--            app:layout_constraintStart_toStartOf="parent"-->
-        <!--            app:layout_constraintTop_toTopOf="parent" />-->
+        </com.github.florent37.androidslidr.Slidr>
+
+        <TextView
+            android:id="@+id/diets_label"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="8dp"
+            android:text="Diets:"
+            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/calories_target" />
+
 
         <com.google.android.flexbox.FlexboxLayout
             android:id="@+id/diet"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="10dp"
+            android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
-            android:layout_marginEnd="10dp"
+            android:layout_marginEnd="8dp"
             app:flexDirection="row"
             app:flexWrap="wrap"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/calories_target">
+            app:layout_constraintTop_toBottomOf="@id/diets_label">
 
             <!--            <string name="diet_gluten_free">Gluten Free</string>-->
             <!--            <string name="diet_vegan">Vegan</string>-->
@@ -150,28 +163,46 @@
 
         </com.google.android.flexbox.FlexboxLayout>
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/exclude_list"
-            android:layout_width="match_parent"
+        <TextView
+            android:id="@+id/exclude_label"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="8dp"
+            android:text="Exclude:"
+            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/diet">
-
-        </androidx.recyclerview.widget.RecyclerView>
+            app:layout_constraintTop_toBottomOf="@id/diet" />
 
         <EditText
             android:id="@+id/exclude"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
             android:backgroundTint="@color/colorAccent"
             android:hint="Olive..."
             android:singleLine="true"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/exclude_list">
+            app:layout_constraintTop_toBottomOf="@id/exclude_label">
 
         </EditText>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/exclude_list"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="8dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/exclude">
+
+        </androidx.recyclerview.widget.RecyclerView>
 
         <Button
             android:id="@+id/submit"
@@ -184,7 +215,7 @@
             android:text="GENERATE PLAN"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/exclude" />
+            app:layout_constraintTop_toBottomOf="@id/exclude_list" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

@@ -80,6 +80,9 @@ public class CreateMealPlanFragment extends Fragment {
         submitButton = view.findViewById(R.id.submit);
 
         // Slider
+        caloriesTarget.setMin(0);
+        caloriesTarget.setMax(4000);
+        caloriesTarget.setCurrentValue(caloriesTarget.getMax() / 2); // start at the half value
         caloriesTarget.setTextFormatter(new Slidr.TextFormatter() {
             @Override
             public String format(float value) {
