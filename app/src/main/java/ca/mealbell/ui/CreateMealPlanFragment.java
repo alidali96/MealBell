@@ -21,6 +21,7 @@ import android.widget.SeekBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.github.florent37.androidslidr.Slidr;
 import com.google.android.flexbox.FlexWrap;
 import com.google.android.flexbox.FlexboxLayoutManager;
 
@@ -48,7 +49,7 @@ public class CreateMealPlanFragment extends Fragment {
 
     RecyclerView recyclerView;
     IngredientsAdapter adapter;
-    SeekBar caloriesTarget;
+    Slidr caloriesTarget;
     EditText searchView;
     Button submitButton;
 
@@ -77,6 +78,20 @@ public class CreateMealPlanFragment extends Fragment {
         caloriesTarget = view.findViewById(R.id.calories_target);
         searchView = view.findViewById(R.id.exclude);
         submitButton = view.findViewById(R.id.submit);
+
+        // Slider
+        caloriesTarget.setTextFormatter(new Slidr.TextFormatter() {
+            @Override
+            public String format(float value) {
+                return String.format("Calories: %d", (int) value);
+            }
+        });
+        caloriesTarget.setRegionTextFormatter(new Slidr.RegionTextFormatter() {
+            @Override
+            public String format(int region, float value) {
+                return "";
+            }
+        });
 
         // Diets
         dietsCheckBoxes[0] = view.findViewById(R.id.diet_gluten_free);
@@ -162,7 +177,7 @@ public class CreateMealPlanFragment extends Fragment {
             // encode ingredients (spaces, symbols or ",")
             String encodedDiets = URLEncoder.encode(csvDiets, "UTF-8");
             // return generate meal URL
-            return Const.API_URL + "recipes/mealplans/generate?timeFrame=day&targetCalories=" + caloriesTarget.getProgress() + "&diet=" + encodedDiets + "&exclude=" + encodedIngredients;
+            return Const.API_URL + "recipes/mealplans/generate?timeFrame=day&targetCalories=" + caloriesTarget.getCurrentValue() + "&diet=" + encodedDiets + "&exclude=" + encodedIngredients;
         } catch (UnsupportedEncodingException e) {
             Log.e(TAG, e.toString());
         }

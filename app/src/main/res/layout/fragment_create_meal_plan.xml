@@ -10,8 +10,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-
-        <SeekBar
+        <com.github.florent37.androidslidr.Slidr
             android:id="@+id/calories_target"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -20,10 +19,30 @@
             android:layout_marginEnd="10dp"
             android:max="4000"
             android:progress="2000"
+
             android:progressTint="@color/colorAccent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            app:slidr_draw_bubble="true"
+            app:slidr_region_leftColor="#4CAF50"
+            app:slidr_regions_centerText="false"
+            app:slidr_regions_textFollowRegionColor="false"
+            app:slidr_step_colorizeAfterLast="true"
+
+            />
+        <!--        <SeekBar-->
+        <!--            android:layout_width="0dp"-->
+        <!--            android:layout_height="wrap_content"-->
+        <!--            android:layout_marginStart="10dp"-->
+        <!--            android:layout_marginTop="10dp"-->
+        <!--            android:layout_marginEnd="10dp"-->
+        <!--            android:max="4000"-->
+        <!--            android:progress="2000"-->
+        <!--            android:progressTint="@color/colorAccent"-->
+        <!--            app:layout_constraintEnd_toEndOf="parent"-->
+        <!--            app:layout_constraintStart_toStartOf="parent"-->
+        <!--            app:layout_constraintTop_toTopOf="parent" />-->
 
         <com.google.android.flexbox.FlexboxLayout
             android:id="@+id/diet"
@@ -39,15 +58,15 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/calories_target">
 
-<!--            <string name="diet_gluten_free">Gluten Free</string>-->
-<!--            <string name="diet_vegan">Vegan</string>-->
-<!--            <string name="diet_vegetarian">Vegetarian</string>-->
-<!--            <string name="diet_lacto_vegetarian">Lacto-Vegetarian</string>-->
-<!--            <string name="diet_ovo_vegetarian">Ovo-Vegetarian</string>-->
-<!--            <string name="diet_ketogenic">Ketogenic</string>-->
-<!--            <string name="diet_pescetarian">Pescetarian</string>-->
-<!--            <string name="diet_paleo">Paleo</string>-->
-<!--            <string name="diet_primal">Primal</string>-->
+            <!--            <string name="diet_gluten_free">Gluten Free</string>-->
+            <!--            <string name="diet_vegan">Vegan</string>-->
+            <!--            <string name="diet_vegetarian">Vegetarian</string>-->
+            <!--            <string name="diet_lacto_vegetarian">Lacto-Vegetarian</string>-->
+            <!--            <string name="diet_ovo_vegetarian">Ovo-Vegetarian</string>-->
+            <!--            <string name="diet_ketogenic">Ketogenic</string>-->
+            <!--            <string name="diet_pescetarian">Pescetarian</string>-->
+            <!--            <string name="diet_paleo">Paleo</string>-->
+            <!--            <string name="diet_primal">Primal</string>-->
             <CheckBox
                 android:id="@+id/diet_gluten_free"
                 android:layout_width="wrap_content"
