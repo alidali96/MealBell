@@ -10,17 +10,31 @@
 
 
     <!-- Temporary Colors :) Feel FREE to Pick New Ones :D -->
-    <color name="colorPrimary">#03ad53</color>
-    <color name="colorPrimaryDark">#007c27</color>
-    <color name="colorAccent">#46af4c</color>
+<!--    <color name="colorPrimary">#03ad53</color>-->
+<!--    <color name="colorPrimaryDark">#007c27</color>-->
+<!--    <color name="colorAccent">#46af4c</color>-->
+
+    <color name="colorPrimary">#33354F</color>
+    <color name="colorPrimaryDark">#27283C</color>
+    <color name="colorAccent">#C32127</color>
 
     <color name="tabtextcolour">#ffffff</color>
     <color name="tabIndicatorColour">#bfbfbf</color>
-    <color name="colorRed">#A40020</color>
-    <color name="colorGold">#FEC813</color>
-    <color name="colorLightBlue">#8598E3</color>
-    <color name="colorOrange">#FEB618</color>
-    <color name="colorDarkBlue">#2B3443</color>
-    <color name="colorPurple">#4E3D9C</color>
+<!--    <color name="colorRed">#A40020</color>-->
+<!--    <color name="colorGold">#FEC813</color>-->
+<!--    <color name="colorLightBlue">#8598E3</color>-->
+<!--    <color name="colorOrange">#FEB618</color>-->
+<!--    <color name="colorDarkBlue">#2B3443</color>-->
+<!--    <color name="colorPurple">#4E3D9C</color>-->
+
+    <!--    <color name="colorRed">#A40020</color>-->
+        <color name="colorGold">#ffc842</color>
+        <color name="colorLightBlue">#8598E3</color>
+    <!--    <color name="colorOrange">#FEB618</color>-->
+        <color name="colorDarkBlue">#2B3443</color>
+        <color name="colorPurple">#58369c</color>
+        <color name="colorPurpleLight">#8861cd</color>
+        <color name="colorPurpleDark">#240a6c</color>
+
 
 </resources>

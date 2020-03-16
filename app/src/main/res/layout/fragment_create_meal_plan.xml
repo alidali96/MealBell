@@ -4,7 +4,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:fillViewport="true"
     tools:context=".ui.CreateMealPlanFragment">
+
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -30,13 +32,15 @@
             android:layout_marginStart="8dp"
             android:layout_marginTop="10dp"
             android:layout_marginEnd="8dp"
-
             android:progressTint="@color/colorAccent"
             app:layout_constraintEnd_toEndOf="parent"
+
+
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/calories_target_label"
+            app:slidr_backgroundColor="@color/colorAccent"
             app:slidr_draw_bubble="true"
-            app:slidr_region_leftColor="#4CAF50"
+            app:slidr_region_leftColor="@color/colorPrimary"
             app:slidr_regions_centerText="false"
             app:slidr_regions_textFollowRegionColor="false"
             app:slidr_step_colorizeAfterLast="true">
@@ -86,6 +90,7 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="5dp"
                 android:text="@string/diet_gluten_free"
+                android:textColorLink="@color/colorPrimary"
                 tools:layout_editor_absoluteX="5dp"
                 tools:layout_editor_absoluteY="5dp" />
 
@@ -198,26 +203,30 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
             android:layout_marginEnd="8dp"
+            android:layout_marginBottom="16dp"
+            app:layout_constraintBottom_toTopOf="@+id/submit"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/exclude">
 
         </androidx.recyclerview.widget.RecyclerView>
 
+
         <Button
             android:id="@+id/submit"
             style="@style/Widget.AppCompat.Button.Colored"
-            android:layout_width="0dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="32dp"
-            android:layout_marginTop="16dp"
-            android:layout_marginEnd="32dp"
+            android:layout_alignParentBottom="true"
+            android:layout_marginStart="64dp"
+            android:layout_marginEnd="64dp"
+            android:layout_marginBottom="16dp"
+            android:background="@drawable/rounded_bg"
             android:text="GENERATE PLAN"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/exclude_list" />
-
-
+            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintStart_toStartOf="parent" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </ScrollView>
