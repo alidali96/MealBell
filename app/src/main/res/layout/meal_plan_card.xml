@@ -1,144 +1,141 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    android:padding="5dp"
 
+    app:cardBackgroundColor="@color/colorDarkBlue"
+    app:cardElevation="1dp">
 
-    <androidx.cardview.widget.CardView
-        android:id="@+id/card_view"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_margin="5dp"
-        app:cardBackgroundColor="@color/colorAccent"
-        app:cardElevation="1dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.44"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
-
-    </androidx.cardview.widget.CardView>
 
     <LinearLayout
-        android:id="@+id/first"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
         android:elevation="2dp"
-        android:orientation="horizontal"
-        app:layout_constraintEnd_toEndOf="@id/card_view"
-        app:layout_constraintStart_toStartOf="@id/card_view"
-        app:layout_constraintTop_toTopOf="@id/card_view">
+        android:orientation="vertical">
 
-        <ImageView
-            android:id="@+id/image"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:layout_gravity="start|center_vertical"
-            android:scaleType="centerCrop"
-            app:srcCompat="@drawable/meal" />
-
-        <TextView
-            android:id="@+id/title"
+        <LinearLayout
+            android:id="@+id/first"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_marginStart="8dp"
-            android:layout_marginEnd="8dp"
-            android:ellipsize="end"
-            android:gravity="center_vertical"
-            android:lines="1"
-            android:text="Meal Number One"
-            android:textSize="24sp" />
-    </LinearLayout>
+            android:elevation="2dp"
+            android:orientation="horizontal">
 
-    <LinearLayout
-        android:id="@+id/second"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:elevation="2dp"
-        android:orientation="horizontal"
-        android:paddingVertical="5dp"
-        app:layout_constraintEnd_toEndOf="@id/card_view"
-        app:layout_constraintStart_toStartOf="@id/card_view"
-        app:layout_constraintTop_toBottomOf="@id/first">
+            <ImageView
+                android:id="@+id/image"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_gravity="start|center_vertical"
+                android:scaleType="centerCrop"
+                app:srcCompat="@drawable/meal" />
 
-        <ImageView
-            android:id="@+id/image2"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:layout_gravity="start|center_vertical"
-            android:scaleType="centerCrop"
-            app:srcCompat="@drawable/meal" />
+            <TextView
+                android:id="@+id/title"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginStart="8dp"
+                android:layout_marginEnd="8dp"
+                android:ellipsize="end"
+                android:gravity="center_vertical"
+                android:lines="1"
+                android:text="Meal Number One"
+                android:textColor="@color/design_default_color_background"
+                android:textSize="24sp" />
+        </LinearLayout>
 
-        <TextView
-            android:id="@+id/title2"
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@drawable/divider" />
+
+        <LinearLayout
+            android:id="@+id/second"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_marginStart="8dp"
-            android:layout_marginEnd="8dp"
-            android:ellipsize="end"
-            android:gravity="center_vertical"
-            android:lines="1"
-            android:text="Meal Number Two"
-            android:textSize="24sp" />
-    </LinearLayout>
+            android:elevation="2dp"
+            android:orientation="horizontal"
+            android:paddingVertical="5dp">
 
-    <LinearLayout
-        android:id="@+id/third"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:elevation="2dp"
-        android:orientation="horizontal"
-        app:layout_constraintEnd_toEndOf="@id/card_view"
-        app:layout_constraintStart_toStartOf="@id/card_view"
-        app:layout_constraintTop_toBottomOf="@id/second">
+            <ImageView
+                android:id="@+id/image2"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_gravity="start|center_vertical"
+                android:scaleType="centerCrop"
+                app:srcCompat="@drawable/meal" />
 
-        <ImageView
-            android:id="@+id/image3"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:layout_gravity="start|center_vertical"
-            android:scaleType="centerCrop"
-            app:srcCompat="@drawable/meal" />
+            <TextView
+                android:id="@+id/title2"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginStart="8dp"
+                android:layout_marginEnd="8dp"
+                android:ellipsize="end"
+                android:gravity="center_vertical"
+                android:lines="1"
+                android:text="Meal Number Two"
+                android:textColor="@color/design_default_color_background"
+                android:textSize="24sp" />
+        </LinearLayout>
 
-        <TextView
-            android:id="@+id/title3"
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@drawable/divider" />
+
+        <LinearLayout
+            android:id="@+id/third"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_marginStart="8dp"
-            android:layout_marginEnd="8dp"
-            android:ellipsize="end"
-            android:gravity="center_vertical"
-            android:lines="1"
-            android:text="Meal Number Three"
-            android:textSize="24sp" />
-    </LinearLayout>
+            android:elevation="2dp"
+            android:orientation="horizontal">
 
-    <LinearLayout
-        android:id="@+id/open"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
+            <ImageView
+                android:id="@+id/image3"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_gravity="start|center_vertical"
+                android:scaleType="centerCrop"
+                app:srcCompat="@drawable/meal" />
 
-        android:background="@color/colorDarkBlue"
-        android:elevation="2dp"
-        android:gravity="center"
-        android:visibility="gone"
-        app:layout_constraintBottom_toBottomOf="@id/card_view"
-        app:layout_constraintEnd_toEndOf="@+id/card_view"
-        app:layout_constraintStart_toStartOf="@id/card_view"
-        app:layout_constraintTop_toBottomOf="@id/third">
+            <TextView
+                android:id="@+id/title3"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginStart="8dp"
+                android:layout_marginEnd="8dp"
+                android:ellipsize="end"
+                android:gravity="center_vertical"
+                android:lines="1"
+                android:text="Meal Number Three"
+                android:textColor="@color/design_default_color_background"
+                android:textSize="24sp" />
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:drawableStart="@drawable/ic_expand_more_black_24dp"
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/open"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+
+            android:background="@color/colorDarkBlue"
+            android:elevation="2dp"
             android:gravity="center"
-            android:padding="5dp"
-            android:text="Open"
-            android:textAlignment="center"
-            android:textColor="@color/design_default_color_background" />
+            android:visibility="gone">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:drawableStart="@drawable/ic_expand_more_black_24dp"
+                android:gravity="center"
+                android:padding="5dp"
+                android:text="Open"
+                android:textAlignment="center"
+                android:textColor="@color/design_default_color_background" />
+        </LinearLayout>
     </LinearLayout>
 
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.cardview.widget.CardView>

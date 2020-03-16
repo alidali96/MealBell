@@ -27,11 +27,13 @@
 <!--    <color name="colorDarkBlue">#2B3443</color>-->
 <!--    <color name="colorPurple">#4E3D9C</color>-->
 
-    <!--    <color name="colorRed">#A40020</color>-->
-        <color name="colorGold">#ffc842</color>
-        <color name="colorLightBlue">#8598E3</color>
-    <!--    <color name="colorOrange">#FEB618</color>-->
+        <color name="colorLightBlue">#545d6e</color>
         <color name="colorDarkBlue">#2B3443</color>
+
+        <color name="colorRed">#A40020</color>
+        <color name="colorGold">#ffc842</color>
+        <color name="colorOrange">#FEB618</color>
+
         <color name="colorPurple">#58369c</color>
         <color name="colorPurpleLight">#8861cd</color>
         <color name="colorPurpleDark">#240a6c</color>

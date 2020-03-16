@@ -4,6 +4,7 @@
     android:id="@+id/meal"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:background="@color/colorLightBlue"
     android:elevation="2dp"
     android:orientation="horizontal"
     android:paddingBottom="5dp">
@@ -44,6 +45,7 @@
         android:maxLines="2"
         android:padding="2dp"
         android:text="Meal Number One"
+        android:textColor="@color/design_default_color_background"
         android:textSize="24sp"
         app:layout_constraintBottom_toTopOf="@id/info"
         app:layout_constraintEnd_toEndOf="@id/meal"
@@ -76,7 +78,8 @@
             android:gravity="center_vertical"
             android:paddingStart="5dp"
             android:paddingEnd="5dp"
-            android:text="5" />
+            android:text="5"
+            android:textColor="@color/design_default_color_background" />
 
         <ImageView
             android:id="@+id/timer"
@@ -92,7 +95,8 @@
             android:gravity="center_vertical"
             android:paddingStart="5dp"
             android:paddingEnd="5dp"
-            android:text="30" />
+            android:text="30"
+            android:textColor="@color/design_default_color_background" />
 
 
     </LinearLayout>
