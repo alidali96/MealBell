@@ -51,7 +51,7 @@ public class MealPlannerFragment extends Fragment {
         // Hide fab
         fab.hide();
         // Change Image of fab
-        fab.setImageResource(R.drawable.ic_add_black_24dp);
+        fab.setImageResource(R.drawable.ic_add_white_24dp);
         // Set Click Listener on fab
         fab.setOnClickListener(new View.OnClickListener() {
             @Override

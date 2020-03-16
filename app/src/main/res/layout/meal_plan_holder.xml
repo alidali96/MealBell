@@ -4,6 +4,7 @@
     android:id="@+id/folding_cell_meal"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
+    android:layout_margin="5dp"
     android:clipChildren="false"
     android:clipToPadding="false"
     android:orientation="vertical"
@@ -13,16 +14,15 @@
     <include
         android:id="@+id/meal_plan_details_container"
         layout="@layout/meal_plan_details_card"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:visibility="gone" />
 
     <include
         android:id="@+id/meal_plan_container"
         layout="@layout/meal_plan_card"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="5dp"
         android:visibility="visible" />
 
 

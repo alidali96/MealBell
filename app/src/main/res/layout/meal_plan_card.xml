@@ -1,13 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:padding="5dp"
 
-    app:cardBackgroundColor="@color/colorDarkBlue"
-    app:cardElevation="1dp">
+    app:cardBackgroundColor="@color/colorDarkBlue">
 
 
     <LinearLayout
@@ -55,8 +53,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:elevation="2dp"
-            android:orientation="horizontal"
-            android:paddingVertical="5dp">
+            android:orientation="horizontal">
 
             <ImageView
                 android:id="@+id/image2"

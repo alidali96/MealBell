@@ -1,174 +1,173 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    android:padding="5dp"
 
-    <androidx.cardview.widget.CardView
-        android:id="@+id/card_view"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_margin="5dp"
-        app:cardBackgroundColor="@color/colorLightBlue"
-        app:cardUseCompatPadding="false"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+    app:cardBackgroundColor="@color/colorLightBlue">
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/meals_recycler_view"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:elevation="2dp"
-        app:layout_constraintBottom_toTopOf="@+id/nutrients"
-        app:layout_constraintEnd_toEndOf="@id/card_view"
-        app:layout_constraintStart_toStartOf="@id/card_view"
-        app:layout_constraintTop_toTopOf="@id/card_view" />
-
-    <com.google.android.flexbox.FlexboxLayout
-        android:id="@+id/nutrients"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginBottom="8dp"
-        android:elevation="2dp"
-        app:flexWrap="wrap"
-        app:layout_constraintBottom_toTopOf="@id/close"
-        app:layout_constraintEnd_toEndOf="@id/card_view"
-        app:layout_constraintStart_toStartOf="@id/card_view"
-        app:layout_constraintTop_toBottomOf="@id/meals_recycler_view">
-
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="5dp"
-            android:orientation="horizontal">
-
-            <ImageView
-                android:layout_width="25dp"
-                android:layout_height="25dp"
-                android:src="@drawable/calories"
-                tools:layout_editor_absoluteX="2dp"
-                tools:layout_editor_absoluteY="1dp" />
-
-            <TextView
-                android:id="@+id/calories"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:fontFamily="sans-serif"
-                android:gravity="center_vertical"
-                android:padding="2.5dp"
-                android:text="Calories"
-                android:textColor="@color/design_default_color_background"
-                android:textSize="14sp" />
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="5dp"
-            android:orientation="horizontal"
-            tools:layout_editor_absoluteX="97dp">
-
-            <ImageView
-                android:layout_width="25dp"
-                android:layout_height="25dp"
-                android:src="@drawable/protein"
-                tools:layout_editor_absoluteX="2dp"
-                tools:layout_editor_absoluteY="1dp" />
-
-            <TextView
-                android:id="@+id/protein"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:fontFamily="sans-serif"
-                android:gravity="center_vertical"
-                android:padding="2.5dp"
-                android:text="Protein"
-                android:textColor="@color/design_default_color_background"
-                android:textSize="14sp" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="5dp"
-            android:orientation="horizontal"
-            tools:layout_editor_absoluteX="188dp">
-
-            <ImageView
-                android:layout_width="25dp"
-                android:layout_height="25dp"
-                android:src="@drawable/fat"
-                tools:layout_editor_absoluteX="2dp"
-                tools:layout_editor_absoluteY="1dp" />
-
-            <TextView
-                android:id="@+id/fat"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:fontFamily="sans-serif"
-                android:gravity="center_vertical"
-                android:padding="2.5dp"
-                android:text="Fat"
-                android:textColor="@color/design_default_color_background"
-                android:textSize="14sp" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="5dp"
-            android:orientation="horizontal"
-            tools:layout_editor_absoluteX="253dp">
-
-            <ImageView
-                android:layout_width="25dp"
-                android:layout_height="25dp"
-                android:src="@drawable/carbohydrates"
-                tools:layout_editor_absoluteX="2dp"
-                tools:layout_editor_absoluteY="1dp" />
-
-            <TextView
-                android:id="@+id/carbohydrates"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:fontFamily="sans-serif"
-                android:gravity="center_vertical"
-                android:padding="2.5dp"
-                android:text="Carbs"
-                android:textColor="@color/design_default_color_background"
-                android:textSize="14sp" />
-        </LinearLayout>
-    </com.google.android.flexbox.FlexboxLayout>
 
     <LinearLayout
-        android:id="@+id/close"
-        android:layout_width="0dp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-
-        android:background="@color/colorDarkBlue"
         android:elevation="2dp"
-        android:gravity="center"
-        app:layout_constraintBottom_toBottomOf="@id/card_view"
-        app:layout_constraintEnd_toEndOf="@+id/card_view"
-        app:layout_constraintStart_toStartOf="@id/card_view"
-        app:layout_constraintTop_toBottomOf="@id/nutrients">
+        android:orientation="vertical">
 
-        <TextView
-            android:layout_width="wrap_content"
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/meals_recycler_view"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:drawableStart="@drawable/ic_keyboard_arrow_up_black_24dp"
+            android:elevation="2dp"
+            app:layout_constraintBottom_toTopOf="@+id/nutrients"
+            app:layout_constraintEnd_toEndOf="@id/card_view"
+            app:layout_constraintStart_toStartOf="@id/card_view"
+            app:layout_constraintTop_toTopOf="@id/card_view" />
+
+        <com.google.android.flexbox.FlexboxLayout
+            android:id="@+id/nutrients"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginBottom="8dp"
+            android:elevation="2dp"
+            app:flexWrap="wrap"
+            app:layout_constraintBottom_toTopOf="@id/close"
+            app:layout_constraintEnd_toEndOf="@id/card_view"
+            app:layout_constraintStart_toStartOf="@id/card_view"
+            app:layout_constraintTop_toBottomOf="@id/meals_recycler_view">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:layout_width="25dp"
+                    android:layout_height="25dp"
+                    android:src="@drawable/calories"
+                    tools:layout_editor_absoluteX="2dp"
+                    tools:layout_editor_absoluteY="1dp" />
+
+                <TextView
+                    android:id="@+id/calories"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="sans-serif"
+                    android:gravity="center_vertical"
+                    android:padding="2.5dp"
+                    android:text="Calories"
+                    android:textColor="@color/design_default_color_background"
+                    android:textSize="14sp" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:orientation="horizontal"
+                tools:layout_editor_absoluteX="97dp">
+
+                <ImageView
+                    android:layout_width="25dp"
+                    android:layout_height="25dp"
+                    android:src="@drawable/protein"
+                    tools:layout_editor_absoluteX="2dp"
+                    tools:layout_editor_absoluteY="1dp" />
+
+                <TextView
+                    android:id="@+id/protein"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="sans-serif"
+                    android:gravity="center_vertical"
+                    android:padding="2.5dp"
+                    android:text="Protein"
+                    android:textColor="@color/design_default_color_background"
+                    android:textSize="14sp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:orientation="horizontal"
+                tools:layout_editor_absoluteX="188dp">
+
+                <ImageView
+                    android:layout_width="25dp"
+                    android:layout_height="25dp"
+                    android:src="@drawable/fat"
+                    tools:layout_editor_absoluteX="2dp"
+                    tools:layout_editor_absoluteY="1dp" />
+
+                <TextView
+                    android:id="@+id/fat"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="sans-serif"
+                    android:gravity="center_vertical"
+                    android:padding="2.5dp"
+                    android:text="Fat"
+                    android:textColor="@color/design_default_color_background"
+                    android:textSize="14sp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:orientation="horizontal"
+                tools:layout_editor_absoluteX="253dp">
+
+                <ImageView
+                    android:layout_width="25dp"
+                    android:layout_height="25dp"
+                    android:src="@drawable/carbohydrates"
+                    tools:layout_editor_absoluteX="2dp"
+                    tools:layout_editor_absoluteY="1dp" />
+
+                <TextView
+                    android:id="@+id/carbohydrates"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="sans-serif"
+                    android:gravity="center_vertical"
+                    android:padding="2.5dp"
+                    android:text="Carbs"
+                    android:textColor="@color/design_default_color_background"
+                    android:textSize="14sp" />
+            </LinearLayout>
+        </com.google.android.flexbox.FlexboxLayout>
+
+        <LinearLayout
+            android:id="@+id/close"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+
+            android:background="@color/colorDarkBlue"
+            android:elevation="2dp"
             android:gravity="center"
-            android:padding="5dp"
-            android:text="Close"
-            android:textAlignment="center"
-            android:textColor="@color/design_default_color_background" />
+            app:layout_constraintBottom_toBottomOf="@id/card_view"
+            app:layout_constraintEnd_toEndOf="@+id/card_view"
+            app:layout_constraintStart_toStartOf="@id/card_view"
+            app:layout_constraintTop_toBottomOf="@id/nutrients">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:drawableStart="@drawable/ic_keyboard_arrow_up_black_24dp"
+                android:gravity="center"
+                android:padding="5dp"
+                android:text="Close"
+                android:textAlignment="center"
+                android:textColor="@color/design_default_color_background" />
+        </LinearLayout>
     </LinearLayout>
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.cardview.widget.CardView>
