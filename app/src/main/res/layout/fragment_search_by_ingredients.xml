@@ -17,6 +17,7 @@
             android:layout_height="wrap_content"
             android:backgroundTint="@color/colorAccent"
             android:hint="Cheese..."
+            android:inputType="text"
             android:singleLine="true"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -31,7 +32,7 @@
             app:layout_constraintBottom_toTopOf="@+id/submit"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/search">
+            app:layout_constraintTop_toBottomOf="@id/search">
 
         </androidx.recyclerview.widget.RecyclerView>
 
