@@ -6,6 +6,7 @@ import android.os.Bundle;
 
 
 import androidx.annotation.Nullable;
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -17,6 +18,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.android.volley.Request;
+import com.android.volley.VolleyError;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
@@ -34,6 +36,7 @@ import ca.mealbell.adapters.ResultsByNutritionAdapter;
 import ca.mealbell.javabeans.RecipeByIngredient;
 import ca.mealbell.javabeans.RecipeByNutrition;
 
+import static ca.mealbell.MainActivity.FOOD_API_HEADERS;
 import static ca.mealbell.MainActivity.fab;
 
 enum SearchType {
@@ -53,7 +56,6 @@ enum SearchType {
 public class RecipesResultsFragment extends Fragment implements SwipeRefreshLayout.OnRefreshListener, APIResponse {
 
     private final String TAG = getClass().getTypeName();
-    private final Map<String, String> FOOD_API_HEADERS = new HashMap<>();
 
     private ArrayList<RecipeByIngredient> recipeByIngredients = new ArrayList<>();
     private ArrayList<RecipeByNutrition> recipeByNutrition = new ArrayList<>();
@@ -82,10 +84,6 @@ public class RecipesResultsFragment extends Fragment implements SwipeRefreshLayo
         }
         // Initialize Gson
         gson = new Gson();
-
-        // Add API headers
-        FOOD_API_HEADERS.put("x-rapidapi-host", "spoonacular-recipe-food-nutrition-v1.p.rapidapi.com");
-        FOOD_API_HEADERS.put("x-rapidapi-key", getString(R.string.api_key));
     }
 
     @Override
@@ -100,7 +98,7 @@ public class RecipesResultsFragment extends Fragment implements SwipeRefreshLayo
         // Set SwipeRefreshLayout
         swipeRefreshLayout = view.findViewById(R.id.swipe_refresh_layout);
         swipeRefreshLayout.setOnRefreshListener(this);
-        swipeRefreshLayout.setColorSchemeColors(Color.GREEN, Color.RED);    // Pick Awesome Colors !)
+        swipeRefreshLayout.setColorSchemeColors(ContextCompat.getColor(getContext(), R.color.colorAccent));    // Pick Awesome Colors !)
 
 
         // Set Adapters
@@ -126,7 +124,7 @@ public class RecipesResultsFragment extends Fragment implements SwipeRefreshLayo
      * Make API Request
      */
     private void search() {
-        MainAPI.getInstance(getContext()).setHeaders(FOOD_API_HEADERS).newRequest(Request.Method.GET, requestURL, null, this);
+        MainAPI.getInstance(getContext()).setHeaders(FOOD_API_HEADERS).stringRequest(Request.Method.GET, requestURL, null, this);
     }
 
     /**
@@ -138,15 +136,15 @@ public class RecipesResultsFragment extends Fragment implements SwipeRefreshLayo
     }
 
     @Override
-    public void onSuccess(String json, int status) {
+    public void onSuccess(Object json, int status) {
         // Stop refreshing
         swipeRefreshLayout.setRefreshing(false);
-        Log.e(TAG, json);
+        Log.e(TAG, json.toString());
 
         if (searchType == SearchType.Ingredient) {
             Type ingredientsType = new TypeToken<ArrayList<RecipeByIngredient>>() {
             }.getType();
-            recipeByIngredients = gson.fromJson(json, ingredientsType);
+            recipeByIngredients = gson.fromJson(json.toString(), ingredientsType);
 
             ingredientsAdapter.updateList(recipeByIngredients);
         } else {
@@ -157,9 +155,9 @@ public class RecipesResultsFragment extends Fragment implements SwipeRefreshLayo
     }
 
     @Override
-    public void onFailure(String error, int status) {
+    public void onFailure(VolleyError error, int status) {
         // Stop refreshing
         swipeRefreshLayout.setRefreshing(false);
-        Log.e(TAG, error);
+        Log.e(TAG, error.toString());
     }
 }

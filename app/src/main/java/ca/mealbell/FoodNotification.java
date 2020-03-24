@@ -13,6 +13,7 @@ import androidx.core.app.NotificationCompat;
 import androidx.core.content.ContextCompat;
 
 import com.android.volley.Request;
+import com.android.volley.VolleyError;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -64,23 +65,20 @@ public class FoodNotification extends BroadcastReceiver implements APIResponse {
         Log.e("RESULT", "TYPE: " + notificationType);
         Log.e("RESULT", "URL: " + url);
 
-        MainAPI.getInstance(context).setHeaders(FOOD_API_HEADERS).newRequest(Request.Method.GET, url, null, this);
+        MainAPI.getInstance(context).setHeaders(FOOD_API_HEADERS).jsonObjectRequest(Request.Method.GET, url, null, this);
     }
 
     @Override
-    public void onSuccess(String json, int status) {
+    public void onSuccess(Object json, int status) {
+        Log.e("RESULT", json.toString());
 
-        Log.e("RESULT", json);
-
-        // TODO: Clean up this mess
-        String joke = "";
+        JSONObject jokeJSON = (JSONObject) json;
+        String joke = "Error loading notification";
         try {
-            JSONObject jokeJSON = new JSONObject(json);
             joke = jokeJSON.getString("text");
         } catch (JSONException e) {
             e.printStackTrace();
         }
-
 
         NotificationCompat.Builder builder = new NotificationCompat.Builder(context, channelID);
 
@@ -98,14 +96,14 @@ public class FoodNotification extends BroadcastReceiver implements APIResponse {
                 .setContentTitle(title)
                 .setContentText(joke)
                 .setStyle(new NotificationCompat.BigTextStyle().bigText(joke))
-                .setColor(Color.parseColor("#ffc842"));
+                .setColor(ContextCompat.getColor(context, R.color.colorGold));
 
         NotificationManager notificationManager = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
         notificationManager.notify(notificationType, builder.build());
     }
 
     @Override
-    public void onFailure(String error, int status) {
-        Log.e("RESULT", error);
+    public void onFailure(VolleyError error, int status) {
+        Log.e("RESULT", error.toString());
     }
 }
