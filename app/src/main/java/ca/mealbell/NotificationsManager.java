@@ -10,6 +10,8 @@ import android.graphics.Color;
 import android.os.Build;
 import android.util.Log;
 
+import androidx.core.content.ContextCompat;
+
 import java.util.Calendar;
 
 /**
@@ -131,7 +133,7 @@ public class NotificationsManager {
             channel.setDescription(channelDescription);
             channel.enableLights(true);
             channel.enableVibration(true);
-            channel.setLightColor(Color.parseColor("#ffc842"));
+            channel.setLightColor(ContextCompat.getColor(context, R.color.colorPrimary));
 
 
             notificationManager.createNotificationChannel(channel);
