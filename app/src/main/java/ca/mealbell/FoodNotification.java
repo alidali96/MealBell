@@ -6,62 +6,73 @@ import android.app.PendingIntent;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
 import android.util.Log;
 
 import androidx.core.app.NotificationCompat;
+import androidx.core.content.ContextCompat;
 
 import com.android.volley.Request;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.util.HashMap;
-import java.util.Map;
 
 import static android.app.PendingIntent.FLAG_ONE_SHOT;
+import static ca.mealbell.MainActivity.FOOD_API_HEADERS;
+import static ca.mealbell.NotificationsManager.CHANNEL_ID;
+import static ca.mealbell.NotificationsManager.FOOD_JOKE;
+import static ca.mealbell.NotificationsManager.FOOD_TRIVIA;
+import static ca.mealbell.NotificationsManager.NOTIFICATION_TYPE;
 
+
+/**
+ * Create New Notification (Joke / Trivia)
+ *
+ * @author Ali Dali
+ * @since 23-03-2020
+ */
 public class FoodNotification extends BroadcastReceiver implements APIResponse {
 
-    private final Map<String, String> FOOD_API_HEADERS = new HashMap<>();
-    Context context;
+    private Context context;
+    private String channelID;
+    private int notificationType;
+    private String type;
+    private String title;
 
     @Override
     public void onReceive(Context context, Intent intent) {
         this.context = context;
-        FOOD_API_HEADERS.put("x-rapidapi-host", "spoonacular-recipe-food-nutrition-v1.p.rapidapi.com");
-        FOOD_API_HEADERS.put("x-rapidapi-key", context.getString(R.string.api_key));
 
-        String url = Const.API_URL + "food/jokes/random";
+        channelID = intent.getStringExtra(CHANNEL_ID);
+        notificationType = intent.getIntExtra(NOTIFICATION_TYPE, 0);
 
-        MainAPI.getInstance(context).setHeaders(FOOD_API_HEADERS).newRequest(Request.Method.GET, url, null, this );
+        switch (notificationType) {
+            case FOOD_JOKE:
+                title = "Food Joke";
+                type = "jokes";
+                break;
+            case FOOD_TRIVIA:
+                title = "Food Trivia";
+                type = "trivia";
+                break;
+        }
 
-//        NotificationCompat.Builder builder = new NotificationCompat.Builder(context);
-//
-//        Intent myIntent = new Intent(context, MainActivity.class);
-//        PendingIntent pendingIntent = PendingIntent.getActivity(
-//                context,
-//                0,
-//                myIntent,
-//                FLAG_ONE_SHOT);
-//
-//        builder.setAutoCancel(true)
-//                .setDefaults(Notification.DEFAULT_ALL)
-//                .setWhen(System.currentTimeMillis())
-//                .setSmallIcon(R.mipmap.ic_launcher)
-//                .setContentTitle("Food")
-//                .setContentIntent(pendingIntent)
-//                .setContentText("This is you notification\nMealBell")
-//                .setDefaults(Notification.DEFAULT_LIGHTS | Notification.DEFAULT_SOUND)
-//                .setContentInfo("Info")
-//                .setChannelId("food");
-//
-//        NotificationManager notificationManager = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
-//        notificationManager.notify(1, builder.build());
+        String url = Const.API_URL + "food/" + type + "/random";
+
+        Log.e("RESULT", "CHANNEL: " + channelID);
+        Log.e("RESULT", "TYPE: " + notificationType);
+        Log.e("RESULT", "URL: " + url);
+
+        MainAPI.getInstance(context).setHeaders(FOOD_API_HEADERS).newRequest(Request.Method.GET, url, null, this);
     }
 
     @Override
     public void onSuccess(String json, int status) {
+
         Log.e("RESULT", json);
+
+        // TODO: Clean up this mess
         String joke = "";
         try {
             JSONObject jokeJSON = new JSONObject(json);
@@ -71,7 +82,7 @@ public class FoodNotification extends BroadcastReceiver implements APIResponse {
         }
 
 
-        NotificationCompat.Builder builder = new NotificationCompat.Builder(context);
+        NotificationCompat.Builder builder = new NotificationCompat.Builder(context, channelID);
 
         Intent myIntent = new Intent(context, MainActivity.class);
         PendingIntent pendingIntent = PendingIntent.getActivity(
@@ -81,20 +92,16 @@ public class FoodNotification extends BroadcastReceiver implements APIResponse {
                 FLAG_ONE_SHOT);
 
         builder.setAutoCancel(true)
-                .setDefaults(Notification.DEFAULT_ALL)
+                .setContentIntent(pendingIntent)
                 .setWhen(System.currentTimeMillis())
                 .setSmallIcon(R.mipmap.ic_launcher)
-                .setContentTitle("Food Joke")
-                .setContentIntent(pendingIntent)
-//                .setContentText(joke)
-                .setDefaults(Notification.DEFAULT_LIGHTS | Notification.DEFAULT_SOUND)
-                .setContentInfo("Info")
+                .setContentTitle(title)
+                .setContentText(joke)
                 .setStyle(new NotificationCompat.BigTextStyle().bigText(joke))
-                .setChannelId("food");
+                .setColor(Color.parseColor("#ffc842"));
 
         NotificationManager notificationManager = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
-        notificationManager.notify(1, builder.build());
-
+        notificationManager.notify(notificationType, builder.build());
     }
 
     @Override

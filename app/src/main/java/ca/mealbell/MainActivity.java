@@ -1,23 +1,12 @@
 package ca.mealbell;
 
-import android.app.AlarmManager;
-import android.app.Notification;
-import android.app.NotificationChannel;
-import android.app.NotificationManager;
-import android.app.PendingIntent;
-import android.content.Context;
-import android.content.Intent;
-import android.graphics.Color;
-import android.os.Build;
 import android.os.Bundle;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
 
-import android.os.SystemClock;
 import android.view.View;
 
-import androidx.core.app.NotificationCompat;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
@@ -32,16 +21,14 @@ import androidx.appcompat.widget.Toolbar;
 
 import android.view.Menu;
 
-import java.util.Calendar;
-
-import static android.app.PendingIntent.FLAG_ONE_SHOT;
+import java.util.HashMap;
+import java.util.Map;
 
 public class MainActivity extends AppCompatActivity {
 
-    public static final String CHANNEL_ID = "MealBell";
-    public static final String CHANNEL_NAME = "Food Joke and Trivia";
 
     private AppBarConfiguration mAppBarConfiguration;
+    public static final Map<String, String> FOOD_API_HEADERS = new HashMap<>();
 
     // Access FAB in other fragments
     public static FloatingActionButton fab;
@@ -77,9 +64,31 @@ public class MainActivity extends AppCompatActivity {
         NavigationUI.setupWithNavController(navigationView, navController);
 
 
-        // After 5 minutes , Repeat 5 minutes
-        launchNotifications(5 * 60 * 1000, 5 * 60 * 1000);
+        // API Headers
+        FOOD_API_HEADERS.put("x-rapidapi-host", "spoonacular-recipe-food-nutrition-v1.p.rapidapi.com");
+        FOOD_API_HEADERS.put("x-rapidapi-key", getString(R.string.api_key));
 
+        // Set Trivia Notification
+        NotificationsManager triviaNotification = new NotificationsManager.Builder(this)
+                .setChannelID("trivia")
+                .setChannelName("Food Trivia")
+                .setChannelDescription("This will show random food trivia")
+                .setNotificationType(NotificationsManager.FOOD_TRIVIA)
+                .setNotificationTime(new NotificationTime(20))
+                .setRepeat(NotificationsManager.Repeat.INTERVAL_DAY)
+                .build();
+        triviaNotification.launchNotification();
+
+        // Set Jokes Notification
+        NotificationsManager jokesNotification = new NotificationsManager.Builder(this)
+                .setChannelID("jokes")
+                .setChannelName("Food Jokes")
+                .setChannelDescription("This will show random food jokes")
+                .setNotificationType(NotificationsManager.FOOD_JOKE)
+                .setNotificationTime(new NotificationTime(8))
+                .setRepeat(NotificationsManager.Repeat.INTERVAL_DAY)
+                .build();
+        jokesNotification.launchNotification();
     }
 
     @Override
@@ -94,39 +103,6 @@ public class MainActivity extends AppCompatActivity {
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
         return NavigationUI.navigateUp(navController, mAppBarConfiguration)
                 || super.onSupportNavigateUp();
-    }
-
-
-    private void launchNotifications(long after, long repeat) {
-
-        // REQUIRED
-        // Create Channel if SDK >= 26 (O)
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            NotificationManager notificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
-
-            NotificationChannel mChannel = new NotificationChannel(CHANNEL_ID, CHANNEL_NAME, NotificationManager.IMPORTANCE_DEFAULT);
-            mChannel.enableLights(true);
-            mChannel.setLightColor(Color.RED);
-            mChannel.enableVibration(true);
-
-            notificationManager.createNotificationChannel(mChannel);
-        }
-
-
-        AlarmManager alarmManager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
-
-        // SET TIME HERE
-        Calendar calendar = Calendar.getInstance();
-//        calendar.set(Calendar.HOUR_OF_DAY, 2);
-//        calendar.set(Calendar.MINUTE, 40);
-//        calendar.set(Calendar.SECOND, 30);
-
-
-        Intent foodNotification = new Intent(this, FoodNotification.class);
-        PendingIntent pendingIntent = PendingIntent.getBroadcast(this, 0, foodNotification, 0);
-
-
-        alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis() + after, repeat, pendingIntent);
     }
 
 }
