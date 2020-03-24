@@ -101,18 +101,24 @@ public class RecipesResultsFragment extends Fragment implements SwipeRefreshLayo
         swipeRefreshLayout.setColorSchemeColors(ContextCompat.getColor(getContext(), R.color.colorAccent));    // Pick Awesome Colors !)
 
 
+        // Set RecyclerView
+        recyclerView = view.findViewById(R.id.recycler_view);
+
         // Set Adapters
         if (searchType == SearchType.Ingredient) {
             ingredientsAdapter = new ResultsByIngredientsAdapter(getContext(), recipeByIngredients);
+            recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+            recyclerView.setAdapter(ingredientsAdapter);
         } else {
-            //nutritionAdapter = new ResultsByNutritionAdapter(getContext(), recipeByNutrition);
+            nutritionAdapter = new ResultsByNutritionAdapter(getContext(), recipeByNutrition);
+            recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+            recyclerView.setAdapter(nutritionAdapter);
         }
 
-        // Set RecyclerView
-        recyclerView = view.findViewById(R.id.recycler_view);
-        // TODO: Set adapter and layout manager
-        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-        recyclerView.setAdapter(ingredientsAdapter);
+
+//        // TODO: Set adapter and layout manager
+//        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+//        recyclerView.setAdapter(ingredientsAdapter);
 
         search();
 
@@ -132,6 +138,7 @@ public class RecipesResultsFragment extends Fragment implements SwipeRefreshLayo
      */
     @Override
     public void onRefresh() {
+
         search();
     }
 
@@ -149,8 +156,11 @@ public class RecipesResultsFragment extends Fragment implements SwipeRefreshLayo
             ingredientsAdapter.updateList(recipeByIngredients);
         } else {
             // TODO: Nutrition
+            Type nutritionType = new TypeToken<ArrayList<RecipeByNutrition>>() {
+            }.getType();
+            recipeByNutrition = gson.fromJson(json.toString(), nutritionType);
 
-
+            nutritionAdapter.updateList(recipeByNutrition);
         }
     }
 

@@ -87,7 +87,8 @@ public class SearchByIngredientsFragment extends Fragment {
             @Override
             public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
                 // (Android Keyboard || External Keyboard && Text !Empty)
-                if ((actionId == EditorInfo.IME_ACTION_DONE || event.getKeyCode() == KeyEvent.KEYCODE_ENTER) && !v.getText().toString().isEmpty()) {
+//                if ((actionId == EditorInfo.IME_ACTION_DONE || event.getKeyCode() == KeyEvent.KEYCODE_ENTER) && !v.getText().toString().isEmpty()) {
+                if (!v.getText().toString().isEmpty()) {
                     ingredients.add(v.getText().toString());
                     adapter.notifyItemInserted(ingredients.size() - 1);
                     v.setText(null);

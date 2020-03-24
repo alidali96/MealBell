@@ -27,9 +27,9 @@ public class RecipeByNutrition implements Serializable {
     private String image;
     private String imageType;
     private int calories;
-    private int protein;
-    private int fat;
-    private int carbs;
+    private String protein;
+    private String fat;
+    private String carbs;
 
 
     /**
@@ -43,7 +43,7 @@ public class RecipeByNutrition implements Serializable {
      * @param fat
      * @param carbs
      */
-    public RecipeByNutrition(int id, String title, String image, String imageType, int calories, int protein, int fat, int carbs) {
+    public RecipeByNutrition(int id, String title, String image, String imageType, int calories, String protein, String fat, String carbs) {
         this.id = id;
         this.title = title;
         this.image = image;
@@ -74,15 +74,15 @@ public class RecipeByNutrition implements Serializable {
         return calories;
     }
 
-    public int getProtein() {
+    public String getProtein() {
         return protein;
     }
 
-    public int getFat() {
+    public String getFat() {
         return fat;
     }
 
-    public int getCarbs() {
+    public String getCarbs() {
         return carbs;
     }
 
