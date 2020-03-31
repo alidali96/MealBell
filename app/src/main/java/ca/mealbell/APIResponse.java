@@ -1,5 +1,7 @@
 package ca.mealbell;
 
+import com.android.volley.VolleyError;
+
 /**
  *  All Classes that uses MainAPI <strong>must</strong> implements this interface
  * @author Ali Dali
@@ -8,6 +10,6 @@ package ca.mealbell;
  */
 public interface APIResponse {
 
-    void onSuccess(String json, int status);
-    void onFailure(String error, int status);
+    void onSuccess(Object json, int status);
+    void onFailure(VolleyError error, int status);
 }

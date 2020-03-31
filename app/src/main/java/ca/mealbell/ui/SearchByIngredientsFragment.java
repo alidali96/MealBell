@@ -1,14 +1,10 @@
 package ca.mealbell.ui;
 
 
-
-import android.content.Context;
 import android.os.Bundle;
 
-import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.Navigation;
-import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.util.Log;
@@ -21,13 +17,16 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import com.google.android.flexbox.FlexWrap;
+import com.google.android.flexbox.FlexboxLayoutManager;
+
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 import java.util.ArrayList;
-import java.util.List;
 
 import ca.mealbell.Const;
 import ca.mealbell.R;
+import ca.mealbell.adapters.IngredientsAdapter;
 
 import static ca.mealbell.MainActivity.fab;
 
@@ -58,7 +57,7 @@ public class SearchByIngredientsFragment extends Fragment {
 
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+    public View onCreateView(LayoutInflater inflater, final ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
 
@@ -72,9 +71,15 @@ public class SearchByIngredientsFragment extends Fragment {
         searchView = view.findViewById(R.id.search);
         submitButton = view.findViewById(R.id.submit);
 
-        // Set RecyclerView adapter and LayoutManager
+        // Set RecyclerView LayoutManager
+//        final LinearLayoutManager linearLayout = new LinearLayoutManager(getContext());
+//        linearLayout.setOrientation(RecyclerView.HORIZONTAL);
+        FlexboxLayoutManager flexboxLayout = new FlexboxLayoutManager(getContext());
+        flexboxLayout.setFlexWrap(FlexWrap.WRAP);
+
+        // Set RecyclerView Adapter
         adapter = new IngredientsAdapter(getContext(), ingredients);
-        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+        recyclerView.setLayoutManager(flexboxLayout);
         recyclerView.setAdapter(adapter);
 
         // Search Click Listener
@@ -82,7 +87,8 @@ public class SearchByIngredientsFragment extends Fragment {
             @Override
             public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
                 // (Android Keyboard || External Keyboard && Text !Empty)
-                if ((actionId == EditorInfo.IME_ACTION_DONE || event.getKeyCode() == KeyEvent.KEYCODE_ENTER) && !v.getText().toString().isEmpty()) {
+//                if ((actionId == EditorInfo.IME_ACTION_DONE || event.getKeyCode() == KeyEvent.KEYCODE_ENTER) && !v.getText().toString().isEmpty()) {
+                if (!v.getText().toString().isEmpty()) {
                     ingredients.add(v.getText().toString());
                     adapter.notifyItemInserted(ingredients.size() - 1);
                     v.setText(null);
@@ -98,8 +104,10 @@ public class SearchByIngredientsFragment extends Fragment {
             public void onClick(View v) {
                 // Send Search URL in bundle to Results Layout
                 Bundle args = new Bundle();
-                args.putString(Const.SEARCH_KEY, getSearchURL());
+                args.putString(Const.SEARCH_URL, getSearchURL());
+                args.putInt(Const.SEARCH_TYPE, Const.INGREDIENT);
                 Navigation.findNavController(view).navigate(R.id.action_nav_serach_recipes_to_recipesResultsFragment, args);
+                Log.e(TAG, getSearchURL());
             }
         });
 
@@ -110,6 +118,7 @@ public class SearchByIngredientsFragment extends Fragment {
 
     /**
      * Add all ingredients to the query
+     *
      * @return the api request URL
      */
     private String getSearchURL() {
@@ -128,48 +137,3 @@ public class SearchByIngredientsFragment extends Fragment {
 
 }
 
-class IngredientsAdapter extends RecyclerView.Adapter<IngredientsHolder> {
-
-    List<String> ingredients;
-    Context context;
-
-    IngredientsAdapter(Context context, ArrayList<String> ingredients) {
-        this.context = context;
-        this.ingredients = ingredients;
-    }
-
-    @NonNull
-    @Override
-    public IngredientsHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(context).inflate(R.layout.ingredient_holder, parent, false);
-        return new IngredientsHolder(view);
-    }
-
-    @Override
-    public void onBindViewHolder(@NonNull final IngredientsHolder holder, int position) {
-        holder.textView.setText(ingredients.get(position));
-        holder.itemView.setOnLongClickListener(new View.OnLongClickListener() {
-            @Override
-            public boolean onLongClick(View v) {
-                ingredients.remove(holder.getAdapterPosition());
-                notifyItemRemoved(holder.getAdapterPosition());
-                return false;
-            }
-        });
-    }
-
-    @Override
-    public int getItemCount() {
-        return ingredients.size();
-    }
-}
-
-class IngredientsHolder extends RecyclerView.ViewHolder {
-
-    TextView textView;
-
-    public IngredientsHolder(@NonNull View itemView) {
-        super(itemView);
-        textView = itemView.findViewById(R.id.ingredient);
-    }
-}

@@ -21,9 +21,14 @@ import androidx.appcompat.widget.Toolbar;
 
 import android.view.Menu;
 
+import java.util.HashMap;
+import java.util.Map;
+
 public class MainActivity extends AppCompatActivity {
 
+
     private AppBarConfiguration mAppBarConfiguration;
+    public static final Map<String, String> FOOD_API_HEADERS = new HashMap<>();
 
     // Access FAB in other fragments
     public static FloatingActionButton fab;
@@ -51,12 +56,39 @@ public class MainActivity extends AppCompatActivity {
         // Passing each menu ID as a set of Ids because each
         // menu should be considered as top level destinations.
         mAppBarConfiguration = new AppBarConfiguration.Builder(
-                R.id.nav_home, R.id.nav_serach_recipes)
+                R.id.nav_home, R.id.nav_serach_recipes, R.id.nav_meal_planner)
                 .setDrawerLayout(drawer)
                 .build();
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
         NavigationUI.setupActionBarWithNavController(this, navController, mAppBarConfiguration);
         NavigationUI.setupWithNavController(navigationView, navController);
+
+
+        // API Headers
+        FOOD_API_HEADERS.put("x-rapidapi-host", "spoonacular-recipe-food-nutrition-v1.p.rapidapi.com");
+        FOOD_API_HEADERS.put("x-rapidapi-key", "fd162a08c4mshdc6272c968e7ee8p1367dcjsne4431e0cbaea");
+
+        // Set Trivia Notification
+        NotificationsManager triviaNotification = new NotificationsManager.Builder(this)
+                .setChannelID("trivia")
+                .setChannelName("Food Trivia")
+                .setChannelDescription("This will show random food trivia")
+                .setNotificationType(NotificationsManager.FOOD_TRIVIA)
+                .setNotificationTime(new NotificationTime(20))
+                .setRepeat(NotificationsManager.Repeat.INTERVAL_DAY)
+                .build();
+        triviaNotification.launchNotification();
+
+        // Set Jokes Notification
+        NotificationsManager jokesNotification = new NotificationsManager.Builder(this)
+                .setChannelID("jokes")
+                .setChannelName("Food Jokes")
+                .setChannelDescription("This will show random food jokes")
+                .setNotificationType(NotificationsManager.FOOD_JOKE)
+                .setNotificationTime(new NotificationTime(8))
+                .setRepeat(NotificationsManager.Repeat.INTERVAL_DAY)
+                .build();
+        jokesNotification.launchNotification();
     }
 
     @Override
@@ -72,4 +104,5 @@ public class MainActivity extends AppCompatActivity {
         return NavigationUI.navigateUp(navController, mAppBarConfiguration)
                 || super.onSupportNavigateUp();
     }
+
 }
