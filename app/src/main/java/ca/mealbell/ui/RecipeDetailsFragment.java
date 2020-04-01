@@ -94,6 +94,7 @@ public class RecipeDetailsFragment extends Fragment  implements APIResponse {
         Log.d("name test", "working");
         Log.d("name test", recipe.getId() + "");
         Log.d("name test", recipe.getTitle() + "");
+        Log.d("ingredients array test", recipe.getExtendedIngredients().length + "");
 
     }
 

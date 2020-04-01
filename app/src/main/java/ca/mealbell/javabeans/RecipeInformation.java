@@ -10,6 +10,7 @@ public class RecipeInformation implements Parcelable {
     private String image;
     private String summary;
     private String instructions;
+    private Ingredient[] extendedIngredients;
 
     protected RecipeInformation(Parcel in) {
         id = in.readInt();
@@ -17,6 +18,7 @@ public class RecipeInformation implements Parcelable {
         image = in.readString();
         summary = in.readString();
         instructions = in.readString();
+        extendedIngredients = in.createTypedArray(Ingredient.CREATOR);
     }
 
     @Override
@@ -26,6 +28,7 @@ public class RecipeInformation implements Parcelable {
         dest.writeString(image);
         dest.writeString(summary);
         dest.writeString(instructions);
+        dest.writeTypedArray(extendedIngredients, flags);
     }
 
     @Override
@@ -73,7 +76,7 @@ public class RecipeInformation implements Parcelable {
         return instructions;
     }
 
-    public String toString() {
-        return String.format("ID: %d\nTitle: ", id, title);
+    public Ingredient[] getExtendedIngredients() {
+        return extendedIngredients;
     }
 }
