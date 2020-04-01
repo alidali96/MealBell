@@ -28,6 +28,7 @@
 <!--    <color name="colorPurple">#4E3D9C</color>-->
 
         <color name="colorLightBlue">#545d6e</color>
+        <color name="colorLightGray">#24292E</color>
         <color name="colorDarkBlue">#2B3443</color>
 
         <color name="colorRed">#A40020</color>
