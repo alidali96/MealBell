@@ -9,10 +9,13 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 import com.android.volley.Request;
 import com.android.volley.VolleyError;
 import com.google.gson.Gson;
+import com.squareup.picasso.Picasso;
+
 import ca.mealbell.APIResponse;
 import ca.mealbell.Const;
 import ca.mealbell.MainAPI;
@@ -26,8 +29,14 @@ import static ca.mealbell.MainActivity.FOOD_API_HEADERS;
  * A simple {@link Fragment} subclass.
  */
 public class RecipeDetailsFragment extends Fragment  implements APIResponse {
-    TextView titleTextView;
     Gson gson = new Gson();
+
+    // UI elements
+    TextView titleTextView;
+    //TextView summaryTextView;
+    TextView instructionsTextView;
+    ImageView recipeImageView;
+
 
 
 
@@ -44,7 +53,11 @@ public class RecipeDetailsFragment extends Fragment  implements APIResponse {
 
         // hide fab
 
+        // Link GUI elements
         titleTextView = view.findViewById(R.id.recipeTitle_textView);
+        recipeImageView = view.findViewById(R.id.recipeImage_imageView);
+        //summaryTextView = view.findViewById(R.id.summary_TextView);
+        instructionsTextView = view.findViewById(R.id.instructions_TextView);
 
 
 
@@ -62,7 +75,10 @@ public class RecipeDetailsFragment extends Fragment  implements APIResponse {
 
 
     public void populateRecipe(RecipeInformation recipe) {
-        //titleTextView.setText(recipe.getID());
+        titleTextView.setText(recipe.getTitle());
+        Picasso.get().load(recipe.getImage()).placeholder(R.drawable.dish).into(recipeImageView);
+        //summaryTextView.setText(recipe.getSummary());
+        instructionsTextView.setText(recipe.getInstructions());
     }
 
     @Override
@@ -73,6 +89,7 @@ public class RecipeDetailsFragment extends Fragment  implements APIResponse {
 
         RecipeInformation recipe = gson.fromJson(json.toString(), RecipeInformation.class);
 
+        populateRecipe(recipe);
         //Log.d("name test", recipe.getOriginalName());
         Log.d("name test", "working");
         Log.d("name test", recipe.getId() + "");

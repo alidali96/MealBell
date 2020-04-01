@@ -7,16 +7,68 @@
     android:orientation="vertical"
     tools:context=".ui.RecipeDetailsFragment">
 
-
-    <TextView
-        android:id="@+id/recipeTitle_textView"
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="TextView" />
+        android:layout_height="match_parent">
 
-    <ImageView
-        android:id="@+id/recipeImage_imageView"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:src="@drawable/dish" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:background="@color/colorDarkBlue">
+
+            <TextView
+                android:id="@+id/recipeTitle_textView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="5sp"
+                android:text="TextView"
+                android:textColor="@color/design_default_color_background"
+                android:textSize="24sp"
+                android:textStyle="bold" />
+
+            <ImageView
+                android:id="@+id/recipeImage_imageView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:src="@drawable/dish" />
+
+<!--            <TextView-->
+<!--                android:id="@+id/summary_TextView"-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:text="TextView"-->
+<!--                android:textSize="30sp"-->
+<!--                android:textStyle="bold" />-->
+
+            <TextView
+                android:id="@+id/textView7"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingTop="5sp"
+                android:paddingLeft="5sp"
+                android:paddingBottom="2sp"
+                android:text="Instructions:"
+                android:textColor="@color/design_default_color_background"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/instructions_TextView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingLeft="5sp"
+                android:paddingBottom="5sp"
+                android:text="TextView"
+                android:textColor="@color/design_default_color_background"
+                android:textSize="14sp" />
+
+        </LinearLayout>
+
+
+    </ScrollView>
+
+
+
+
 </LinearLayout>
