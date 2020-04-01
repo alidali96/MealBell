@@ -22,7 +22,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:padding="5sp"
-                android:text="TextView"
+                android:text="Recipe Name"
                 android:textColor="@color/design_default_color_background"
                 android:textSize="24sp"
                 android:textStyle="bold" />
@@ -33,13 +33,27 @@
                 android:layout_height="wrap_content"
                 android:src="@drawable/dish" />
 
-<!--            <TextView-->
-<!--                android:id="@+id/summary_TextView"-->
-<!--                android:layout_width="match_parent"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:text="TextView"-->
-<!--                android:textSize="30sp"-->
-<!--                android:textStyle="bold" />-->
+            <TextView
+                android:id="@+id/textView3"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingTop="5sp"
+                android:paddingLeft="5sp"
+                android:paddingBottom="2sp"
+                android:textColor="@color/design_default_color_background"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                android:text="Summary:" />
+
+            <TextView
+                android:id="@+id/summary_TextView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingLeft="5sp"
+                android:paddingBottom="5sp"
+                android:text="TextView"
+                android:textColor="@color/design_default_color_background"
+                android:textSize="14sp" />
 
             <TextView
                 android:id="@+id/textView7"
@@ -62,6 +76,23 @@
                 android:text="TextView"
                 android:textColor="@color/design_default_color_background"
                 android:textSize="14sp" />
+
+            <TextView
+                android:id="@+id/textView8"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Ingredients:"
+                android:paddingTop="5sp"
+                android:paddingLeft="5sp"
+                android:paddingBottom="2sp"
+                android:textColor="@color/design_default_color_background"
+                android:textSize="18sp"
+                android:textStyle="bold"/>
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/ingredients_recyclerView"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
 
         </LinearLayout>
 
