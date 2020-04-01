@@ -24,7 +24,11 @@
         android:id="@+id/recipesResultsFragment"
         android:name="ca.mealbell.ui.RecipesResultsFragment"
         android:label="@string/menu_recipes_results"
-        tools:layout="@layout/fragment_recipes_results" />
+        tools:layout="@layout/fragment_recipes_results" >
+        <action
+            android:id="@+id/action_nav_show_recipe_details"
+            app:destination="@id/nav_recipe_details" />
+    </fragment>
     <fragment
         android:id="@+id/searchByIngredientsFragment"
         android:name="ca.mealbell.ui.SearchByIngredientsFragment"
@@ -50,7 +54,7 @@
         android:label="@string/create_meal_plan"
         tools:layout="@layout/fragment_create_meal_plan" />
     <fragment
-        android:id="@+id/nav_Recipe_details"
+        android:id="@+id/nav_recipe_details"
         android:name="ca.mealbell.ui.RecipeDetailsFragment"
         android:label="Recipe Details"
         tools:layout="@layout/fragment_recipe_details" />

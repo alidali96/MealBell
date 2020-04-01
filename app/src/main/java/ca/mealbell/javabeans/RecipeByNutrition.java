@@ -96,5 +96,5 @@ public class RecipeByNutrition implements Serializable {
      */
     public String toString() {
         return String.format("ID: %d\nTitle: %s\nImage: %s\nImage type: %s\nCalories: %d\nProtein: %d\nFat: %d\nCarbs: %d\n", id, title, image, imageType, calories, protein, fat, carbs);
-    }
-}
+        }
+        }

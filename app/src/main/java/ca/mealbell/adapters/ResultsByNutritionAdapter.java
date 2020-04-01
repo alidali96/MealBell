@@ -1,6 +1,8 @@
 package ca.mealbell.adapters;
 
 import android.content.Context;
+import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -8,6 +10,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.squareup.picasso.Picasso;
@@ -27,12 +30,13 @@ public class ResultsByNutritionAdapter extends RecyclerView.Adapter<ResultsByNut
     public ResultsByNutritionAdapter( Context context, ArrayList<RecipeByNutrition> recipes) {
         this.recipes = recipes;
         this.context = context;
+
     }
 
     @NonNull
     @Override
     public ResultsByNutritionAdapter.ResultsByNutritionHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(context).inflate(R.layout.results_by_nutrition_holder, parent, false);
+        final View view = LayoutInflater.from(context).inflate(R.layout.results_by_nutrition_holder, parent, false);
         return new ResultsByNutritionHolder(view);
     }
 
@@ -72,7 +76,7 @@ public class ResultsByNutritionAdapter extends RecyclerView.Adapter<ResultsByNut
         TextView proteinTextView;
         TextView carbsTextView;
 
-        public ResultsByNutritionHolder(@NonNull View itemView) {
+        public ResultsByNutritionHolder(@NonNull final View itemView) {
 
             super(itemView);
             recipeImageView = itemView.findViewById(R.id.recipe_imageview);
@@ -81,6 +85,24 @@ public class ResultsByNutritionAdapter extends RecyclerView.Adapter<ResultsByNut
             fatTextView = itemView.findViewById(R.id.fat_textview);
             proteinTextView = itemView.findViewById(R.id.protein_textview);
             carbsTextView = itemView.findViewById(R.id.carbs_textview);
+
+            // Add click Listener to the clicked cell in the recycler view
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    // Create an instance of recipeByNutrition
+                    RecipeByNutrition recipe = recipes.get(getAdapterPosition());
+
+                    // Retrieve the id of the clicked cell
+                    int recipeID = recipe.getId();
+
+                    // Create a bundle and add the id to it
+                    Bundle args = new Bundle();
+                    args.putInt("RECIPE_ID", recipeID);
+                    Navigation.findNavController(itemView).navigate(R.id.action_nav_show_recipe_details, args);
+                    Log.d("Cell is Clicked", recipe.getId() + "");
+                }
+            });
         }
     }
 }
