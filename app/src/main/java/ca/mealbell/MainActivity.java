@@ -26,6 +26,9 @@ import android.view.Menu;
 import java.util.HashMap;
 import java.util.Map;
 
+import ca.mealbell.notifications.NotificationTime;
+import ca.mealbell.notifications.NotificationsManager;
+
 public class MainActivity extends AppCompatActivity {
 
 
