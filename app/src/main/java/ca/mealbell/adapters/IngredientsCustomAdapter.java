@@ -17,26 +17,26 @@ import java.util.ArrayList;
 import ca.mealbell.R;
 import ca.mealbell.javabeans.Ingredient;
 
-public class IngredientsEquipmentsAdapter extends RecyclerView.Adapter<IngredientsEquipmentsAdapter.CustomViewHolder> {
+public class IngredientsCustomAdapter extends RecyclerView.Adapter<IngredientsCustomAdapter.CustomViewHolder> {
 
     private ArrayList<Ingredient> ingredients;
     private Context context;
 
-    public IngredientsEquipmentsAdapter(ArrayList<Ingredient> ingredients, Context context) {
+    public IngredientsCustomAdapter(ArrayList<Ingredient> ingredients, Context context) {
         this.ingredients = ingredients;
         this.context = context;
     }
 
     @NonNull
     @Override
-    public IngredientsEquipmentsAdapter.CustomViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public IngredientsCustomAdapter.CustomViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         final View view = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.ingredient_row, parent, false);
+                .inflate(R.layout.ingredient_equipment_row, parent, false);
         return new CustomViewHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull IngredientsEquipmentsAdapter.CustomViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull IngredientsCustomAdapter.CustomViewHolder holder, int position) {
 
         final Ingredient ingredient = ingredients.get(position);
 

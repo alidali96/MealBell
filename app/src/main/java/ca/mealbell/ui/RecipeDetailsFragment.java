@@ -14,7 +14,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 import com.android.volley.Request;
 import com.android.volley.VolleyError;
@@ -27,7 +26,10 @@ import ca.mealbell.APIResponse;
 import ca.mealbell.Const;
 import ca.mealbell.MainAPI;
 import ca.mealbell.R;
-import ca.mealbell.adapters.IngredientsEquipmentsAdapter;
+import ca.mealbell.adapters.EquipmentsCustomAdapter;
+import ca.mealbell.adapters.IngredientsCustomAdapter;
+import ca.mealbell.javabeans.Equipement;
+import ca.mealbell.javabeans.EquipmentsObject;
 import ca.mealbell.javabeans.Ingredient;
 import ca.mealbell.javabeans.RecipeInformation;
 
@@ -40,7 +42,10 @@ import static ca.mealbell.MainActivity.FOOD_API_HEADERS;
 public class RecipeDetailsFragment extends Fragment  implements APIResponse {
     Gson gson = new Gson();
 
-    ArrayList<Ingredient> ingredients = new ArrayList<>();
+    private ArrayList<Ingredient> ingredients = new ArrayList<>();
+    private ArrayList<Equipement> equipements = new ArrayList<>();
+    private Equipement[] equipementsSet;
+
 
     // UI elements
     TextView titleTextView;
@@ -48,6 +53,7 @@ public class RecipeDetailsFragment extends Fragment  implements APIResponse {
     TextView instructionsTextView;
     ImageView recipeImageView;
     RecyclerView ingredientsRecyclerView;
+    RecyclerView equipmentsRecyclerView;
 
 
 
@@ -71,24 +77,47 @@ public class RecipeDetailsFragment extends Fragment  implements APIResponse {
         summaryTextView = view.findViewById(R.id.summary_TextView);
         instructionsTextView = view.findViewById(R.id.instructions_TextView);
         ingredientsRecyclerView = view.findViewById(R.id.ingredients_recyclerView);
+        equipmentsRecyclerView = view.findViewById(R.id.equipments_recyclerView);
 
         // Set the ingredients RecyclerView
         LinearLayoutManager manager = new LinearLayoutManager(getContext());
         manager.setOrientation(RecyclerView.VERTICAL);
+
         ingredientsRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-        IngredientsEquipmentsAdapter adapter = new IngredientsEquipmentsAdapter(ingredients, getContext());
+        IngredientsCustomAdapter adapter = new IngredientsCustomAdapter(ingredients, getContext());
         ingredientsRecyclerView.setAdapter(adapter);
 
+        equipmentsRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+        EquipmentsCustomAdapter equipmentsAdapter = new EquipmentsCustomAdapter(equipements, getContext());
+        equipmentsRecyclerView.setAdapter(equipmentsAdapter);
 
-        // API request
+
+        // API requests
         int id = getArguments().getInt("RECIPE_ID", 0);
-        titleTextView.setText(id + "");
-        if(id != 0) {
-            String url = Const.API_URL + "recipes/" + id + "/information";
-            MainAPI.getInstance(getContext()).setHeaders(FOOD_API_HEADERS).stringRequest(Request.Method.GET, url, null, this);
-        }
+        // Retrieve a recipe with the given id
+
+        getRecipeDetails(id);
+        getRecipeEquipments(id);
 
         return view;
+    }
+
+
+    public void getRecipeDetails(int id) {
+        if(id != 0) {
+            String recipeURL = Const.API_URL + "recipes/" + id + "/information";
+            MainAPI.getInstance(getContext()).setHeaders(FOOD_API_HEADERS).stringRequest(Request.Method.GET, recipeURL, null, this);
+        }
+    }
+
+    public void getRecipeEquipments(int id) {
+        if(id != 0) {
+            // Retrieve a set of equipments for the given id
+            String equipmentURL = Const.API_URL + "recipes/" + id + "/equipmentWidget.json";
+            //https://spoonacular-recipe-food-nutrition-v1.p.rapidapi.com/recipes/1003464/equipmentWidget.json
+            //https://spoonacular-recipe-food-nutrition-v1.p.rapidapi.com/
+            MainAPI.getInstance(getContext()).setHeaders(FOOD_API_HEADERS).stringRequest(Request.Method.GET, equipmentURL, null, this);
+        }
     }
 
 
@@ -104,15 +133,20 @@ public class RecipeDetailsFragment extends Fragment  implements APIResponse {
         for (int i = 0; i < ingredientsArray.length; i++) {
             ingredients.add(ingredientsArray[i]);
         }
+
+        recipe.setEquipments(equipementsSet);
+        // Populate equipments ArrayList from the equipmentsSet array
+        for (int i = 0; i < equipementsSet.length; i++) {
+            equipements.add(equipementsSet[i]);
+        }
     }
 
     @Override
     public void onSuccess(Object json, int status) {
         // TODO: retrieve recipe information
-
-//        RecipeInformation recipe = new RecipeInformation();
-
         RecipeInformation recipe = gson.fromJson(json.toString(), RecipeInformation.class);
+        EquipmentsObject equipementsObject = gson.fromJson(json.toString(), EquipmentsObject.class);
+        equipementsSet = equipementsObject.getEquipment();
 
 
         populateRecipe(recipe);

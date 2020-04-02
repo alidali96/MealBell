@@ -11,6 +11,7 @@ public class RecipeInformation implements Parcelable {
     private String summary;
     private String instructions;
     private Ingredient[] extendedIngredients;
+    private Equipement[] equipments;
 
     protected RecipeInformation(Parcel in) {
         id = in.readInt();
@@ -19,6 +20,7 @@ public class RecipeInformation implements Parcelable {
         summary = in.readString();
         instructions = in.readString();
         extendedIngredients = in.createTypedArray(Ingredient.CREATOR);
+        equipments = in.createTypedArray(Equipement.CREATOR);
     }
 
     @Override
@@ -29,6 +31,7 @@ public class RecipeInformation implements Parcelable {
         dest.writeString(summary);
         dest.writeString(instructions);
         dest.writeTypedArray(extendedIngredients, flags);
+        dest.writeTypedArray(equipments, flags);
     }
 
     @Override
@@ -78,5 +81,13 @@ public class RecipeInformation implements Parcelable {
 
     public Ingredient[] getExtendedIngredients() {
         return extendedIngredients;
+    }
+
+    public Equipement[] getEquipments() {
+        return equipments;
+    }
+
+    public void setEquipments(Equipement[] equipments) {
+        this.equipments = equipments;
     }
 }
