@@ -1,4 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!--@author: Fadi Findakly-->
+<!--@date: 03-31-2020-->
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical" android:layout_width="match_parent"
@@ -42,6 +44,7 @@
         android:layout_marginTop="22dp"
         android:elevation="2dp"
         android:text="TextView"
+        android:scrollHorizontally="false"
         android:textColor="@color/colorDarkBlue"
         android:textSize="14sp"
         android:textStyle="bold"

@@ -3,6 +3,12 @@ package ca.mealbell.javabeans;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+/**
+ * <p>This class is responsible for holding a returned json object from the API</p>
+ * @author Fadi Findakly
+ * @since 04-01-2020
+ */
+
 public class EquipmentsObject implements Parcelable {
 
     private Equipement[] equipment;

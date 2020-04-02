@@ -1,4 +1,8 @@
 package ca.mealbell.adapters;
+/**
+ *  @author: Fadi Findakly
+ *  @date: 03-29-2020
+ */
 
 import android.content.Context;
 import android.media.audiofx.DynamicsProcessing;

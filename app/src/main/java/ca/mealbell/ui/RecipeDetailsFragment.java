@@ -1,6 +1,13 @@
 package ca.mealbell.ui;
 
+/**
+ * This fragment is responsible to display details of a recipe that is retrieved from different fragments in the app
+ * It requests recipes from the API based on the their id
+ * @author: Fadi Findakly
+ * @date: 03-29-2020
+ */
 
+import android.opengl.Visibility;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -30,7 +37,6 @@ import ca.mealbell.javabeans.Equipement;
 import ca.mealbell.javabeans.EquipmentsObject;
 import ca.mealbell.javabeans.Ingredient;
 import ca.mealbell.javabeans.RecipeInformation;
-
 import static ca.mealbell.MainActivity.FOOD_API_HEADERS;
 import static ca.mealbell.MainActivity.fab;
 
@@ -39,31 +45,39 @@ import static ca.mealbell.MainActivity.fab;
  * A simple {@link Fragment} subclass.
  */
 public class RecipeDetailsFragment extends Fragment  implements APIResponse {
-    Gson gson = new Gson();
 
+    // Properties
+    Gson gson = new Gson();
     private final int RECIPE = 0;
     private final int EQUIPMENT =1;
-
-
     private ArrayList<Ingredient> ingredients = new ArrayList<>();
     private ArrayList<Equipement> equipements = new ArrayList<>();
     private Equipement[] equipementsSet;
     private RecipeInformation recipe;
 
-
-    // UI elements
+    // Fragment-UI elements
     TextView titleTextView;
     TextView summaryTextView;
     TextView instructionsTextView;
     ImageView recipeImageView;
     RecyclerView ingredientsRecyclerView;
     RecyclerView equipmentsRecyclerView;
-
-
+    TextView readyInMinutesTextView;
+    TextView servingsTextView;
+    TextView instructionsLabel;
+    TextView equipmentsLabel;
 
 
     public RecipeDetailsFragment() {
         // Required empty public constructor
+    }
+
+    // Getters and setters
+    public RecipeInformation getRecipe() {
+        return recipe;
+    }
+    public void setRecipe(RecipeInformation recipe) {
+        this.recipe = recipe;
     }
 
 
@@ -83,8 +97,12 @@ public class RecipeDetailsFragment extends Fragment  implements APIResponse {
         instructionsTextView = view.findViewById(R.id.instructions_TextView);
         ingredientsRecyclerView = view.findViewById(R.id.ingredients_recyclerView);
         equipmentsRecyclerView = view.findViewById(R.id.equipments_recyclerView);
+        readyInMinutesTextView = view.findViewById(R.id.minutes_textView);
+        servingsTextView = view.findViewById(R.id.servings_textView);
+        instructionsLabel = view.findViewById(R.id.instructions_label);
+        equipmentsLabel = view.findViewById(R.id.equipments_label);
 
-        // Set the ingredients RecyclerView
+        // Set the ingredients and equipments RecyclerViews
         LinearLayoutManager manager = new LinearLayoutManager(getContext());
         manager.setOrientation(RecyclerView.VERTICAL);
 
@@ -97,9 +115,8 @@ public class RecipeDetailsFragment extends Fragment  implements APIResponse {
         equipmentsRecyclerView.setAdapter(equipmentsAdapter);
 
 
-        // API requests
+        // Retrieve the recipe's id
         int id = getArguments().getInt("RECIPE_ID", 0);
-
 
         getRecipeDetails(id);
         getRecipeEquipments(id);
@@ -108,6 +125,10 @@ public class RecipeDetailsFragment extends Fragment  implements APIResponse {
     }
 
 
+    /**
+     * This function retrieved a json object that represents a recipe based on its id
+     * @param id
+     */
     public void getRecipeDetails(int id) {
         if(id != 0) {
             // Retrieve a recipe with the given id
@@ -116,6 +137,10 @@ public class RecipeDetailsFragment extends Fragment  implements APIResponse {
         }
     }
 
+    /**
+     * This function retrieved a json object that represents a recipe's set of needed equipments based on its id
+     * @param id
+     */
     public void getRecipeEquipments(int id) {
         if(id != 0) {
             // Retrieve a set of equipments for the given id
@@ -125,14 +150,28 @@ public class RecipeDetailsFragment extends Fragment  implements APIResponse {
     }
 
 
+    /**
+     * This function is to populate the fragment with a passed recipe
+     * @param recipe
+     */
     public void populateRecipe(RecipeInformation recipe) {
         if(recipe == null) return;
 
         titleTextView.setText(recipe.getTitle());
         Picasso.get().load(recipe.getImage()).placeholder(R.drawable.dish).into(recipeImageView);
-        summaryTextView.setText(Html.fromHtml("<style>a { color: green;} b { color: red; font-size: 2em;}</style>"+recipe.getSummary(), Html.FROM_HTML_MODE_LEGACY));
+        summaryTextView.setText(Html.fromHtml(recipe.getSummary(), Html.FROM_HTML_MODE_LEGACY));
         summaryTextView.setMovementMethod(LinkMovementMethod.getInstance());
         instructionsTextView.setText(recipe.getInstructions());
+        readyInMinutesTextView.setText(recipe.getReadyInMinutes() + "");
+        servingsTextView.setText(recipe.getServings() + "");
+
+        // Check if some layout parts content exist in the returned json object
+        if (recipe.getEquipments() == null) {
+            equipmentsLabel.setVisibility(View.GONE);
+        }
+        if (recipe.getInstructions() == null) {
+            instructionsLabel.setVisibility(View.GONE);
+        }
 
         Ingredient[] ingredientsArray = recipe.getExtendedIngredients();
         // Populate ingredients ArrayList from the ingredients array
@@ -149,7 +188,8 @@ public class RecipeDetailsFragment extends Fragment  implements APIResponse {
 
     @Override
     public void onSuccess(Object json, int status, int request) {
-        // TODO: retrieve recipe information
+
+        // Check API requests responses
         if(request == RECIPE) {
              recipe = gson.fromJson(json.toString(), RecipeInformation.class);
         }
