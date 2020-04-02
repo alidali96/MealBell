@@ -32,6 +32,7 @@ import ca.mealbell.javabeans.Ingredient;
 import ca.mealbell.javabeans.RecipeInformation;
 
 import static ca.mealbell.MainActivity.FOOD_API_HEADERS;
+import static ca.mealbell.MainActivity.fab;
 
 
 /**
@@ -40,9 +41,14 @@ import static ca.mealbell.MainActivity.FOOD_API_HEADERS;
 public class RecipeDetailsFragment extends Fragment  implements APIResponse {
     Gson gson = new Gson();
 
+    private final int RECIPE = 0;
+    private final int EQUIPMENT =1;
+
+
     private ArrayList<Ingredient> ingredients = new ArrayList<>();
     private ArrayList<Equipement> equipements = new ArrayList<>();
     private Equipement[] equipementsSet;
+    private RecipeInformation recipe;
 
 
     // UI elements
@@ -67,7 +73,8 @@ public class RecipeDetailsFragment extends Fragment  implements APIResponse {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_recipe_details, container, false);
 
-        // hide fab
+        // Hide fab
+        fab.hide();
 
         // Link GUI elements
         titleTextView = view.findViewById(R.id.recipeTitle_textView);
@@ -92,7 +99,7 @@ public class RecipeDetailsFragment extends Fragment  implements APIResponse {
 
         // API requests
         int id = getArguments().getInt("RECIPE_ID", 0);
-        // Retrieve a recipe with the given id
+
 
         getRecipeDetails(id);
         getRecipeEquipments(id);
@@ -103,8 +110,9 @@ public class RecipeDetailsFragment extends Fragment  implements APIResponse {
 
     public void getRecipeDetails(int id) {
         if(id != 0) {
+            // Retrieve a recipe with the given id
             String recipeURL = Const.API_URL + "recipes/" + id + "/information";
-            MainAPI.getInstance(getContext()).setHeaders(FOOD_API_HEADERS).stringRequest(Request.Method.GET, recipeURL, null, this);
+            MainAPI.getInstance(getContext()).setHeaders(FOOD_API_HEADERS).stringRequest(Request.Method.GET, recipeURL, null, this, RECIPE);
         }
     }
 
@@ -112,14 +120,14 @@ public class RecipeDetailsFragment extends Fragment  implements APIResponse {
         if(id != 0) {
             // Retrieve a set of equipments for the given id
             String equipmentURL = Const.API_URL + "recipes/" + id + "/equipmentWidget.json";
-            //https://spoonacular-recipe-food-nutrition-v1.p.rapidapi.com/recipes/1003464/equipmentWidget.json
-            //https://spoonacular-recipe-food-nutrition-v1.p.rapidapi.com/
-            MainAPI.getInstance(getContext()).setHeaders(FOOD_API_HEADERS).stringRequest(Request.Method.GET, equipmentURL, null, this);
+            MainAPI.getInstance(getContext()).setHeaders(FOOD_API_HEADERS).stringRequest(Request.Method.GET, equipmentURL, null, this, EQUIPMENT);
         }
     }
 
 
     public void populateRecipe(RecipeInformation recipe) {
+        if(recipe == null) return;
+
         titleTextView.setText(recipe.getTitle());
         Picasso.get().load(recipe.getImage()).placeholder(R.drawable.dish).into(recipeImageView);
         summaryTextView.setText(Html.fromHtml("<style>a { color: green;} b { color: red; font-size: 2em;}</style>"+recipe.getSummary(), Html.FROM_HTML_MODE_LEGACY));
@@ -142,17 +150,17 @@ public class RecipeDetailsFragment extends Fragment  implements APIResponse {
     @Override
     public void onSuccess(Object json, int status, int request) {
         // TODO: retrieve recipe information
-        RecipeInformation recipe = gson.fromJson(json.toString(), RecipeInformation.class);
-        EquipmentsObject equipementsObject = gson.fromJson(json.toString(), EquipmentsObject.class);
-        equipementsSet = equipementsObject.getEquipment();
+        if(request == RECIPE) {
+             recipe = gson.fromJson(json.toString(), RecipeInformation.class);
+        }
+        if(request == EQUIPMENT) {
+            EquipmentsObject equipementsObject = gson.fromJson(json.toString(), EquipmentsObject.class);
+            equipementsSet = equipementsObject.getEquipment();
+        }
 
-
-        populateRecipe(recipe);
-        //Log.d("name test", recipe.getOriginalName());
-        Log.d("name test", "working");
-        Log.d("name test", recipe.getId() + "");
-        Log.d("name test", recipe.getTitle() + "");
-        Log.d("ingredients array test", recipe.getExtendedIngredients().length + "");
+        if(recipe != null && equipementsSet != null) {
+            populateRecipe(recipe);
+        }
 
     }
 

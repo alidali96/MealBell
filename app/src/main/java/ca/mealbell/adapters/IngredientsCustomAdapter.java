@@ -42,7 +42,8 @@ public class IngredientsCustomAdapter extends RecyclerView.Adapter<IngredientsCu
 
         Picasso.get().load("https://spoonacular.com/cdn/ingredients_100x100/" + ingredient.getImage()).placeholder(R.drawable.dish).into(holder.recipeImage);
         holder.recipeName.setText(ingredient.getName());
-        holder.amount.setText(ingredient.getAmount() + "");
+        //holder.amount.setText(ingredient.getAmount() + "");
+        holder.amount.setText(String.format("%.2f", ingredient.getAmount()));
         holder.unit.setText(ingredient.getUnit());
 
     }
