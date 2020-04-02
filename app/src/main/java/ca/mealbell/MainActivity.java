@@ -5,8 +5,10 @@ import android.os.Bundle;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
 
+import android.view.MenuItem;
 import android.view.View;
 
+import androidx.annotation.NonNull;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
@@ -23,6 +25,9 @@ import android.view.Menu;
 
 import java.util.HashMap;
 import java.util.Map;
+
+import ca.mealbell.notifications.NotificationTime;
+import ca.mealbell.notifications.NotificationsManager;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -96,6 +101,14 @@ public class MainActivity extends AppCompatActivity {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.main, menu);
         return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        if (item.getItemId() == R.id.action_settings) {
+            Navigation.findNavController(this, R.id.nav_host_fragment).navigate(R.id.settingsFragment);
+        }
+        return super.onOptionsItemSelected(item);
     }
 
     @Override

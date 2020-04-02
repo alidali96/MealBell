@@ -1,12 +1,10 @@
-package ca.mealbell;
+package ca.mealbell.notifications;
 
-import android.app.Notification;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.Color;
 import android.util.Log;
 
 import androidx.core.app.NotificationCompat;
@@ -19,12 +17,18 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 
+import ca.mealbell.Const;
+import ca.mealbell.MainActivity;
+import ca.mealbell.R;
+import ca.mealbell.api.APIResponse;
+import ca.mealbell.api.MainAPI;
+
 import static android.app.PendingIntent.FLAG_ONE_SHOT;
 import static ca.mealbell.MainActivity.FOOD_API_HEADERS;
-import static ca.mealbell.NotificationsManager.CHANNEL_ID;
-import static ca.mealbell.NotificationsManager.FOOD_JOKE;
-import static ca.mealbell.NotificationsManager.FOOD_TRIVIA;
-import static ca.mealbell.NotificationsManager.NOTIFICATION_TYPE;
+import static ca.mealbell.notifications.NotificationsManager.CHANNEL_ID;
+import static ca.mealbell.notifications.NotificationsManager.FOOD_JOKE;
+import static ca.mealbell.notifications.NotificationsManager.FOOD_TRIVIA;
+import static ca.mealbell.notifications.NotificationsManager.NOTIFICATION_TYPE;
 
 
 /**
@@ -69,7 +73,7 @@ public class FoodNotification extends BroadcastReceiver implements APIResponse {
     }
 
     @Override
-    public void onSuccess(Object json, int status) {
+    public void onSuccess(Object json, int status, int request) {
         Log.e("RESULT", json.toString());
 
         JSONObject jokeJSON = (JSONObject) json;
@@ -103,7 +107,7 @@ public class FoodNotification extends BroadcastReceiver implements APIResponse {
     }
 
     @Override
-    public void onFailure(VolleyError error, int status) {
+    public void onFailure(VolleyError error, int status, int request) {
         Log.e("RESULT", error.toString());
     }
 }

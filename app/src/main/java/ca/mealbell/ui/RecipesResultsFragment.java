@@ -1,7 +1,6 @@
 package ca.mealbell.ui;
 
 
-import android.graphics.Color;
 import android.os.Bundle;
 
 
@@ -24,12 +23,10 @@ import com.google.gson.reflect.TypeToken;
 
 import java.lang.reflect.Type;
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
 
-import ca.mealbell.APIResponse;
+import ca.mealbell.api.APIResponse;
 import ca.mealbell.Const;
-import ca.mealbell.MainAPI;
+import ca.mealbell.api.MainAPI;
 import ca.mealbell.R;
 import ca.mealbell.adapters.ResultsByIngredientsAdapter;
 import ca.mealbell.adapters.ResultsByNutritionAdapter;
@@ -81,6 +78,7 @@ public class RecipesResultsFragment extends Fragment implements SwipeRefreshLayo
         if (getArguments() != null) {
             requestURL = getArguments().getString(Const.SEARCH_URL);
             searchType = SearchType.values()[getArguments().getInt(Const.SEARCH_TYPE, 0)];
+            Log.e("RESULT", requestURL);
         }
         // Initialize Gson
         gson = new Gson();
@@ -143,7 +141,7 @@ public class RecipesResultsFragment extends Fragment implements SwipeRefreshLayo
     }
 
     @Override
-    public void onSuccess(Object json, int status) {
+    public void onSuccess(Object json, int status, int request) {
         // Stop refreshing
         swipeRefreshLayout.setRefreshing(false);
         Log.e(TAG, json.toString());
@@ -165,7 +163,7 @@ public class RecipesResultsFragment extends Fragment implements SwipeRefreshLayo
     }
 
     @Override
-    public void onFailure(VolleyError error, int status) {
+    public void onFailure(VolleyError error, int status, int request) {
         // Stop refreshing
         swipeRefreshLayout.setRefreshing(false);
         Log.e(TAG, error.toString());

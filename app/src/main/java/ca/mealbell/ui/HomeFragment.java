@@ -13,12 +13,11 @@ import android.view.ViewGroup;
 import com.android.volley.Request;
 import com.android.volley.VolleyError;
 
-import java.lang.reflect.Method;
 
-import ca.mealbell.APIResponse;
 import ca.mealbell.Const;
-import ca.mealbell.MainAPI;
 import ca.mealbell.R;
+import ca.mealbell.api.APIResponse;
+import ca.mealbell.api.MainAPI;
 
 import static ca.mealbell.MainActivity.FOOD_API_HEADERS;
 import static ca.mealbell.MainActivity.fab;
@@ -74,13 +73,13 @@ public class HomeFragment extends Fragment implements APIResponse, SwipeRefreshL
     }
 
     @Override
-    public void onSuccess(Object json, int status) {
+    public void onSuccess(Object json, int status, int request) {
         swipeRefreshLayout.setRefreshing(false);
         //TODO: populate recipe information
     }
 
     @Override
-    public void onFailure(VolleyError error, int status) {
+    public void onFailure(VolleyError error, int status, int request) {
         swipeRefreshLayout.setRefreshing(false);
     }
 }
