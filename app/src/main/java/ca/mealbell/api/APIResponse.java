@@ -1,4 +1,4 @@
-package ca.mealbell;
+package ca.mealbell.api;
 
 import com.android.volley.VolleyError;
 
@@ -10,6 +10,6 @@ import com.android.volley.VolleyError;
  */
 public interface APIResponse {
 
-    void onSuccess(Object json, int status);
-    void onFailure(VolleyError error, int status);
+    void onSuccess(Object json, int status, int request);
+    void onFailure(VolleyError error, int status, int request);
 }
