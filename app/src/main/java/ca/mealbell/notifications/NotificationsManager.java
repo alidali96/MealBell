@@ -1,4 +1,4 @@
-package ca.mealbell;
+package ca.mealbell.notifications;
 
 import android.app.AlarmManager;
 import android.app.NotificationChannel;
@@ -6,13 +6,14 @@ import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.Color;
 import android.os.Build;
 import android.util.Log;
 
 import androidx.core.content.ContextCompat;
 
 import java.util.Calendar;
+
+import ca.mealbell.R;
 
 /**
  * Notification Manager
@@ -22,7 +23,7 @@ import java.util.Calendar;
  */
 public class NotificationsManager {
 
-    enum Repeat {
+    public enum Repeat {
         INTERVAL_MINUTE(60 * 1000),
         INTERVAL_FIVE_MINUTES(5 * 60 * 1000),
         INTERVAL_FIFTEEN_MINUTES(15 * 60 * 1000),
@@ -162,44 +163,5 @@ public class NotificationsManager {
         PendingIntent pendingIntent = PendingIntent.getBroadcast(context.getApplicationContext(), requestCode++, foodNotification, 0);  // Unique Request Code
 
         alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), repeat.value, pendingIntent);
-    }
-}
-
-class NotificationTime {
-    private int hour;
-    private int minute;
-    private int second;
-
-    public NotificationTime() {
-        hour = minute = second = 0;
-    }
-
-    public NotificationTime(int hour) {
-        this();
-        this.hour = hour;
-    }
-
-    public NotificationTime(int hour, int minute) {
-        this();
-        this.hour = hour;
-        this.minute = minute;
-    }
-
-    public NotificationTime(int hour, int minute, int second) {
-        this.hour = hour;
-        this.minute = minute;
-        this.second = second;
-    }
-
-    public int getHour() {
-        return hour;
-    }
-
-    public int getMinute() {
-        return minute;
-    }
-
-    public int getSecond() {
-        return second;
     }
 }

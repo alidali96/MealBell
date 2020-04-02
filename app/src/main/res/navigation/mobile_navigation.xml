@@ -15,7 +15,7 @@
         android:id="@+id/nav_serach_recipes"
         android:name="ca.mealbell.ui.SearchRecipesFragment"
         android:label="@string/menu_search"
-        tools:layout="@layout/fragment_search_recipes" >
+        tools:layout="@layout/fragment_search_recipes">
         <action
             android:id="@+id/action_nav_serach_recipes_to_recipesResultsFragment"
             app:destination="@id/recipesResultsFragment" />
@@ -27,7 +27,7 @@
         tools:layout="@layout/fragment_recipes_results" >
         <action
             android:id="@+id/action_nav_show_recipe_details"
-            app:destination="@id/nav_recipe_details" />
+            app:destination="@id/nav_Recipe_details" />
     </fragment>
     <fragment
         android:id="@+id/searchByIngredientsFragment"
@@ -43,7 +43,7 @@
         android:id="@+id/nav_meal_planner"
         android:name="ca.mealbell.ui.MealPlannerFragment"
         android:label="@string/menu_meal_planner"
-        tools:layout="@layout/fragment_meal_planner" >
+        tools:layout="@layout/fragment_meal_planner">
         <action
             android:id="@+id/action_nav_meal_planner_to_createMealPlanFragment"
             app:destination="@id/createMealPlanFragment" />
@@ -54,7 +54,12 @@
         android:label="@string/create_meal_plan"
         tools:layout="@layout/fragment_create_meal_plan" />
     <fragment
-        android:id="@+id/nav_recipe_details"
+        android:id="@+id/settingsFragment"
+        android:name="ca.mealbell.ui.SettingsFragment"
+        android:label="@string/settings"
+        tools:layout="@layout/fragment_settings" />
+    <fragment
+        android:id="@+id/nav_Recipe_details"
         android:name="ca.mealbell.ui.RecipeDetailsFragment"
         android:label="Recipe Details"
         tools:layout="@layout/fragment_recipe_details" />

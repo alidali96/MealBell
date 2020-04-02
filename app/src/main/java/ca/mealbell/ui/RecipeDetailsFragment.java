@@ -19,15 +19,13 @@ import com.android.volley.Request;
 import com.android.volley.VolleyError;
 import com.google.gson.Gson;
 import com.squareup.picasso.Picasso;
-
 import java.util.ArrayList;
-
-import ca.mealbell.APIResponse;
 import ca.mealbell.Const;
-import ca.mealbell.MainAPI;
 import ca.mealbell.R;
 import ca.mealbell.adapters.EquipmentsCustomAdapter;
 import ca.mealbell.adapters.IngredientsCustomAdapter;
+import ca.mealbell.api.APIResponse;
+import ca.mealbell.api.MainAPI;
 import ca.mealbell.javabeans.Equipement;
 import ca.mealbell.javabeans.EquipmentsObject;
 import ca.mealbell.javabeans.Ingredient;
@@ -142,7 +140,7 @@ public class RecipeDetailsFragment extends Fragment  implements APIResponse {
     }
 
     @Override
-    public void onSuccess(Object json, int status) {
+    public void onSuccess(Object json, int status, int request) {
         // TODO: retrieve recipe information
         RecipeInformation recipe = gson.fromJson(json.toString(), RecipeInformation.class);
         EquipmentsObject equipementsObject = gson.fromJson(json.toString(), EquipmentsObject.class);
@@ -159,7 +157,7 @@ public class RecipeDetailsFragment extends Fragment  implements APIResponse {
     }
 
     @Override
-    public void onFailure(VolleyError error, int status) {
+    public void onFailure(VolleyError error, int status, int request) {
 
     }
 }
