@@ -10,6 +10,7 @@ package ca.mealbell.ui;
 import android.opengl.Visibility;
 import android.os.Bundle;
 
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -65,11 +66,21 @@ public class RecipeDetailsFragment extends Fragment  implements APIResponse {
     TextView readyInMinutesTextView;
     TextView servingsTextView;
     TextView instructionsLabel;
+    TextView summaryLabel;
     TextView equipmentsLabel;
 
+    int id;
 
     public RecipeDetailsFragment() {
         // Required empty public constructor
+    }
+
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        if(getArguments()!=null){
+            id = getArguments().getInt("RECIPE_ID", 0);
+        }
     }
 
     // Getters and setters
@@ -100,6 +111,7 @@ public class RecipeDetailsFragment extends Fragment  implements APIResponse {
         readyInMinutesTextView = view.findViewById(R.id.minutes_textView);
         servingsTextView = view.findViewById(R.id.servings_textView);
         instructionsLabel = view.findViewById(R.id.instructions_label);
+        summaryLabel = view.findViewById(R.id.summary_label);
         equipmentsLabel = view.findViewById(R.id.equipments_label);
 
         // Set the ingredients and equipments RecyclerViews
@@ -108,15 +120,19 @@ public class RecipeDetailsFragment extends Fragment  implements APIResponse {
 
         ingredientsRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         IngredientsCustomAdapter adapter = new IngredientsCustomAdapter(ingredients, getContext());
+//        ingredientsRecyclerView.setNestedScrollingEnabled(false);
+        ingredientsRecyclerView.setHasFixedSize(true);
         ingredientsRecyclerView.setAdapter(adapter);
 
         equipmentsRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         EquipmentsCustomAdapter equipmentsAdapter = new EquipmentsCustomAdapter(equipements, getContext());
+//        equipmentsRecyclerView.setNestedScrollingEnabled(false);
+        equipmentsRecyclerView.setHasFixedSize(true);
         equipmentsRecyclerView.setAdapter(equipmentsAdapter);
 
 
         // Retrieve the recipe's id
-        int id = getArguments().getInt("RECIPE_ID", 0);
+//        int id = getArguments().getInt("RECIPE_ID", 0);
 
         getRecipeDetails(id);
         getRecipeEquipments(id);
@@ -158,20 +174,21 @@ public class RecipeDetailsFragment extends Fragment  implements APIResponse {
         if(recipe == null) return;
 
         titleTextView.setText(recipe.getTitle());
+
         Picasso.get().load(recipe.getImage()).placeholder(R.drawable.dish).into(recipeImageView);
-        summaryTextView.setText(Html.fromHtml(recipe.getSummary(), Html.FROM_HTML_MODE_LEGACY));
-        summaryTextView.setMovementMethod(LinkMovementMethod.getInstance());
-        instructionsTextView.setText(recipe.getInstructions());
+
+        if (recipe.getSummary() != null) {
+            summaryTextView.setText(Html.fromHtml(recipe.getSummary(), Html.FROM_HTML_MODE_LEGACY));
+            summaryTextView.setMovementMethod(LinkMovementMethod.getInstance());
+        }
+
+        if (recipe.getInstructions() != null) {
+            instructionsTextView.setText(Html.fromHtml(recipe.getInstructions(), Html.FROM_HTML_MODE_LEGACY));
+            instructionsTextView.setMovementMethod(LinkMovementMethod.getInstance());
+        }
+
         readyInMinutesTextView.setText(recipe.getReadyInMinutes() + "");
         servingsTextView.setText(recipe.getServings() + "");
-
-        // Check if some layout parts content exist in the returned json object
-        if (recipe.getEquipments() == null) {
-            equipmentsLabel.setVisibility(View.GONE);
-        }
-        if (recipe.getInstructions() == null) {
-            instructionsLabel.setVisibility(View.GONE);
-        }
 
         Ingredient[] ingredientsArray = recipe.getExtendedIngredients();
         // Populate ingredients ArrayList from the ingredients array
@@ -184,6 +201,20 @@ public class RecipeDetailsFragment extends Fragment  implements APIResponse {
         for (int i = 0; i < equipementsSet.length; i++) {
             equipements.add(equipementsSet[i]);
         }
+
+        // Check if some layout parts content exist in the returned json object
+        if (recipe.getEquipments() == null) {
+            equipmentsLabel.setVisibility(View.GONE);
+        }
+        if (recipe.getInstructions() == null) {
+            instructionsLabel.setVisibility(View.GONE);
+        }
+        if (recipe.getSummary() == null) {
+            summaryLabel.setVisibility(View.GONE);
+        }
+
+
+        getView().setVisibility(View.VISIBLE);
     }
 
     @Override
@@ -201,7 +232,6 @@ public class RecipeDetailsFragment extends Fragment  implements APIResponse {
         if(recipe != null && equipementsSet != null) {
             populateRecipe(recipe);
         }
-
     }
 
     @Override
