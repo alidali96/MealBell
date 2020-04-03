@@ -33,15 +33,17 @@ public class RecipeByIngredient implements Serializable {
     private String image;
     private int usedIngredientCount;
     private int missedIngredientCount;
-    private int likes;
+    private Ingredient[] missedIngredients;
+    private Ingredient[] usedIngredients;
 
-    public RecipeByIngredient(int id, String title, String image, int usedIngredientCount, int missedIngredientCount, int likes) {
+    public RecipeByIngredient(int id, String title, String image, int usedIngredientCount, int missedIngredientCount, Ingredient[] missedIngredients, Ingredient[] usedIngredients) {
         this.id = id;
         this.title = title;
         this.image = image;
         this.usedIngredientCount = usedIngredientCount;
         this.missedIngredientCount = missedIngredientCount;
-        this.likes = likes;
+        this.missedIngredients = missedIngredients;
+        this.usedIngredients = usedIngredients;
     }
 
     public int getId() {
@@ -64,10 +66,13 @@ public class RecipeByIngredient implements Serializable {
         return missedIngredientCount;
     }
 
-    public int getLikes() {
-        return likes;
+    public Ingredient[] getMissedIngredients() {
+        return missedIngredients;
     }
 
+    public Ingredient[] getUsedIngredients() {
+        return usedIngredients;
+    }
 
     /**
      * This will print all information about a recipe by ingredients (search result)
@@ -78,6 +83,6 @@ public class RecipeByIngredient implements Serializable {
      */
     @Override
     public String toString() {
-        return String.format("ID: %d\nTitle: %s\nImage: %s\nUsed Ingredients: %d\nMissed Ingredients: %d\nLikes: %d\n", id, title, image, usedIngredientCount, missedIngredientCount, likes);
+        return String.format("ID: %d\nTitle: %s\nImage: %s\nUsed Ingredients: %d\nMissed Ingredients: %d\n\n", id, title, image, usedIngredientCount, missedIngredientCount);
     }
 }

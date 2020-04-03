@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical">
@@ -49,89 +50,108 @@
         android:text="Recipe"
         android:textColor="@color/design_default_color_background"
         android:textSize="18sp"
-        app:layout_constraintEnd_toStartOf="@+id/likes"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="@id/card_view"
         app:layout_constraintStart_toStartOf="@id/card_view"
         app:layout_constraintTop_toBottomOf="@id/image" />
 
     <TextView
-        android:id="@+id/used"
+        android:id="@+id/ingredients_label"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:layout_marginBottom="8dp"
         android:elevation="11dp"
-        android:text="Used"
+        android:text="Ingredients:"
         android:textColor="@color/design_default_color_background"
         android:textSize="18sp"
-        app:layout_constraintBottom_toBottomOf="@id/card_view"
-        app:layout_constraintStart_toEndOf="@+id/used_icon"
-        app:layout_constraintTop_toBottomOf="@+id/title" />
+        app:layout_constraintBottom_toBottomOf="@+id/card_view"
+        app:layout_constraintEnd_toStartOf="@id/ingredients_list"
+        app:layout_constraintStart_toStartOf="@id/card_view"
+        app:layout_constraintTop_toBottomOf="@id/title" />
 
-    <TextView
-        android:id="@+id/missed"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginBottom="8dp"
-        android:elevation="11dp"
-        android:text="Missed"
-        android:textColor="@color/design_default_color_background"
-        android:textSize="18sp"
-        app:layout_constraintBottom_toBottomOf="@id/card_view"
-        app:layout_constraintStart_toEndOf="@+id/missed_icon"
-        app:layout_constraintTop_toBottomOf="@+id/title" />
-
-    <TextView
-        android:id="@+id/likes"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:elevation="11dp"
-        android:text="Likes"
-        android:textColor="@color/design_default_color_background"
-        android:textSize="18sp"
-        app:layout_constraintEnd_toStartOf="@id/like_icon"
-        app:layout_constraintStart_toEndOf="@id/title"
-        app:layout_constraintTop_toBottomOf="@+id/image" />
-
-    <ImageView
-        android:id="@+id/like_icon"
-        android:layout_width="24dp"
-        android:layout_height="24dp"
+    <HorizontalScrollView
+        android:id="@+id/ingredients_list"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
-        android:elevation="11dp"
-        app:layout_constraintEnd_toEndOf="@id/card_view"
-        app:layout_constraintStart_toEndOf="@+id/likes"
-        app:layout_constraintTop_toBottomOf="@+id/image"
-        app:srcCompat="@drawable/ic_love" />
-
-    <ImageView
-        android:id="@+id/used_icon"
-        android:layout_width="24dp"
-        android:layout_height="24dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
         android:layout_marginBottom="8dp"
         android:elevation="11dp"
-        app:layout_constraintBottom_toBottomOf="@+id/card_view"
-        app:layout_constraintStart_toStartOf="@id/card_view"
-        app:layout_constraintTop_toBottomOf="@+id/title"
-        app:srcCompat="@drawable/ic_tick" />
-
-    <ImageView
-        android:id="@+id/missed_icon"
-        android:layout_width="24dp"
-        android:layout_height="24dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginBottom="8dp"
-        android:elevation="11dp"
+        android:fillViewport="true"
+        android:orientation="horizontal"
+        android:scrollbars="none"
         app:layout_constraintBottom_toBottomOf="@id/card_view"
-        app:layout_constraintStart_toEndOf="@id/used"
-        app:layout_constraintTop_toBottomOf="@id/title"
-        app:srcCompat="@drawable/ic_cancel" />
+        app:layout_constraintEnd_toEndOf="@id/card_view"
+        app:layout_constraintStart_toEndOf="@id/ingredients_label"
+        app:layout_constraintTop_toBottomOf="@id/title">
+
+        <LinearLayout
+            android:id="@+id/ingredients_container"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:text="asdad ads"
+                android:textColor="@color/colorAccent"
+                android:visibility="visible" />
+
+            <TextView
+                android:id="@+id/textView9"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="asdad ads"
+                android:textColor="@color/colorAccent"
+                android:visibility="visible" />
+
+            <TextView
+                android:id="@+id/textView11"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="asdad ads"
+                android:textColor="@color/colorAccent"
+                android:visibility="visible" />
+
+            <TextView
+                android:id="@+id/textView12"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="asdad ads"
+                android:textColor="@color/colorAccent"
+                android:visibility="visible" />
+
+            <TextView
+                android:id="@+id/textView13"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="asdad ads"
+                android:textColor="@color/colorAccent"
+                android:visibility="visible" />
+
+            <TextView
+                android:id="@+id/textView14"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="asdad ads"
+                android:textColor="@color/colorAccent"
+                android:visibility="visible" />
+        </LinearLayout>
+    </HorizontalScrollView>
+
 </androidx.constraintlayout.widget.ConstraintLayout>
