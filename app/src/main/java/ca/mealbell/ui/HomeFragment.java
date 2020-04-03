@@ -4,20 +4,27 @@ package ca.mealbell.ui;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.android.volley.Request;
 import com.android.volley.VolleyError;
+import com.google.gson.Gson;
 
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import ca.mealbell.Const;
 import ca.mealbell.R;
 import ca.mealbell.api.APIResponse;
 import ca.mealbell.api.MainAPI;
+import ca.mealbell.javabeans.RecipeInformation;
 
 import static ca.mealbell.MainActivity.FOOD_API_HEADERS;
 import static ca.mealbell.MainActivity.fab;
@@ -32,6 +39,9 @@ import static ca.mealbell.MainActivity.fab;
 public class HomeFragment extends Fragment implements APIResponse, SwipeRefreshLayout.OnRefreshListener {
 
     private SwipeRefreshLayout swipeRefreshLayout;
+    private RecipeDetailsFragment recipeDetailsFragment;
+
+    private Gson gson = new Gson();
 
     public HomeFragment() {
         // Required empty public constructor
@@ -58,6 +68,10 @@ public class HomeFragment extends Fragment implements APIResponse, SwipeRefreshL
         });
 
 
+        recipeDetailsFragment = (RecipeDetailsFragment) getChildFragmentManager().findFragmentById(R.id.random_recipe);
+
+        if (recipeDetailsFragment != null)
+            generateRandomRecipe();
 
         return view;
     }
@@ -76,6 +90,17 @@ public class HomeFragment extends Fragment implements APIResponse, SwipeRefreshL
     public void onSuccess(Object json, int status, int request) {
         swipeRefreshLayout.setRefreshing(false);
         //TODO: populate recipe information
+        try {
+            JSONObject jsonObject = (JSONObject) json;
+            String jsonRecipe = jsonObject.getJSONArray("recipes").get(0).toString();
+            RecipeInformation recipeInformation = gson.fromJson(jsonRecipe, RecipeInformation.class);
+
+            // Set Recipe in Details Fragment
+            recipeDetailsFragment.setRecipe(recipeInformation);
+            recipeDetailsFragment.getRecipeEquipments(recipeInformation.getId());
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
     }
 
     @Override

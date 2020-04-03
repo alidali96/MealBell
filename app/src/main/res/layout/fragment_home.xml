@@ -6,9 +6,15 @@
     android:layout_height="match_parent"
     tools:context=".ui.HomeFragment">
 
-    <fragment
-        android:id="@+id/search_fragment"
-        android:name="ca.mealbell.ui.SearchByIngredientsFragment"
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="match_parent"
+        android:fillViewport="true">
+
+        <fragment
+            android:id="@+id/random_recipe"
+            android:name="ca.mealbell.ui.RecipeDetailsFragment"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+    </ScrollView>
 </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
