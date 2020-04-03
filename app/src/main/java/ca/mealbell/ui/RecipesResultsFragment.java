@@ -78,6 +78,7 @@ public class RecipesResultsFragment extends Fragment implements SwipeRefreshLayo
         if (getArguments() != null) {
             requestURL = getArguments().getString(Const.SEARCH_URL);
             searchType = SearchType.values()[getArguments().getInt(Const.SEARCH_TYPE, 0)];
+            Log.e("RESULT", requestURL);
         }
         // Initialize Gson
         gson = new Gson();
