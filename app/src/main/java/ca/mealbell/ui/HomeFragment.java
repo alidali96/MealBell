@@ -70,8 +70,8 @@ public class HomeFragment extends Fragment implements APIResponse, SwipeRefreshL
 
         recipeDetailsFragment = (RecipeDetailsFragment) getChildFragmentManager().findFragmentById(R.id.random_recipe);
 
-        if (recipeDetailsFragment != null)
-            generateRandomRecipe();
+//        if (recipeDetailsFragment != null)
+//            generateRandomRecipe();
 
         return view;
     }
@@ -89,7 +89,7 @@ public class HomeFragment extends Fragment implements APIResponse, SwipeRefreshL
     @Override
     public void onSuccess(Object json, int status, int request) {
         swipeRefreshLayout.setRefreshing(false);
-        //TODO: populate recipe information
+
         try {
             JSONObject jsonObject = (JSONObject) json;
             String jsonRecipe = jsonObject.getJSONArray("recipes").get(0).toString();
