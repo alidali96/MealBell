@@ -24,6 +24,7 @@ import ca.mealbell.Const;
 import ca.mealbell.R;
 import ca.mealbell.api.APIResponse;
 import ca.mealbell.api.MainAPI;
+import ca.mealbell.database.DatabaseHandler;
 import ca.mealbell.javabeans.RecipeInformation;
 
 import static ca.mealbell.MainActivity.FOOD_API_HEADERS;
@@ -59,16 +60,6 @@ public class HomeFragment extends Fragment implements APIResponse, SwipeRefreshL
         swipeRefreshLayout.setOnRefreshListener(this);
 
         fab.hide();
-        fab.setImageResource(R.drawable.ic_favorite_black_24dp);
-        fab.show();
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                // TODO: Save in Database
-
-            }
-        });
-
 
         recipeDetailsFragment = (RecipeDetailsFragment) getChildFragmentManager().findFragmentById(R.id.random_recipe);
 
@@ -81,6 +72,25 @@ public class HomeFragment extends Fragment implements APIResponse, SwipeRefreshL
     private void generateRandomRecipe() {
         String url = Const.API_URL + "/recipes/random";
         MainAPI.getInstance(getContext()).setHeaders(FOOD_API_HEADERS).jsonObjectRequest(Request.Method.GET, url, null, this);
+    }
+
+    private void handleFAB(final RecipeInformation recipe) {
+        final RecipeInformation favourite = DatabaseHandler.getInstance(getContext()).getRecipe(recipe.getId());
+        fab.hide();
+        fab.setImageResource(favourite == null ? R.drawable.ic_favorite_border_black_24dp : R.drawable.ic_favorite_black_24dp);
+
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (favourite == null) {
+                    DatabaseHandler.getInstance(getContext()).addRecipe(recipe);
+                } else {
+                    DatabaseHandler.getInstance(getContext()).deleteRecipe(recipe);
+                }
+                handleFAB(recipe);
+            }
+        });
+        fab.show();
     }
 
     @Override
@@ -100,6 +110,10 @@ public class HomeFragment extends Fragment implements APIResponse, SwipeRefreshL
             // Set Recipe in Details Fragment
             recipeDetailsFragment.setRecipe(recipeInformation);
             recipeDetailsFragment.getRecipeEquipments(recipeInformation.getId());
+
+
+            handleFAB(recipeInformation);
+
         } catch (JSONException e) {
             e.printStackTrace();
         }

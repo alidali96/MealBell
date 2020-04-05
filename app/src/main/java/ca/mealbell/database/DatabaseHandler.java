@@ -50,8 +50,8 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 
 
     // CREATE RECIPE TABLE
-    private final String CREATE_RECIPES_TABLE = String.format("CREATE TABLE %s IF NOT EXISTS (" +
-            "%s INTEGER PRIMARY KEY AUTO_INCREMENT," +
+    private final String CREATE_RECIPES_TABLE = String.format("CREATE TABLE IF NOT EXISTS %s (" +
+            "%s INTEGER PRIMARY KEY," +
             "%s VARCHAR(255)," +
             "%s VARCHAR(255)," +
             "%s TEXT," +
@@ -138,20 +138,26 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         db.close();
     }
 
-    // TODO: Delete this useless method
-    public RecipeInformation getRecipe(int id) {
+    public RecipeInformation getRecipe(int recipeID) {
         SQLiteDatabase db = this.getReadableDatabase();
 
         Cursor cursor = db.query(TABLE_RECIPES, new String[]{COLUMN_ID, COLUMN_TITLE, COLUMN_IMAGE, COLUMN_SUMMARY, COLUMN_INSTRUCTIONS, COLUMN_READY_IN_MINUTES, COLUMN_SERVINGS},
-                COLUMN_ID + "=?", new String[]{String.valueOf(id)}, null, null, null, null);
-        if (cursor != null)
-            cursor.moveToFirst();
+                COLUMN_ID + "=?", new String[]{String.valueOf(recipeID)}, null, null, null, null);
 
+        if (cursor.moveToFirst()) {
+            int id = cursor.getInt(0);
+            String title = cursor.getString(1);
+            String image = cursor.getString(2);
+            String summary = cursor.getString(3);
+            String instructions = cursor.getString(4);
+            int readyInMinutes = cursor.getInt(5);
+            int servings = cursor.getInt(6);
 
-        // TODO: get recipe
-//        Contact contact = new Contact(Integer.parseInt(cursor.getString(0)),
-//                cursor.getString(1), cursor.getString(2));
-        // return contact
+            //TODO: Ingredients and Equipments
+            RecipeInformation recipe = new RecipeInformation(id, title, image, summary, instructions, null, null, readyInMinutes, servings);
+            return recipe;
+        }
+
         return null;
     }
 
