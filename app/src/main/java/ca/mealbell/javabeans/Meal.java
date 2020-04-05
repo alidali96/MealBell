@@ -53,7 +53,7 @@ public class Meal implements Serializable {
     }
 
     public String getImage() {
-        return image;
+        return "https://spoonacular.com/recipeImages/" + image;
     }
 
     public String[] getImageUrls() {

@@ -21,9 +21,12 @@ import android.widget.SeekBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.android.volley.Request;
+import com.android.volley.VolleyError;
 import com.github.florent37.androidslidr.Slidr;
 import com.google.android.flexbox.FlexWrap;
 import com.google.android.flexbox.FlexboxLayoutManager;
+import com.google.gson.Gson;
 
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
@@ -32,7 +35,12 @@ import java.util.ArrayList;
 import ca.mealbell.Const;
 import ca.mealbell.R;
 import ca.mealbell.adapters.IngredientsAdapter;
+import ca.mealbell.api.APIResponse;
+import ca.mealbell.api.MainAPI;
+import ca.mealbell.database.DatabaseHandler;
+import ca.mealbell.javabeans.MealPlan;
 
+import static ca.mealbell.MainActivity.FOOD_API_HEADERS;
 import static ca.mealbell.MainActivity.fab;
 
 
@@ -43,7 +51,7 @@ import static ca.mealbell.MainActivity.fab;
  * @version 1.0
  * @since 08-03-2020
  */
-public class CreateMealPlanFragment extends Fragment {
+public class CreateMealPlanFragment extends Fragment implements APIResponse {
 
     private final String TAG = getClass().getTypeName();
 
@@ -58,6 +66,8 @@ public class CreateMealPlanFragment extends Fragment {
     // List of ingredients to be excluded
     final ArrayList<String> ingredients = new ArrayList<>();
     final ArrayList<String> diets = new ArrayList<>();
+
+    private Gson gson = new Gson();
 
     public CreateMealPlanFragment() {
         // Required empty public constructor
@@ -152,10 +162,7 @@ public class CreateMealPlanFragment extends Fragment {
         submitButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // TODO: Generate Meal Plan
-
-                // Back to previous page
-                Navigation.findNavController(view).popBackStack();
+                MainAPI.getInstance(getContext()).setHeaders(FOOD_API_HEADERS).jsonObjectRequest(Request.Method.GET, getGenerateMealURL(), null, CreateMealPlanFragment.this);
                 Log.e(TAG, getGenerateMealURL());
             }
         });
@@ -187,4 +194,19 @@ public class CreateMealPlanFragment extends Fragment {
         return null;
     }
 
+    @Override
+    public void onSuccess(Object json, int status, int request) {
+
+        MealPlan mealPlan = gson.fromJson(json.toString(), MealPlan.class);
+        if (mealPlan != null)
+            DatabaseHandler.getInstance(getContext()).addMealPlan(mealPlan);
+
+        // Back to previous page
+        Navigation.findNavController(getView()).popBackStack();
+    }
+
+    @Override
+    public void onFailure(VolleyError error, int status, int request) {
+        Toast.makeText(getContext(), error.toString(), Toast.LENGTH_SHORT).show();
+    }
 }

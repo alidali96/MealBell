@@ -30,6 +30,11 @@ public class MealPlan implements Serializable {
         this.nutrients = nutrients;
     }
 
+    public MealPlan setId(int id) {
+        this.id = id;
+        return this;
+    }
+
     public int getId() {
         return id;
     }

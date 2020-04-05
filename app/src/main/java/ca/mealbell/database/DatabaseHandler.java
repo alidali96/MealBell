@@ -104,7 +104,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 
     // CREATE MEAL PLANS TABLE
     private final static String CREATE_MEAL_PLANS_TABLE = String.format("CREATE TABLE IF NOT EXISTS %s (" +
-            "%s INTEGER NOT NULL," +
+            "%s INTEGER PRIMARY KEY AUTOINCREMENT," +
             "%s DECIMAL," +
             "%s DECIMAL," +
             "%s DECIMAL," +
@@ -117,7 +117,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
             "%s VARCHAR(255)," +
             "%s INTEGER," +
             "%s INTEGER," +
-            "%S VARCHAR(255) " +
+            "%s VARCHAR(255)," +
             "FOREIGN KEY (%s) " +
             "REFERENCES %s (%s) )", TABLE_MEALS, COLUMN_ID, COLUMN_RECIPE_ID, COLUMN_NAME, COLUMN_READY_IN_MINUTES, COLUMN_SERVINGS, COLUMN_IMAGE, COLUMN_ID, TABLE_MEAL_PLANS, COLUMN_ID);
 
@@ -357,7 +357,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         db.close();
     }
 
-    private List<MealPlan> getAllMealPlans() {
+    public List<MealPlan> getAllMealPlans() {
         List<MealPlan> mealPlans = new ArrayList<>();
 
         String query = String.format("SELECT * FROM %s", TABLE_MEAL_PLANS);
@@ -366,11 +366,11 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         Cursor cursor = db.rawQuery(query, null);
 
         while (cursor.moveToNext()) {
-            int id = cursor.getInt(1);
-            double calories = cursor.getDouble(2);
-            double protein = cursor.getDouble(3);
-            double fat = cursor.getDouble(4);
-            double carbohydrates = cursor.getDouble(5);
+            int id = cursor.getInt(0);
+            double calories = cursor.getDouble(1);
+            double protein = cursor.getDouble(2);
+            double fat = cursor.getDouble(3);
+            double carbohydrates = cursor.getDouble(4);
 
             Meal[] meals = new Meal[getAllMeals(id).size()];
             meals = getAllMeals(id).toArray(meals);
@@ -381,25 +381,25 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         return mealPlans;
     }
 
-    private void addMealPlan(MealPlan mealPlan) {
+    public void addMealPlan(MealPlan mealPlan) {
         SQLiteDatabase db = this.getWritableDatabase();
 
 
         ContentValues values = new ContentValues();
-        values.put(COLUMN_ID, mealPlan.getId());
         values.put(COLUMN_CALORIES, mealPlan.getNutrients().getCalories());
         values.put(COLUMN_PROTEIN, mealPlan.getNutrients().getProtein());
         values.put(COLUMN_FAT, mealPlan.getNutrients().getFat());
         values.put(COLUMN_CARBOHYDRATES, mealPlan.getNutrients().getCarbohydrates());
 
-        db.insert(TABLE_MEAL_PLANS, null, values);
+        long id = db.insert(TABLE_MEAL_PLANS, null, values);
 
         db.close();
 
+        mealPlan.setId((int) id);
         addMeals(mealPlan);
     }
 
-    private void deleteMealPlan(MealPlan mealPlan) {
+    public void deleteMealPlan(MealPlan mealPlan) {
         SQLiteDatabase db = this.getWritableDatabase();
 
         db.delete(TABLE_MEAL_PLANS, COLUMN_ID + " = ?",

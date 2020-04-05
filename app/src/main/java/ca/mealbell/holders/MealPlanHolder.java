@@ -107,7 +107,7 @@ public class MealPlanHolder extends RecyclerView.ViewHolder implements View.OnCl
 
     public void setMealPlan(MealPlan mealPlan) {
         // Populate Meal Card
-        for (int i = 0; i < 3; i++) {
+        for (int i = 0; i < mealPlan.getMeals().length; i++) {
             Picasso.get().load(mealPlan.getMeals()[i].getImage()).placeholder(R.drawable.meal).into(images[i]);
             titles[i].setText(mealPlan.getMeals()[i].getTitle());
         }
