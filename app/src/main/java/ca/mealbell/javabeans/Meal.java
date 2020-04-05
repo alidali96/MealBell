@@ -1,5 +1,7 @@
 package ca.mealbell.javabeans;
 
+import android.util.Log;
+
 import java.io.Serializable;
 import java.util.Arrays;
 
@@ -53,7 +55,7 @@ public class Meal implements Serializable {
     }
 
     public String getImage() {
-        return "https://spoonacular.com/recipeImages/" + image;
+        return image;
     }
 
     public String[] getImageUrls() {
