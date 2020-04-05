@@ -9,13 +9,15 @@ import android.database.sqlite.SQLiteOpenHelper;
 import androidx.annotation.Nullable;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 import ca.mealbell.javabeans.Equipement;
 import ca.mealbell.javabeans.Ingredient;
+import ca.mealbell.javabeans.Meal;
+import ca.mealbell.javabeans.MealPlan;
 import ca.mealbell.javabeans.Measurements;
 import ca.mealbell.javabeans.MeasurementsSet;
+import ca.mealbell.javabeans.Nutrients;
 import ca.mealbell.javabeans.RecipeInformation;
 
 public class DatabaseHandler extends SQLiteOpenHelper {
@@ -38,31 +40,38 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 
 
     // TABLES
-    private final String TABLE_RECIPES = "recipes";
-    private final String TABLE_INGREDIENTS = "ingredients";
-    private final String TABLE_EQUIPMENTS = "equipments";
-    private final String TABLE_MEAL_PLANS = "meal_plans";
-    private final String TABLE_MEALS = "meals";
+    private final static String TABLE_RECIPES = "recipes";
+    private final static String TABLE_INGREDIENTS = "ingredients";
+    private final static String TABLE_EQUIPMENTS = "equipments";
+    private final static String TABLE_MEAL_PLANS = "meal_plans";
+    private final static String TABLE_MEALS = "meals";
 
     // COLUMNS
-    private final String COLUMN_ID = "id";
-    private final String COLUMN_TITLE = "title";
-    private final String COLUMN_IMAGE = "image";
-    private final String COLUMN_SUMMARY = "summary";
-    private final String COLUMN_INSTRUCTIONS = "instructions";
-    private final String COLUMN_READY_IN_MINUTES = "ready_in_minutes";
-    private final String COLUMN_SERVINGS = "servings";
+    private final static String COLUMN_ID = "id";
+    private final static String COLUMN_TITLE = "title";
+    private final static String COLUMN_IMAGE = "image";
+    private final static String COLUMN_SUMMARY = "summary";
+    private final static String COLUMN_INSTRUCTIONS = "instructions";
+    private final static String COLUMN_READY_IN_MINUTES = "ready_in_minutes";
+    private final static String COLUMN_SERVINGS = "servings";
 
-    private final String COLUMN_NAME = "name";
+    private final static String COLUMN_NAME = "name";
 
-    private final String COLUMN_US_AMOUNT = "us_amount";
-    private final String COLUMN_METRIC_AMOUNT = "metric_amount";
-    private final String COLUMN_US_SHORT = "us_short";
-    private final String COLUMN_METRIC_SHORT = "metric_short";
+    private final static String COLUMN_US_AMOUNT = "us_amount";
+    private final static String COLUMN_METRIC_AMOUNT = "metric_amount";
+    private final static String COLUMN_US_SHORT = "us_short";
+    private final static String COLUMN_METRIC_SHORT = "metric_short";
+
+    private final static String COLUMN_RECIPE_ID = "recipe_id";
+
+    private final static String COLUMN_CALORIES = "calories";
+    private final static String COLUMN_PROTEIN = "protein";
+    private final static String COLUMN_FAT = "fat";
+    private final static String COLUMN_CARBOHYDRATES = "carbohydrates";
 
 
-    // CREATE RECIPE TABLE
-    private final String CREATE_RECIPES_TABLE = String.format("CREATE TABLE IF NOT EXISTS %s (" +
+    // CREATE RECIPES TABLE
+    private final static String CREATE_RECIPES_TABLE = String.format("CREATE TABLE IF NOT EXISTS %s (" +
             "%s INTEGER PRIMARY KEY," +
             "%s VARCHAR(255)," +
             "%s VARCHAR(255)," +
@@ -71,7 +80,8 @@ public class DatabaseHandler extends SQLiteOpenHelper {
             "%s INTEGER," +
             "%s INTEGER)", TABLE_RECIPES, COLUMN_ID, COLUMN_TITLE, COLUMN_IMAGE, COLUMN_SUMMARY, COLUMN_INSTRUCTIONS, COLUMN_READY_IN_MINUTES, COLUMN_SERVINGS);
 
-    private final String CREATE_INGREDIENT_TABLE = String.format("CREATE TABLE IF NOT EXISTS %s (" +
+    // CREATE INGREDIENTS TABLE
+    private final static String CREATE_INGREDIENTS_TABLE = String.format("CREATE TABLE IF NOT EXISTS %s (" +
             "%s INTEGER NOT NULL," +
             "%s VARCHAR(255)," +
             "%s VARCHAR(255)," +
@@ -83,13 +93,38 @@ public class DatabaseHandler extends SQLiteOpenHelper {
             "REFERENCES %s (%s) )", TABLE_INGREDIENTS, COLUMN_ID, COLUMN_NAME, COLUMN_IMAGE, COLUMN_US_AMOUNT, COLUMN_US_SHORT, COLUMN_METRIC_AMOUNT, COLUMN_METRIC_SHORT, COLUMN_ID, TABLE_RECIPES, COLUMN_ID);
 
 
-    // CREATE EQUIPMENT TABLE
-    private final String CREATE_EQUIPMENT_TABLE = String.format("CREATE TABLE IF NOT EXISTS %s (" +
+    // CREATE EQUIPMENTS TABLE
+    private final static String CREATE_EQUIPMENTS_TABLE = String.format("CREATE TABLE IF NOT EXISTS %s (" +
             "%s INTEGER NOT NULL," +
             "%s VARCHAR(255)," +
             "%s VARCHAR(255)," +
             "FOREIGN KEY (%s) " +
             "REFERENCES %s (%s) )", TABLE_EQUIPMENTS, COLUMN_ID, COLUMN_NAME, COLUMN_IMAGE, COLUMN_ID, TABLE_RECIPES, COLUMN_ID);
+
+
+    // CREATE MEAL PLANS TABLE
+    private final static String CREATE_MEAL_PLANS_TABLE = String.format("CREATE TABLE IF NOT EXISTS %s (" +
+            "%s INTEGER NOT NULL," +
+            "%s DECIMAL," +
+            "%s DECIMAL," +
+            "%s DECIMAL," +
+            "%s DECIMAL )", TABLE_MEAL_PLANS, COLUMN_ID, COLUMN_CALORIES, COLUMN_PROTEIN, COLUMN_FAT, COLUMN_CARBOHYDRATES);
+
+    // CREATE MEALS TABLE
+    private final static String CREATE_MEALS_TABLE = String.format("CREATE TABLE IF NOT EXISTS %s (" +
+            "%s INTEGER NOT NULL," +
+            "%s INTEGER NOT NULL," +
+            "%s VARCHAR(255)," +
+            "%s INTEGER," +
+            "%s INTEGER," +
+            "%S VARCHAR(255) " +
+            "FOREIGN KEY (%s) " +
+            "REFERENCES %s (%s) )", TABLE_MEALS, COLUMN_ID, COLUMN_RECIPE_ID, COLUMN_NAME, COLUMN_READY_IN_MINUTES, COLUMN_SERVINGS, COLUMN_IMAGE, COLUMN_ID, TABLE_MEAL_PLANS, COLUMN_ID);
+
+
+    // ARRAYS
+    private final static String[] TABLES = {TABLE_RECIPES, TABLE_EQUIPMENTS, TABLE_INGREDIENTS, TABLE_MEAL_PLANS, TABLE_MEALS};
+    private final static String[] CREATE_TABLES = {CREATE_RECIPES_TABLE, CREATE_EQUIPMENTS_TABLE, CREATE_INGREDIENTS_TABLE, CREATE_MEAL_PLANS_TABLE, CREATE_MEALS_TABLE};
 
 
     private static DatabaseHandler instance;
@@ -107,17 +142,19 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        db.execSQL(CREATE_RECIPES_TABLE);
-        db.execSQL(CREATE_INGREDIENT_TABLE);
-        db.execSQL(CREATE_EQUIPMENT_TABLE);
+        for (String CREATE_TABLE :
+                CREATE_TABLES) {
+            db.execSQL(CREATE_TABLE);
+        }
     }
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
         // Drop older table if existed
-        db.execSQL("DROP TABLE IF EXISTS " + TABLE_RECIPES);
-        db.execSQL("DROP TABLE IF EXISTS " + TABLE_INGREDIENTS);
-        db.execSQL("DROP TABLE IF EXISTS " + TABLE_EQUIPMENTS);
+        for (String TABLE :
+                TABLES) {
+            db.execSQL("DROP TABLE IF EXISTS " + TABLE);
+        }
 
         // Create tables again
         onCreate(db);
@@ -320,4 +357,109 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         db.close();
     }
 
+    private List<MealPlan> getAllMealPlans() {
+        List<MealPlan> mealPlans = new ArrayList<>();
+
+        String query = String.format("SELECT * FROM %s", TABLE_MEAL_PLANS);
+
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.rawQuery(query, null);
+
+        while (cursor.moveToNext()) {
+            int id = cursor.getInt(1);
+            double calories = cursor.getDouble(2);
+            double protein = cursor.getDouble(3);
+            double fat = cursor.getDouble(4);
+            double carbohydrates = cursor.getDouble(5);
+
+            Meal[] meals = new Meal[getAllMeals(id).size()];
+            meals = getAllMeals(id).toArray(meals);
+
+            MealPlan meal = new MealPlan(id, meals, new Nutrients(calories, protein, fat, carbohydrates));
+            mealPlans.add(meal);
+        }
+        return mealPlans;
+    }
+
+    private void addMealPlan(MealPlan mealPlan) {
+        SQLiteDatabase db = this.getWritableDatabase();
+
+
+        ContentValues values = new ContentValues();
+        values.put(COLUMN_ID, mealPlan.getId());
+        values.put(COLUMN_CALORIES, mealPlan.getNutrients().getCalories());
+        values.put(COLUMN_PROTEIN, mealPlan.getNutrients().getProtein());
+        values.put(COLUMN_FAT, mealPlan.getNutrients().getFat());
+        values.put(COLUMN_CARBOHYDRATES, mealPlan.getNutrients().getCarbohydrates());
+
+        db.insert(TABLE_MEAL_PLANS, null, values);
+
+        db.close();
+
+        addMeals(mealPlan);
+    }
+
+    private void deleteMealPlan(MealPlan mealPlan) {
+        SQLiteDatabase db = this.getWritableDatabase();
+
+        db.delete(TABLE_MEAL_PLANS, COLUMN_ID + " = ?",
+                new String[]{String.valueOf(mealPlan.getId())});
+
+        db.close();
+
+        deleteMeals(mealPlan);
+    }
+
+    private List<Meal> getAllMeals(int mealID) {
+        List<Meal> meals = new ArrayList<>();
+
+        String query = String.format("SELECT * FROM %s WHERE %s = %d", TABLE_MEALS, COLUMN_ID, mealID);
+
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.rawQuery(query, null);
+
+        while (cursor.moveToNext()) {
+            int id = cursor.getInt(1);
+            String title = cursor.getString(2);
+            int readyInMinutes = cursor.getInt(3);
+            int servings = cursor.getInt(4);
+            String image = cursor.getString(5);
+
+            Meal meal = new Meal(id, title, readyInMinutes, servings, image, null);
+            meals.add(meal);
+        }
+        return meals;
+    }
+
+    private void addMeals(MealPlan mealPlan) {
+        SQLiteDatabase db = this.getWritableDatabase();
+
+        for (Meal meal :
+                mealPlan.getMeals()) {
+
+            ContentValues values = new ContentValues();
+            values.put(COLUMN_ID, mealPlan.getId());
+            values.put(COLUMN_RECIPE_ID, meal.getId());
+            values.put(COLUMN_NAME, meal.getTitle());
+            values.put(COLUMN_IMAGE, meal.getImage());
+            values.put(COLUMN_READY_IN_MINUTES, meal.getReadyInMinutes());
+            values.put(COLUMN_SERVINGS, meal.getServings());
+
+            db.insert(TABLE_MEALS, null, values);
+        }
+
+        db.close();
+    }
+
+    private void deleteMeals(MealPlan mealPlan) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        for (Meal meal :
+                mealPlan.getMeals()) {
+
+            db.delete(TABLE_MEALS, COLUMN_ID + " = ?",
+                    new String[]{String.valueOf(mealPlan.getId())});
+        }
+
+        db.close();
+    }
 }
