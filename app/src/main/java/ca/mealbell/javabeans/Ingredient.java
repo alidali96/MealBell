@@ -19,6 +19,12 @@ public class Ingredient implements Parcelable {
     private String unit;
     private MeasurementsSet measures;
 
+    public Ingredient(String name, String image, MeasurementsSet measures) {
+        this.name = name;
+        this.image = image;
+        this.measures = measures;
+    }
+
     protected Ingredient(Parcel in) {
         name = in.readString();
         image = in.readString();

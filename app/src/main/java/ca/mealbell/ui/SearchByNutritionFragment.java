@@ -155,7 +155,7 @@ public class SearchByNutritionFragment extends Fragment {
         return Const.API_URL + "recipes/findByNutrients?"
                              + "maxCalories=" + maxCalories
                              + "&maxFat=" + maxFat
-                             + "&maxProtein" + maxProtein
-                             + "&maxCarbs" + maxCarbs;
+                             + "&maxProtein=" + maxProtein
+                             + "&maxCarbs=" + maxCarbs;
     }
 }
