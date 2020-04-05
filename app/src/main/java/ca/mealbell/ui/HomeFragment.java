@@ -58,12 +58,14 @@ public class HomeFragment extends Fragment implements APIResponse, SwipeRefreshL
         swipeRefreshLayout = view.findViewById(R.id.swipe_refresh_layout);
         swipeRefreshLayout.setOnRefreshListener(this);
 
-        // Show fab
+        fab.hide();
+        fab.setImageResource(R.drawable.ic_favorite_black_24dp);
         fab.show();
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 // TODO: Save in Database
+
             }
         });
 
