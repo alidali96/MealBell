@@ -9,8 +9,10 @@ import android.database.sqlite.SQLiteOpenHelper;
 import androidx.annotation.Nullable;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
+import ca.mealbell.javabeans.Equipement;
 import ca.mealbell.javabeans.RecipeInformation;
 
 public class DatabaseHandler extends SQLiteOpenHelper {
@@ -48,6 +50,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
     private final String COLUMN_READY_IN_MINUTES = "ready_in_minutes";
     private final String COLUMN_SERVINGS = "servings";
 
+    private final String COLUMN_NAME = "name";
 
     // CREATE RECIPE TABLE
     private final String CREATE_RECIPES_TABLE = String.format("CREATE TABLE IF NOT EXISTS %s (" +
@@ -58,6 +61,13 @@ public class DatabaseHandler extends SQLiteOpenHelper {
             "%s TEXT," +
             "%s INTEGER," +
             "%s INTEGER)", TABLE_RECIPES, COLUMN_ID, COLUMN_TITLE, COLUMN_IMAGE, COLUMN_SUMMARY, COLUMN_INSTRUCTIONS, COLUMN_READY_IN_MINUTES, COLUMN_SERVINGS);
+
+    private final String CREATE_EQUIPMENT_TABLE = String.format("CREATE TABLE IF NOT EXISTS %s (" +
+            "%s INTEGER NOT NULL," +
+            "%s VARCHAR(255)," +
+            "%s VARCHAR(255)," +
+            "FOREIGN KEY (%s) " +
+            "REFERENCES %s (%s) )", TABLE_EQUIPMENTS, COLUMN_ID, COLUMN_NAME, COLUMN_IMAGE, COLUMN_ID, TABLE_RECIPES, COLUMN_ID);
 
 
     private static DatabaseHandler instance;
@@ -76,12 +86,14 @@ public class DatabaseHandler extends SQLiteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase db) {
         db.execSQL(CREATE_RECIPES_TABLE);
+        db.execSQL(CREATE_EQUIPMENT_TABLE);
     }
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
         // Drop older table if existed
         db.execSQL("DROP TABLE IF EXISTS " + CREATE_RECIPES_TABLE);
+        db.execSQL("DROP TABLE IF EXISTS " + CREATE_EQUIPMENT_TABLE);
 
         // Create tables again
         onCreate(db);
@@ -106,7 +118,10 @@ public class DatabaseHandler extends SQLiteOpenHelper {
             int servings = cursor.getInt(6);
 
             //TODO: Add Ingredients and Equipments
-            RecipeInformation recipe = new RecipeInformation(id, title, image, summary, instructions, null, null, readyInMinutes, servings);
+            Equipement[] equipments = new Equipement[getAllEquipments(id).size()];
+            equipments = getAllEquipments(id).toArray(equipments);
+
+            RecipeInformation recipe = new RecipeInformation(id, title, image, summary, instructions, null, equipments, readyInMinutes, servings);
             recipes.add(recipe);
         }
         cursor.close();
@@ -125,10 +140,12 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         values.put(COLUMN_INSTRUCTIONS, recipe.getInstructions());
         values.put(COLUMN_READY_IN_MINUTES, recipe.getReadyInMinutes());
         values.put(COLUMN_SERVINGS, recipe.getServings());
-        //TODO: Ingredients and Equipments
 
         db.insert(TABLE_RECIPES, null, values);
         db.close();
+
+        //TODO: Ingredients and Equipments
+        addEquipments(recipe);
     }
 
     public void deleteRecipe(RecipeInformation recipe) {
@@ -136,6 +153,9 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         db.delete(TABLE_RECIPES, COLUMN_ID + " = ?",
                 new String[]{String.valueOf(recipe.getId())});
         db.close();
+
+        //TODO: Ingredients and Equipments
+        deleteEquipments(recipe);
     }
 
     public RecipeInformation getRecipe(int recipeID) {
@@ -154,12 +174,62 @@ public class DatabaseHandler extends SQLiteOpenHelper {
             int servings = cursor.getInt(6);
 
             //TODO: Ingredients and Equipments
-            RecipeInformation recipe = new RecipeInformation(id, title, image, summary, instructions, null, null, readyInMinutes, servings);
+            Equipement[] equipments = new Equipement[getAllEquipments(recipeID).size()];
+            equipments = getAllEquipments(recipeID).toArray(equipments);
+
+            RecipeInformation recipe = new RecipeInformation(id, title, image, summary, instructions, null, equipments, readyInMinutes, servings);
             return recipe;
         }
 
         return null;
     }
 
+
+    private List<Equipement> getAllEquipments(int recipeID) {
+        List<Equipement> equipements = new ArrayList<>();
+
+        String query = String.format("SELECT  %s,%s FROM %s WHERE %s = %d", COLUMN_NAME, COLUMN_IMAGE, TABLE_EQUIPMENTS, COLUMN_ID, recipeID);
+
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.rawQuery(query, null);
+
+        while (cursor.moveToNext()) {
+            String name = cursor.getString(0);
+            String image = cursor.getString(1);
+
+            Equipement equipement = new Equipement(name, image);
+            equipements.add(equipement);
+        }
+        return equipements;
+    }
+
+    private void addEquipments(RecipeInformation recipe) {
+        SQLiteDatabase db = this.getWritableDatabase();
+
+        for (Equipement equipment :
+                recipe.getEquipments()) {
+
+            ContentValues values = new ContentValues();
+            values.put(COLUMN_ID, recipe.getId());
+            values.put(COLUMN_NAME, equipment.getName());
+            values.put(COLUMN_IMAGE, equipment.getImage());
+
+            db.insert(TABLE_EQUIPMENTS, null, values);
+        }
+
+        db.close();
+    }
+
+    private void deleteEquipments(RecipeInformation recipe) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        for (Equipement equipment :
+                recipe.getEquipments()) {
+
+            db.delete(TABLE_EQUIPMENTS, COLUMN_ID + " = ?",
+                    new String[]{String.valueOf(recipe.getId())});
+        }
+
+        db.close();
+    }
 
 }
