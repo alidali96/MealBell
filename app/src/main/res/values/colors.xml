@@ -31,7 +31,8 @@
         <color name="colorLightGray">#24292E</color>
         <color name="colorDarkBlue">#2B3443</color>
 
-        <color name="colorRed">#A40020</color>
+        <color name="colorRed">#FF0000</color>
+        <color name="colorGreen">#00FF00</color>
         <color name="colorGold">#ffc842</color>
         <color name="colorOrange">#FEB618</color>
 

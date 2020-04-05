@@ -155,7 +155,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:paddingLeft="5sp"
-                android:paddingRight="5sp"/>
+                android:paddingRight="5sp" />
 
             <TextView
                 android:id="@+id/equipments_label"
@@ -172,7 +172,9 @@
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/equipments_recyclerView"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent" />
+                android:layout_height="match_parent" >
+
+            </androidx.recyclerview.widget.RecyclerView>
 
         </LinearLayout>
 
