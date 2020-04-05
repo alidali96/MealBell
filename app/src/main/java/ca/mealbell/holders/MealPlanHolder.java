@@ -1,5 +1,6 @@
 package ca.mealbell.holders;
 
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -107,8 +108,8 @@ public class MealPlanHolder extends RecyclerView.ViewHolder implements View.OnCl
 
     public void setMealPlan(MealPlan mealPlan) {
         // Populate Meal Card
-        for (int i = 0; i < 3; i++) {
-            Picasso.get().load(mealPlan.getMeals()[i].getImage()).placeholder(R.drawable.meal).into(images[i]);
+        for (int i = 0; i < mealPlan.getMeals().length; i++) {
+            Picasso.get().load("https://spoonacular.com/recipeImages/" + mealPlan.getMeals()[i].getImage()).placeholder(R.drawable.meal).into(images[i]);
             titles[i].setText(mealPlan.getMeals()[i].getTitle());
         }
 
@@ -122,7 +123,7 @@ public class MealPlanHolder extends RecyclerView.ViewHolder implements View.OnCl
         ArrayList<Meal> meals = new ArrayList<>();
         Collections.addAll(meals, mealPlan.getMeals());
         // Set Adapter for Meal Plan Details
-        adapter = new MealAdapter(itemView.getContext(),  meals);
+        adapter = new MealAdapter(itemView.getContext(), meals);
         recyclerView.setAdapter(adapter);
 //        recyclerView.addItemDecoration(new DividerItemDecoration(recyclerView.getContext(), DividerItemDecoration.VERTICAL));
     }
