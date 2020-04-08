@@ -139,7 +139,7 @@ public class RecipeDetailsFragment extends Fragment implements APIResponse {
         }
 
         if (recipe != null) {
-            populateRecipe(recipe);
+            populateRecipe(recipe, view);
         }
 
         return view;
@@ -178,24 +178,18 @@ public class RecipeDetailsFragment extends Fragment implements APIResponse {
      *
      * @param recipe
      */
-    public void populateRecipe(RecipeInformation recipe) {
+    public void populateRecipe(RecipeInformation recipe, View view) {
         if (recipe == null) return;
 
         titleTextView.setText(recipe.getTitle());
         Picasso.get().load(recipe.getImage()).placeholder(R.drawable.dish).into(recipeImageView);
         summaryTextView.setText(Html.fromHtml(recipe.getSummary(), Html.FROM_HTML_MODE_LEGACY));
         summaryTextView.setMovementMethod(LinkMovementMethod.getInstance());
-        instructionsTextView.setText(recipe.getInstructions());
+        instructionsTextView.setText(Html.fromHtml(recipe.getInstructions(), Html.FROM_HTML_MODE_LEGACY));
+        instructionsTextView.setMovementMethod(LinkMovementMethod.getInstance());
         readyInMinutesTextView.setText(recipe.getReadyInMinutes() + "");
         servingsTextView.setText(recipe.getServings() + "");
 
-        // Check if some layout parts content exist in the returned json object
-        if (recipe.getEquipments() == null) {
-            equipmentsLabel.setVisibility(View.GONE);
-        }
-        if (recipe.getInstructions() == null) {
-            instructionsLabel.setVisibility(View.GONE);
-        }
 
         Ingredient[] ingredientsArray = recipe.getExtendedIngredients();
         // Populate ingredients ArrayList from the ingredients array
@@ -203,13 +197,23 @@ public class RecipeDetailsFragment extends Fragment implements APIResponse {
             ingredients.add(ingredientsArray[i]);
         }
 
-        if (recipe.getEquipments() == null) {
+        if (equipementsSet != null)
             recipe.setEquipments(equipementsSet);
-            // Populate equipments ArrayList from the equipmentsSet array
-            for (int i = 0; i < equipementsSet.length; i++) {
-                equipements.add(equipementsSet[i]);
-            }
+        // Populate equipments ArrayList from the equipmentsSet array
+        for (int i = 0; i < recipe.getEquipments().length; i++) {
+            equipements.add(recipe.getEquipments()[i]);
         }
+
+
+        // Check if some layout parts content exist in the returned json object
+        if (recipe.getEquipments() == null || recipe.getEquipments().length == 0) {
+            equipmentsLabel.setVisibility(View.GONE);
+        }
+        if (recipe.getInstructions() == null || recipe.getInstructions().isEmpty()) {
+            instructionsLabel.setVisibility(View.GONE);
+        }
+
+        view.setVisibility(View.VISIBLE);
     }
 
     @Override
@@ -225,7 +229,7 @@ public class RecipeDetailsFragment extends Fragment implements APIResponse {
         }
 
         if (recipe != null && equipementsSet != null) {
-            populateRecipe(recipe);
+            populateRecipe(recipe, getView());
         }
 
     }
