@@ -68,7 +68,7 @@ public class FavouritesViewPager extends Fragment {
         viewPager.setAdapter(adapter);
         viewPager.setPageTransformer(true, new RotateAboutTopTransformer());
 
-        adapter.getItem(adapter.getItemPosition(recipe));
+        viewPager.setCurrentItem(adapter.getItemPosition(recipe),true);
         return view;
     }
 
