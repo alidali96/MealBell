@@ -63,4 +63,9 @@
         android:name="ca.mealbell.ui.RecipeDetailsFragment"
         android:label="Recipe Details"
         tools:layout="@layout/fragment_recipe_details" />
+    <fragment
+        android:id="@+id/nav_favourite_recipes"
+        android:name="ca.mealbell.ui.FavouriteRecipes"
+        android:label="@string/favourite_recipes"
+        tools:layout="@layout/fragment_favourite_recipes" />
 </navigation>

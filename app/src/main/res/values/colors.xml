@@ -20,6 +20,8 @@
 
     <color name="tabtextcolour">#ffffff</color>
     <color name="tabIndicatorColour">#bfbfbf</color>
+
+    <color name="textBackground">#80000000</color>
 <!--    <color name="colorRed">#A40020</color>-->
 <!--    <color name="colorGold">#FEC813</color>-->
 <!--    <color name="colorLightBlue">#8598E3</color>-->
