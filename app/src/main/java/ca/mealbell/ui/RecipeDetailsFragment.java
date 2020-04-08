@@ -11,6 +11,7 @@ package ca.mealbell.ui;
 import android.opengl.Visibility;
 import android.os.Bundle;
 
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -72,6 +73,8 @@ public class RecipeDetailsFragment extends Fragment implements APIResponse {
     TextView instructionsLabel;
     TextView equipmentsLabel;
 
+    int id = 0;
+
 
     public RecipeDetailsFragment() {
         // Required empty public constructor
@@ -86,6 +89,15 @@ public class RecipeDetailsFragment extends Fragment implements APIResponse {
         this.recipe = recipe;
     }
 
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        if (getArguments() != null) {
+            // Retrieve the recipe's id
+            id = getArguments().getInt("RECIPE_ID", 0);
+            recipe = getArguments().getParcelable("RECIPE");
+        }
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -120,13 +132,15 @@ public class RecipeDetailsFragment extends Fragment implements APIResponse {
         EquipmentsCustomAdapter equipmentsAdapter = new EquipmentsCustomAdapter(equipements, getContext());
         equipmentsRecyclerView.setAdapter(equipmentsAdapter);
 
-        int id = 0;
-        // Retrieve the recipe's id
-        if (getArguments() != null)
-            id = getArguments().getInt("RECIPE_ID", 0);
 
-        getRecipeDetails(id);
-        getRecipeEquipments(id);
+        if (id != 0) {
+            getRecipeDetails(id);
+            getRecipeEquipments(id);
+        }
+
+        if (recipe != null) {
+            populateRecipe(recipe);
+        }
 
         return view;
     }
@@ -189,10 +203,12 @@ public class RecipeDetailsFragment extends Fragment implements APIResponse {
             ingredients.add(ingredientsArray[i]);
         }
 
-        recipe.setEquipments(equipementsSet);
-        // Populate equipments ArrayList from the equipmentsSet array
-        for (int i = 0; i < equipementsSet.length; i++) {
-            equipements.add(equipementsSet[i]);
+        if (recipe.getEquipments() == null) {
+            recipe.setEquipments(equipementsSet);
+            // Populate equipments ArrayList from the equipmentsSet array
+            for (int i = 0; i < equipementsSet.length; i++) {
+                equipements.add(equipementsSet[i]);
+            }
         }
     }
 
@@ -217,5 +233,18 @@ public class RecipeDetailsFragment extends Fragment implements APIResponse {
     @Override
     public void onFailure(VolleyError error, int status, int request) {
 
+    }
+
+    /**
+     * Create new instance of DetailsFragment for ViewPager
+     *
+     * @since 08-04-2020
+     */
+    public static RecipeDetailsFragment newInstance(RecipeInformation recipe) {
+        RecipeDetailsFragment fragment = new RecipeDetailsFragment();
+        Bundle args = new Bundle();
+        args.putParcelable("RECIPE", recipe);
+        fragment.setArguments(args);
+        return fragment;
     }
 }

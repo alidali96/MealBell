@@ -3,8 +3,11 @@ package ca.mealbell.javabeans;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import androidx.annotation.Nullable;
+
 /**
  * <p>This class is responsible for holding a returned json object from the API</p>
+ *
  * @author Fadi Findakly
  * @since 03-29-2020
  */
@@ -119,5 +122,15 @@ public class RecipeInformation implements Parcelable {
         dest.writeTypedArray(equipments, flags);
         dest.writeInt(readyInMinutes);
         dest.writeInt(servings);
+    }
+
+
+    // Important for ViewPager
+    @Override
+    public boolean equals(@Nullable Object obj) {
+        if (obj instanceof RecipeInformation) {
+            return ((RecipeInformation) obj).getId() == this.id;
+        }
+        return super.equals(obj);
     }
 }
