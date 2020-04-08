@@ -1,10 +1,13 @@
 package ca.mealbell.adapters;
 
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.navigation.Navigation;
@@ -15,9 +18,14 @@ import com.squareup.picasso.Picasso;
 import java.util.ArrayList;
 
 import ca.mealbell.R;
+import ca.mealbell.database.DatabaseHandler;
 import ca.mealbell.holders.FavouriteRecipeHolder;
-import ca.mealbell.holders.MealHolder;
 import ca.mealbell.javabeans.RecipeInformation;
+
+/**
+ * @author Ali Dali
+ * @since 08-04-2020
+ */
 
 public class FavouriteRecipeAdapter extends RecyclerView.Adapter<FavouriteRecipeHolder> {
 
@@ -47,8 +55,30 @@ public class FavouriteRecipeAdapter extends RecyclerView.Adapter<FavouriteRecipe
             @Override
             public void onClick(View v) {
                 Bundle args = new Bundle();
-                args.putInt("RECIPE_ID", recipe.getId());
-                Navigation.findNavController(holder.itemView).navigate(R.id.nav_Recipe_details, args);
+                args.putParcelable("RECIPE", recipe);
+                Navigation.findNavController(holder.itemView).navigate(R.id.action_nav_favourite_recipes_to_favouritesViewPager, args);
+            }
+        });
+
+        holder.itemView.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View v) {
+                AlertDialog.Builder alert = new AlertDialog.Builder(context);
+                alert.setIcon(R.drawable.ic_warning_black_24dp);
+                alert.setTitle("Remove Favourite Recipe");
+                alert.setMessage("Are you sure you want to remove \"" + recipe.getTitle() + "\" from favourites?");
+                alert.setPositiveButton("Remove", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        DatabaseHandler.getInstance(context).deleteRecipe(recipe);
+                        recipes.remove(holder.getAdapterPosition());
+                        notifyItemRemoved(holder.getAdapterPosition());
+                        Toast.makeText(context, "Recipe removed from favourites", Toast.LENGTH_LONG).show();
+                    }
+                });
+                alert.setNegativeButton("Cancel", null);
+                alert.create();
+                alert.show();
+                return true;
             }
         });
     }

@@ -67,5 +67,14 @@
         android:id="@+id/nav_favourite_recipes"
         android:name="ca.mealbell.ui.FavouriteRecipes"
         android:label="@string/favourite_recipes"
-        tools:layout="@layout/fragment_favourite_recipes" />
+        tools:layout="@layout/fragment_favourite_recipes" >
+        <action
+            android:id="@+id/action_nav_favourite_recipes_to_favouritesViewPager"
+            app:destination="@id/favouritesViewPager" />
+    </fragment>
+    <fragment
+        android:id="@+id/favouritesViewPager"
+        android:name="ca.mealbell.ui.FavouritesViewPager"
+        android:label="Favourite Recipe"
+        tools:layout="@layout/fragment_favourites_view_pager" />
 </navigation>
