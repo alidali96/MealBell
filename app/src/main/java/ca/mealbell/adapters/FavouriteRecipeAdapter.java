@@ -7,6 +7,8 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -81,7 +83,14 @@ public class FavouriteRecipeAdapter extends RecyclerView.Adapter<FavouriteRecipe
                 return true;
             }
         });
+
+
+        // Animate
+        Animation animation = AnimationUtils.loadAnimation(context, R.anim.down_to_top);
+        holder.itemView.startAnimation(animation);
+
     }
+
 
     @Override
     public int getItemCount() {
