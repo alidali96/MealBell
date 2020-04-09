@@ -11,6 +11,7 @@
     <string name="menu_home">Meal Bell</string>
     <string name="menu_search">Search Recipes</string>
     <string name="menu_meal_planner">Meal Planner</string>
+    <string name="menu_bmi">BMI</string>
     <string name="menu_favourite_recipes">Favourite Recipes</string>
 
 
@@ -44,5 +45,8 @@
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <!--    BMI-->
+    <string name="bmi_title_textview">Based on the data you have entered:</string>
 
 </resources>
