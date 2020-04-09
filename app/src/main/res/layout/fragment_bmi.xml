@@ -1,0 +1,271 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.BMIFragment">
+
+
+    <TextView
+        android:id="@+id/main_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="serif"
+        android:paddingTop="16dp"
+        android:paddingBottom="8dp"
+        android:text="@string/bmi_title_textview"
+        android:textSize="@dimen/labels_font_size"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:textColor="@color/colorDarkBlue"/>
+
+    <LinearLayout
+        android:id="@+id/labels_linearLayout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:paddingBottom="16dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/main_label">
+
+        <TextView
+            android:id="@+id/weight_label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="serif"
+            android:paddingLeft="8dp"
+            android:paddingTop="8dp"
+            android:text="Weight:"
+            android:textSize="14sp"
+            android:textStyle="bold"
+            android:textColor="@color/colorDarkBlue"/>
+
+        <TextView
+            android:id="@+id/weight_textView"
+            android:layout_width="75dp"
+            android:layout_height="wrap_content"
+            android:fontFamily="serif"
+            android:lineSpacingExtra="14sp"
+            android:paddingLeft="16dp"
+            android:paddingTop="8dp"
+            android:textSize="14sp"
+            android:textColor="@color/colorDarkBlue"/>
+
+        <TextView
+            android:id="@+id/height_label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="serif"
+            android:paddingLeft="24dp"
+            android:paddingTop="8dp"
+            android:text="Height:"
+            android:textSize="14sp"
+            android:textStyle="bold"
+            android:textColor="@color/colorDarkBlue"/>
+
+        <TextView
+            android:id="@+id/height_textView"
+            android:layout_width="75dp"
+            android:layout_height="wrap_content"
+            android:fontFamily="serif"
+            android:paddingLeft="16dp"
+            android:paddingTop="8dp"
+            android:textSize="14sp"
+            android:textColor="@color/colorDarkBlue"/>
+
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/bmi_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="serif"
+        android:paddingLeft="8dp"
+        android:paddingTop="16dp"
+        android:text="Your BMI equals:"
+        android:textSize="@dimen/labels_font_size"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/labels_linearLayout"
+        android:textColor="@color/colorDarkBlue"/>
+
+    <TextView
+        android:id="@+id/bmi_textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="serif"
+        android:paddingLeft="8dp"
+        android:paddingTop="8dp"
+        android:textSize="@dimen/labels_font_size"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/bmi_label"
+        android:textColor="@color/colorAccent"/>
+
+    <TextView
+        android:id="@+id/bmi_dif_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="serif"
+        android:paddingLeft="8dp"
+        android:paddingTop="16dp"
+        android:text="Body Mass Index (BMI):"
+        android:textSize="@dimen/labels_font_size"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/bmi_textView"
+        android:textColor="@color/colorDarkBlue"/>
+
+    <TextView
+        android:id="@+id/bmi_difintion"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Body mass index is a value derived from the mass and height of a person. The BMI is defined as the body mass
+divided by the square of the body height, resulting from mass in kilograms and height in metres.
+Weight status varies according to the BMI value as below:
+"
+        android:paddingLeft="8dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/bmi_dif_label"
+        tools:layout_editor_absoluteX="1dp"
+        android:textColor="@color/colorDarkBlue"/>
+
+    <TableLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingTop="16dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/bmi_difintion"
+        android:paddingLeft="8dp"
+        android:paddingRight="8dp">
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:id="@+id/textView25"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:fontFamily="serif"
+                android:text="BMI"
+                android:textAlignment="center"
+                android:textStyle="bold"
+                android:background="@color/colorDarkBlue"
+                android:textColor="@color/design_default_color_background" />
+
+            <TextView
+                android:id="@+id/textView26"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:fontFamily="serif"
+                android:text="Weight Status"
+                android:textAlignment="center"
+                android:textStyle="bold"
+                android:background="@color/colorDarkBlue"
+                android:textColor="@color/design_default_color_background" />
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" >
+
+            <TextView
+                android:id="@+id/textView28"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Below 18.5"
+                android:textAlignment="center"
+                android:textColor="@color/colorDarkBlue"/>
+
+            <TextView
+                android:id="@+id/textView27"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Underweight"
+                android:textAlignment="center"
+                android:textColor="@color/colorDarkBlue"/>
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" >
+
+            <TextView
+                android:id="@+id/textView30"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="18.5 – 24.9"
+                android:textAlignment="center"
+                android:textColor="@color/colorDarkBlue"/>
+
+            <TextView
+                android:id="@+id/textView29"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Normal or Healthy Weight"
+                android:textAlignment="center"
+                android:textColor="@color/colorDarkBlue"/>
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" >
+
+            <TextView
+                android:id="@+id/textView32"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="25.0 – 29.9"
+                android:textAlignment="center"
+                android:textColor="@color/colorDarkBlue"/>
+
+            <TextView
+                android:id="@+id/textView31"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Overweight"
+                android:textAlignment="center"
+                android:textColor="@color/colorDarkBlue"/>
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            >
+
+            <TextView
+                android:id="@+id/textView34"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="30.0 and Above"
+                android:textAlignment="center"
+                android:textColor="@color/colorDarkBlue"/>
+
+            <TextView
+                android:id="@+id/textView33"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Obese"
+                android:textAlignment="center"
+                android:textColor="@color/colorDarkBlue"/>
+        </TableRow>
+    </TableLayout>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
