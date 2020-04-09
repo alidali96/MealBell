@@ -77,4 +77,9 @@
         android:name="ca.mealbell.ui.FavouritesViewPager"
         android:label="Favourite Recipe"
         tools:layout="@layout/fragment_favourites_view_pager" />
+    <fragment
+        android:id="@+id/nav_bmi_fragment"
+        android:name="ca.mealbell.ui.BMIFragment"
+        android:label="BMI"
+        tools:layout="@layout/fragment_bmi" />
 </navigation>

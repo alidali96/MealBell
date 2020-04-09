@@ -7,6 +7,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:visibility="gone"
     tools:context=".ui.RecipeDetailsFragment">
 
     <ScrollView
@@ -16,8 +17,8 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:background="@color/colorDarkBlue">
+            android:background="@color/colorDarkBlue"
+            android:orientation="vertical">
 
             <TextView
                 android:id="@+id/recipeTitle_textView"
@@ -33,19 +34,23 @@
                 android:id="@+id/recipeImage_imageView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:src="@drawable/dish" />
+                android:adjustViewBounds="true"
+                android:src="@drawable/dish"
+                android:paddingRight="5sp"
+                android:paddingLeft="5sp"
+                />
 
             <TextView
                 android:id="@+id/textView3"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:paddingTop="5sp"
                 android:paddingLeft="5sp"
+                android:paddingTop="5sp"
                 android:paddingBottom="2sp"
+                android:text="Summary:"
                 android:textColor="@color/design_default_color_background"
                 android:textSize="18sp"
-                android:textStyle="bold"
-                android:text="Summary:" />
+                android:textStyle="bold" />
 
             <TextView
                 android:id="@+id/summary_TextView"
@@ -62,8 +67,8 @@
                 android:id="@+id/instructions_label"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:paddingTop="5sp"
                 android:paddingLeft="5sp"
+                android:paddingTop="5sp"
                 android:paddingBottom="2sp"
                 android:text="Instructions:"
                 android:textColor="@color/design_default_color_background"
@@ -84,8 +89,7 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:orientation="horizontal"
- >
+                android:orientation="horizontal">
 
                 <TextView
                     android:id="@+id/textView10"
@@ -93,7 +97,6 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:paddingLeft="5sp"
-                    android:paddingTop="5sp"
                     android:paddingBottom="2sp"
                     android:text="Ready in minutes:"
                     android:textColor="@color/design_default_color_background"
@@ -118,10 +121,8 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:paddingLeft="5sp"
-                    android:paddingTop="5sp"
-                    android:paddingBottom="2sp"
+                    android:paddingBottom="5sp"
                     android:text="Servings:"
-
                     android:textColor="@color/design_default_color_background"
                     android:textSize="18sp"
                     android:textStyle="bold" />
@@ -142,13 +143,13 @@
                 android:id="@+id/textView8"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Ingredients:"
-                android:paddingTop="5sp"
                 android:paddingLeft="5sp"
+                android:paddingTop="5sp"
                 android:paddingBottom="2sp"
+                android:text="Ingredients:"
                 android:textColor="@color/design_default_color_background"
                 android:textSize="18sp"
-                android:textStyle="bold"/>
+                android:textStyle="bold" />
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/ingredients_recyclerView"
@@ -161,18 +162,20 @@
                 android:id="@+id/equipments_label"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Equipments:"
-                android:paddingTop="5sp"
                 android:paddingLeft="5sp"
+                android:paddingTop="5sp"
                 android:paddingBottom="2sp"
+                android:text="Equipments:"
                 android:textColor="@color/design_default_color_background"
                 android:textSize="18sp"
-                android:textStyle="bold"/>
+                android:textStyle="bold" />
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/equipments_recyclerView"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent" >
+                android:layout_height="match_parent"
+                android:paddingLeft="5sp"
+                android:paddingRight="5sp">
 
             </androidx.recyclerview.widget.RecyclerView>
 
@@ -180,8 +183,6 @@
 
 
     </ScrollView>
-
-
 
 
 </LinearLayout>

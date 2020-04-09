@@ -55,7 +55,8 @@ public class SettingsFragment extends Fragment {
 
     private Measurement measurement;
     private String name;
-    private int weight;
+    //private int weight;
+    private float weight;
 
     private int previous;
 
@@ -76,7 +77,8 @@ public class SettingsFragment extends Fragment {
 
         measurement = Measurement.valueOf(sharedPreferences.getString(MEASUREMENT, Measurement.US.toString()));
         name = sharedPreferences.getString(NAME, "");
-        weight = sharedPreferences.getInt(WEIGHT, 0);
+        //weight = sharedPreferences.getInt(WEIGHT, 0);
+        weight = sharedPreferences.getFloat(WEIGHT, 0);
     }
 
     @Override
@@ -145,7 +147,8 @@ public class SettingsFragment extends Fragment {
 
                 if (!value.isEmpty()) {
                     weight = Integer.parseInt(value);
-                    sharedPreferencesEditor.putInt(WEIGHT, weight);
+                    //sharedPreferencesEditor.putInt(WEIGHT, weight);
+                    sharedPreferencesEditor.putFloat(WEIGHT, weight);
                     sharedPreferencesEditor.commit();
                     setWeight();
                 }
@@ -201,7 +204,8 @@ public class SettingsFragment extends Fragment {
             }
             weightText.setHint(weight + (measurement == Measurement.US ? " lb" : " kg"));
         }
-        sharedPreferencesEditor.putInt(WEIGHT, weight);
+        //sharedPreferencesEditor.putInt(WEIGHT, weight);
+        sharedPreferencesEditor.putFloat(WEIGHT, weight);
         sharedPreferencesEditor.commit();
     }
 
