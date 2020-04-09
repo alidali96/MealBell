@@ -73,7 +73,26 @@
         android:layout_gravity="fill_horizontal|end"
         android:ems="10"
         android:hint="Enter your weight"
-        android:inputType="number"
+        android:inputType="numberDecimal"
+        android:paddingStart="5dp"
+        android:paddingEnd="5dp" />
+
+    <TextView
+        android:id="@+id/text_view4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Height"
+        android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+        android:textSize="18sp" />
+
+    <EditText
+        android:id="@+id/height"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="fill_horizontal|end"
+        android:ems="10"
+        android:hint="Enter your height"
+        android:inputType="numberDecimal"
         android:paddingStart="5dp"
         android:paddingEnd="5dp" />
 

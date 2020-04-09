@@ -1,8 +1,8 @@
 package ca.mealbell.adapters;
 
 /**
- *  @author: Fadi Findakly
- *  @date: 03-29-2020
+ * @author: Fadi Findakly
+ * @date: 03-29-2020
  */
 
 import android.app.Application;
@@ -40,7 +40,7 @@ public class IngredientsCustomAdapter extends RecyclerView.Adapter<IngredientsCu
         this.ingredients = ingredients;
         this.context = context;
         SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(context);
-        unitSystem = SettingsFragment.Measurement.valueOf(preferences.getString(SettingsFragment.MEASUREMENT,SettingsFragment.Measurement.US.toString()));
+        unitSystem = SettingsFragment.Measurement.valueOf(preferences.getString(SettingsFragment.MEASUREMENT, SettingsFragment.Measurement.US.toString()));
     }
 
     //SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences

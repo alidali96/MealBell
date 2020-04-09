@@ -19,6 +19,7 @@ import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 
 import belka.us.androidtoggleswitch.widgets.BaseToggleSwitch;
@@ -40,9 +41,13 @@ public class SettingsFragment extends Fragment {
     public final static String MEASUREMENT = "MEASUREMENT";
     public final static String NAME = "NAME";
     public final static String WEIGHT = "WEIGHT";
+    public final static String HEIGHT = "HEIGHT";
 
-//    public final static String US = "US";
-//    public final static String METRIC = "METRIC";
+    private final String FEET = " ft";
+    private final String CM = " cm";
+    private final String KG = " kg";
+    private final String LBS = " lbs";
+
 
     public enum Measurement {
         US,
@@ -52,17 +57,20 @@ public class SettingsFragment extends Fragment {
     private ToggleSwitch measurmentToggleSwitch;
     private EditText nameText;
     private EditText weightText;
+    private EditText heightText;
 
     private Measurement measurement;
     private String name;
-    //private int weight;
     private float weight;
+    private float height;
 
     private int previous;
 
 
     private SharedPreferences sharedPreferences;
     private SharedPreferences.Editor sharedPreferencesEditor;
+    private DecimalFormat df = new DecimalFormat("#.##");
+
 
     public SettingsFragment() {
         // Required empty public constructor
@@ -77,8 +85,8 @@ public class SettingsFragment extends Fragment {
 
         measurement = Measurement.valueOf(sharedPreferences.getString(MEASUREMENT, Measurement.US.toString()));
         name = sharedPreferences.getString(NAME, "");
-        //weight = sharedPreferences.getInt(WEIGHT, 0);
         weight = sharedPreferences.getFloat(WEIGHT, 0);
+        height = sharedPreferences.getFloat(HEIGHT, 0);
     }
 
     @Override
@@ -91,14 +99,16 @@ public class SettingsFragment extends Fragment {
         measurmentToggleSwitch = view.findViewById(R.id.measurment);
         nameText = view.findViewById(R.id.name);
         weightText = view.findViewById(R.id.weight);
+        heightText = view.findViewById(R.id.height);
 
         // Hide fab
         fab.hide();
 
         // Set Measurement Toggle Switch
         ArrayList<String> measurmentsList = new ArrayList<>();
-        measurmentsList.add("US");
-        measurmentsList.add("METRIC");
+        measurmentsList.add(String.valueOf(Measurement.US));
+        measurmentsList.add(String.valueOf(Measurement.METRIC));
+        // Custom Toggle Switch
         measurmentToggleSwitch.setActiveBgColor(ContextCompat.getColor(getContext(), R.color.colorAccent));
         measurmentToggleSwitch.setInactiveBgColor(ContextCompat.getColor(getContext(), R.color.colorPrimaryDark));
         measurmentToggleSwitch.setActiveTextColor(ContextCompat.getColor(getContext(), R.color.design_default_color_background));
@@ -123,6 +133,7 @@ public class SettingsFragment extends Fragment {
                 }
                 sharedPreferencesEditor.commit();
                 updateWeight();
+                updateHeight();
             }
         });
 
@@ -146,11 +157,26 @@ public class SettingsFragment extends Fragment {
                 String value = v.getText().toString();
 
                 if (!value.isEmpty()) {
-                    weight = Integer.parseInt(value);
-                    //sharedPreferencesEditor.putInt(WEIGHT, weight);
+                    weight = Float.parseFloat(value);
                     sharedPreferencesEditor.putFloat(WEIGHT, weight);
                     sharedPreferencesEditor.commit();
                     setWeight();
+                }
+                return false;
+            }
+        });
+
+        // Set Height
+        heightText.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+            @Override
+            public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
+                String value = v.getText().toString();
+
+                if (!value.isEmpty()) {
+                    height = Float.parseFloat(value);
+                    sharedPreferencesEditor.putFloat(HEIGHT, height);
+                    sharedPreferencesEditor.commit();
+                    setHeight();
                 }
                 return false;
             }
@@ -167,6 +193,7 @@ public class SettingsFragment extends Fragment {
         setMeasurement();
         setName();
         setWeight();
+        setHeight();
     }
 
     private void setMeasurement() {
@@ -190,7 +217,14 @@ public class SettingsFragment extends Fragment {
     private void setWeight() {
         if (weight != 0) {
             weightText.setText("");
-            weightText.setHint(weight + (measurement == Measurement.US ? " lb" : " kg"));
+            weightText.setHint(df.format(weight) + (measurement == Measurement.US ? LBS : KG));
+        }
+    }
+
+    private void setHeight() {
+        if (height != 0) {
+            heightText.setText("");
+            heightText.setHint(df.format(height) + (measurement == Measurement.US ? FEET : CM));
         }
     }
 
@@ -200,12 +234,23 @@ public class SettingsFragment extends Fragment {
                 weight *= 2.20462;
             } else if (measurement == Measurement.METRIC) {
                 weight *= 0.453592;
-                weight++; // round up
             }
-            weightText.setHint(weight + (measurement == Measurement.US ? " lb" : " kg"));
+            weightText.setHint(df.format(weight) + (measurement == Measurement.US ? LBS : KG));
         }
-        //sharedPreferencesEditor.putInt(WEIGHT, weight);
         sharedPreferencesEditor.putFloat(WEIGHT, weight);
+        sharedPreferencesEditor.commit();
+    }
+
+    private void updateHeight() {
+        if (height != 0) {
+            if (measurement == Measurement.US) {
+                height /= 30.48;
+            } else if (measurement == Measurement.METRIC) {
+                height *= 30.48;
+            }
+            heightText.setHint(df.format(height) + (measurement == Measurement.US ? FEET : CM));
+        }
+        sharedPreferencesEditor.putFloat(HEIGHT, height);
         sharedPreferencesEditor.commit();
     }
 
