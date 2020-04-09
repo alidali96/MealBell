@@ -101,7 +101,7 @@ public class SettingsFragment extends Fragment {
         measurmentToggleSwitch.setInactiveBgColor(ContextCompat.getColor(getContext(), R.color.colorPrimaryDark));
         measurmentToggleSwitch.setActiveTextColor(ContextCompat.getColor(getContext(), R.color.design_default_color_background));
         measurmentToggleSwitch.setInactiveTextColor(ContextCompat.getColor(getContext(), R.color.design_default_color_background));
-        measurmentToggleSwitch.setToggleWidth(200);
+        measurmentToggleSwitch.setToggleWidth(300);
         measurmentToggleSwitch.setLabels(measurmentsList);
 
         measurmentToggleSwitch.setOnToggleSwitchChangeListener(new BaseToggleSwitch.OnToggleSwitchChangeListener() {

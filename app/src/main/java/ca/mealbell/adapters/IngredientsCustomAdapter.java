@@ -59,7 +59,7 @@ public class IngredientsCustomAdapter extends RecyclerView.Adapter<IngredientsCu
 
         final Ingredient ingredient = ingredients.get(position);
 
-        Picasso.get().load("https://spoonacular.com/cdn/ingredients_100x100/" + ingredient.getImage()).placeholder(R.drawable.dish).into(holder.recipeImage);
+        Picasso.get().load("https://spoonacular.com/cdn/ingredients_100x100/" + ingredient.getImage()).placeholder(R.drawable.ingredient).into(holder.recipeImage);
         holder.recipeName.setText(ingredient.getName());
 
         if (unitSystem == SettingsFragment.Measurement.US) {
