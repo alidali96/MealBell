@@ -46,7 +46,7 @@ public class BMIFragment extends Fragment {
         SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(getContext());
         unitSystem = SettingsFragment.Measurement.valueOf(preferences.getString(SettingsFragment.MEASUREMENT,SettingsFragment.Measurement.US.toString()));
         weight = preferences.getFloat(SettingsFragment.WEIGHT, weight);
-        //height = preferences.getFloat(SettingsFragment.HEIGHT, height);
+        height = preferences.getFloat(SettingsFragment.HEIGHT, height);
 
 
         // Inflate the layout for this fragment
