@@ -15,6 +15,8 @@ import android.widget.TextView;
 
 import ca.mealbell.R;
 
+import static ca.mealbell.MainActivity.fab;
+
 
 /**
  * A simple {@link Fragment} subclass.
@@ -71,9 +73,9 @@ public class BMIFragment extends Fragment {
         // Set the bmiTextView content
         bmiTextView.setText(String.format("%.2f", bmi));
 
-
-
-
+        // Hide the fab button
+        fab.hide();
+        
         return view;
     }
 
