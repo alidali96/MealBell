@@ -205,6 +205,11 @@ public class RecipeDetailsFragment extends Fragment  implements APIResponse {
         // Check if some layout parts content exist in the returned json object
         if (recipe.getEquipments() == null) {
             equipmentsLabel.setVisibility(View.GONE);
+            Log.d("equipments", "There is no equipments");
+        }
+        if (recipe.getEquipments() != null) {
+            //equipmentsLabel.setVisibility(View.GONE);
+            Log.d("equipments", "There is no equipments");
         }
         if (recipe.getInstructions() == null) {
             instructionsLabel.setVisibility(View.GONE);
