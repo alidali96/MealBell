@@ -35,7 +35,10 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:adjustViewBounds="true"
-                android:src="@drawable/dish" />
+                android:src="@drawable/dish"
+                android:paddingRight="5sp"
+                android:paddingLeft="5sp"
+                />
 
             <TextView
                 android:id="@+id/textView3"
@@ -94,7 +97,6 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:paddingLeft="5sp"
-                    android:paddingTop="5sp"
                     android:paddingBottom="2sp"
                     android:text="Ready in minutes:"
                     android:textColor="@color/design_default_color_background"
@@ -119,10 +121,8 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:paddingLeft="5sp"
-                    android:paddingTop="5sp"
-                    android:paddingBottom="2sp"
+                    android:paddingBottom="5sp"
                     android:text="Servings:"
-
                     android:textColor="@color/design_default_color_background"
                     android:textSize="18sp"
                     android:textStyle="bold" />
@@ -173,7 +173,9 @@
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/equipments_recyclerView"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
+                android:layout_height="match_parent"
+                android:paddingLeft="5sp"
+                android:paddingRight="5sp">
 
             </androidx.recyclerview.widget.RecyclerView>
 
