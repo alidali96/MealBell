@@ -10,6 +10,7 @@ import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 
 import android.preference.PreferenceManager;
+import android.text.method.LinkMovementMethod;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
@@ -18,6 +19,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.TextView;
+
+import org.w3c.dom.Text;
 
 import java.text.DecimalFormat;
 import java.util.ArrayList;
@@ -71,6 +74,8 @@ public class SettingsFragment extends Fragment {
     private SharedPreferences.Editor sharedPreferencesEditor;
     private DecimalFormat df = new DecimalFormat("#.##");
 
+    private ArrayList<TextView> credits = new ArrayList<>();
+    private int[] creditsIDs = {R.id.credit0, R.id.credit1, R.id.credit2, R.id.credit3, R.id.credit4, R.id.credit5, R.id.credit6, R.id.credit7, R.id.credit8, R.id.credit9, R.id.credit10};
 
     public SettingsFragment() {
         // Required empty public constructor
@@ -100,6 +105,18 @@ public class SettingsFragment extends Fragment {
         nameText = view.findViewById(R.id.name);
         weightText = view.findViewById(R.id.weight);
         heightText = view.findViewById(R.id.height);
+        // Credits
+        for (int creditID :
+                creditsIDs) {
+            TextView credit = view.findViewById(creditID);
+            credits.add(credit);
+        }
+
+        // Make credits clickable
+        for (TextView credit:
+             credits) {
+            credit.setMovementMethod(LinkMovementMethod.getInstance());
+        }
 
         // Hide fab
         fab.hide();
