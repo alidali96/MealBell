@@ -25,6 +25,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.android.volley.Request;
 import com.android.volley.VolleyError;
@@ -39,6 +40,7 @@ import ca.mealbell.adapters.EquipmentsCustomAdapter;
 import ca.mealbell.adapters.IngredientsCustomAdapter;
 import ca.mealbell.api.APIResponse;
 import ca.mealbell.api.MainAPI;
+import ca.mealbell.database.DatabaseHandler;
 import ca.mealbell.javabeans.Equipement;
 import ca.mealbell.javabeans.EquipmentsObject;
 import ca.mealbell.javabeans.Ingredient;
@@ -241,7 +243,31 @@ public class RecipeDetailsFragment extends Fragment implements APIResponse {
             instructionsLabel.setVisibility(View.GONE);
         }
 
+        handleFAB(recipe);
+
         view.setVisibility(View.VISIBLE);
+    }
+
+    // Add and remove recipes to and from favourite
+    private void handleFAB(final RecipeInformation recipe) {
+        final RecipeInformation favourite = DatabaseHandler.getInstance(getContext()).getRecipe(recipe.getId());
+        fab.hide();
+        fab.setImageResource(favourite == null ? R.drawable.ic_favorite_border_black_24dp : R.drawable.ic_favorite_black_24dp);
+
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (favourite == null) {
+                    DatabaseHandler.getInstance(getContext()).addRecipe(recipe);
+                    Toast.makeText(getContext(), "Recipe added to favourites", Toast.LENGTH_SHORT).show();
+                } else {
+                    DatabaseHandler.getInstance(getContext()).deleteRecipe(recipe);
+                    Toast.makeText(getContext(), "Recipe removed from favourites", Toast.LENGTH_SHORT).show();
+                }
+                handleFAB(recipe);
+            }
+        });
+        fab.show();
     }
 
     @Override

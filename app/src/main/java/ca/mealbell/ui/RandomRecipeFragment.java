@@ -3,11 +3,10 @@ package ca.mealbell.ui;
 
 import android.os.Bundle;
 
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -38,14 +37,14 @@ import static ca.mealbell.MainActivity.fab;
  * @author Ali Dali
  * @since 31-03-2020
  */
-public class HomeFragment extends Fragment implements APIResponse, SwipeRefreshLayout.OnRefreshListener {
+public class RandomRecipeFragment extends Fragment implements APIResponse, SwipeRefreshLayout.OnRefreshListener {
 
     private SwipeRefreshLayout swipeRefreshLayout;
     private RecipeDetailsFragment recipeDetailsFragment;
 
     private Gson gson = new Gson();
 
-    public HomeFragment() {
+    public RandomRecipeFragment() {
         // Required empty public constructor
     }
 
@@ -54,12 +53,14 @@ public class HomeFragment extends Fragment implements APIResponse, SwipeRefreshL
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View view = inflater.inflate(R.layout.fragment_home, container, false);
+        View view = inflater.inflate(R.layout.fragment_random_recipe, container, false);
 
         // Swipe Refresh Layout
         swipeRefreshLayout = view.findViewById(R.id.swipe_refresh_layout);
         swipeRefreshLayout.setOnRefreshListener(this);
+        swipeRefreshLayout.setColorSchemeColors(ContextCompat.getColor(getContext(), R.color.colorAccent));
 
+        // Hide fab
         fab.hide();
 
         recipeDetailsFragment = (RecipeDetailsFragment) getChildFragmentManager().findFragmentById(R.id.random_recipe);
@@ -75,26 +76,6 @@ public class HomeFragment extends Fragment implements APIResponse, SwipeRefreshL
         MainAPI.getInstance(getContext()).setHeaders(FOOD_API_HEADERS).jsonObjectRequest(Request.Method.GET, url, null, this);
     }
 
-    private void handleFAB(final RecipeInformation recipe) {
-        final RecipeInformation favourite = DatabaseHandler.getInstance(getContext()).getRecipe(recipe.getId());
-        fab.hide();
-        fab.setImageResource(favourite == null ? R.drawable.ic_favorite_border_black_24dp : R.drawable.ic_favorite_black_24dp);
-
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (favourite == null) {
-                    DatabaseHandler.getInstance(getContext()).addRecipe(recipe);
-                    Toast.makeText(getContext(), "Recipe added to favourites", Toast.LENGTH_SHORT).show();
-                } else {
-                    DatabaseHandler.getInstance(getContext()).deleteRecipe(recipe);
-                    Toast.makeText(getContext(), "Recipe removed from favourites", Toast.LENGTH_SHORT).show();
-                }
-                handleFAB(recipe);
-            }
-        });
-        fab.show();
-    }
 
     @Override
     public void onRefresh() {
@@ -113,9 +94,6 @@ public class HomeFragment extends Fragment implements APIResponse, SwipeRefreshL
             // Set Recipe in Details Fragment
             recipeDetailsFragment.setRecipe(recipeInformation);
             recipeDetailsFragment.getRecipeEquipments(recipeInformation.getId());
-
-
-            handleFAB(recipeInformation);
 
         } catch (JSONException e) {
             e.printStackTrace();
