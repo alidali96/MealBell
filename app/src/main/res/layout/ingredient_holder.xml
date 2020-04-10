@@ -19,6 +19,8 @@
         android:padding="10dp"
         android:paddingEnd="28dp"
         android:text="Ingredient  "
+        android:textSize="@dimen/content_font_size"
+        android:fontFamily="@string/font_family"
         android:textColor="@color/design_default_color_background" />
 
     <ImageView

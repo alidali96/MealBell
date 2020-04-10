@@ -8,7 +8,7 @@
     <string name="action_settings">Settings</string>
 
     <!-- menu items -->
-    <string name="menu_home">Meal Bell</string>
+    <string name="menu_home">Random Recipes</string>
     <string name="menu_search">Search Recipes</string>
     <string name="menu_meal_planner">Meal Planner</string>
     <string name="menu_bmi">BMI</string>
@@ -58,5 +58,8 @@
 
     <!--    BMI-->
     <string name="bmi_title_textview">Based on the data you have entered:</string>
+
+    <!--    Styles  -->
+    <string name="font_family">serif</string>
 
 </resources>

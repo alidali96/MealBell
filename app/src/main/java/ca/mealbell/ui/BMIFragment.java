@@ -32,6 +32,8 @@ public class BMIFragment extends Fragment {
     private float weight;
     private float height;
     private float bmi;
+    private String wightUnit;
+    private String heightUnit;
 
     public BMIFragment() {
         // Required empty public constructor
@@ -61,17 +63,23 @@ public class BMIFragment extends Fragment {
         // Metric system formula: bmi = weight (kg) / [height (m)]2
         // US system formula: bmi = 703 x weight (lbs) / [height (in)]2
         if (unitSystem == SettingsFragment.Measurement.US) {
-            bmi = (703 * weight) / (height * height);
-            weightTextView.setText(weight + "lbs");
-            heightTextView.setText(height + "in");
+//            float tempHeight = (float) Math.floor(height);
+//            float heigtInInches = ((height - tempHeight)) * 10 + (tempHeight * 12);
+            float heigtInInches = height * 12;
+            bmi = (703 * weight) / (heigtInInches * heigtInInches);
+            wightUnit = "lbs";
+            heightUnit = "ft";
         } else {
+            height = height / 100;
             bmi = weight / (height * height);
-            weightTextView.setText(weight + "kgs");
-            heightTextView.setText(height + "cm");
+            wightUnit = "kgs";
+            heightUnit = "m";
         }
 
         // Set the bmiTextView content
         bmiTextView.setText(String.format("%.2f", bmi));
+        weightTextView.setText(String.format("%.2f", weight) + wightUnit);
+        heightTextView.setText(String.format("%.2f", height) + heightUnit);
 
         // Hide the fab button
         fab.hide();

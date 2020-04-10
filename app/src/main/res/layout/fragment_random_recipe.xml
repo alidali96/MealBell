@@ -21,8 +21,11 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:gravity="center"
-                android:text="Swipe for Random Recipe"
-                android:textSize="24sp" />
+                android:text="Swipe for a Random Recipe"
+                android:textSize="@dimen/h1_font_size"
+                android:fontFamily="@string/font_family"
+                android:textStyle="bold"
+                android:textColor="@color/colorDarkBlue"/>
 
             <fragment
                 android:id="@+id/random_recipe"
