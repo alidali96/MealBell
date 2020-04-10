@@ -49,4 +49,7 @@
     <!--    BMI-->
     <string name="bmi_title_textview">Based on the data you have entered:</string>
 
+    <!--    Styles  -->
+    <string name="font_family">serif</string>
+
 </resources>

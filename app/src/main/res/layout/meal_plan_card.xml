@@ -40,7 +40,8 @@
                 android:lines="1"
                 android:text="Meal Number One"
                 android:textColor="@color/design_default_color_background"
-                android:textSize="24sp" />
+                android:textSize="@dimen/h2_font_size"
+                android:fontFamily="@string/font_family"/>
         </LinearLayout>
 
         <View
@@ -74,7 +75,8 @@
                 android:lines="1"
                 android:text="Meal Number Two"
                 android:textColor="@color/design_default_color_background"
-                android:textSize="24sp" />
+                android:textSize="@dimen/h2_font_size"
+                android:fontFamily="@string/font_family" />
         </LinearLayout>
 
         <View
@@ -108,7 +110,8 @@
                 android:lines="1"
                 android:text="Meal Number Three"
                 android:textColor="@color/design_default_color_background"
-                android:textSize="24sp" />
+                android:textSize="@dimen/h2_font_size"
+                android:fontFamily="@string/font_family" />
 
         </LinearLayout>
 
@@ -129,6 +132,8 @@
                 android:gravity="center"
                 android:padding="5dp"
                 android:text="Open"
+                android:fontFamily="@string/font_family"
+                android:textSize="@dimen/content_font_size"
                 android:textAlignment="center"
                 android:textColor="@color/design_default_color_background" />
         </LinearLayout>

@@ -18,6 +18,8 @@
             android:backgroundTint="@color/colorAccent"
             android:hint="Cheese..."
             android:inputType="text"
+            android:textSize="@dimen/content_font_size"
+            android:fontFamily="@string/font_family"
             android:singleLine="true"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -36,17 +38,6 @@
 
         </androidx.recyclerview.widget.RecyclerView>
 
-        <!--    <SearchView-->
-        <!--        android:id="@+id/search"-->
-        <!--        android:layout_width="0dp"-->
-        <!--        android:layout_height="wrap_content"-->
-        <!--        app:layout_constraintEnd_toEndOf="parent"-->
-        <!--        app:layout_constraintStart_toStartOf="parent"-->
-        <!--        app:layout_constraintTop_toBottomOf="@id/ingredients_list">-->
-
-        <!--    </SearchView>-->
-
-
         <Button
             android:id="@+id/submit"
             style="@style/Widget.AppCompat.Button.Colored"
@@ -58,6 +49,8 @@
             android:layout_marginBottom="16dp"
             android:background="@drawable/rounded_bg"
             android:text="SEARCH"
+            android:textSize="@dimen/h2_font_size"
+            android:fontFamily="@string/font_family"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent" />

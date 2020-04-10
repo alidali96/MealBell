@@ -27,7 +27,8 @@
                 android:padding="5sp"
                 android:text="Recipe Name"
                 android:textColor="@color/design_default_color_background"
-                android:textSize="24sp"
+                android:textSize="@dimen/h1_font_size"
+                android:fontFamily="@string/font_family"
                 android:textStyle="bold" />
 
             <ImageView
@@ -49,7 +50,8 @@
                 android:paddingBottom="2sp"
                 android:text="Summary:"
                 android:textColor="@color/design_default_color_background"
-                android:textSize="18sp"
+                android:textSize="@dimen/h2_font_size"
+                android:fontFamily="@string/font_family"
                 android:textStyle="bold" />
 
             <TextView
@@ -61,7 +63,8 @@
                 android:paddingBottom="5sp"
                 android:text="TextView"
                 android:textColor="@color/design_default_color_background"
-                android:textSize="14sp" />
+                android:textSize="@dimen/content_font_size"
+                android:fontFamily="@string/font_family"/>
 
             <TextView
                 android:id="@+id/instructions_label"
@@ -72,7 +75,8 @@
                 android:paddingBottom="2sp"
                 android:text="Instructions:"
                 android:textColor="@color/design_default_color_background"
-                android:textSize="18sp"
+                android:textSize="@dimen/h2_font_size"
+                android:fontFamily="@string/font_family"
                 android:textStyle="bold" />
 
             <TextView
@@ -84,7 +88,8 @@
                 android:paddingBottom="5sp"
                 android:text="TextView"
                 android:textColor="@color/design_default_color_background"
-                android:textSize="14sp" />
+                android:textSize="@dimen/content_font_size"
+                android:fontFamily="@string/font_family"/>
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -100,7 +105,8 @@
                     android:paddingBottom="2sp"
                     android:text="Ready in minutes:"
                     android:textColor="@color/design_default_color_background"
-                    android:textSize="18sp"
+                    android:textSize="@dimen/h2_font_size"
+                    android:fontFamily="@string/font_family"
                     android:textStyle="bold" />
 
                 <TextView
@@ -113,7 +119,8 @@
                     android:text="TextView"
                     android:textAlignment="textStart"
                     android:textColor="@color/design_default_color_background"
-                    android:textSize="14sp" />
+                    android:textSize="@dimen/content_font_size"
+                    android:fontFamily="@string/font_family"/>
 
                 <TextView
                     android:id="@+id/textView4"
@@ -124,7 +131,8 @@
                     android:paddingBottom="5sp"
                     android:text="Servings:"
                     android:textColor="@color/design_default_color_background"
-                    android:textSize="18sp"
+                    android:textSize="@dimen/h2_font_size"
+                    android:fontFamily="@string/font_family"
                     android:textStyle="bold" />
 
                 <TextView
@@ -136,7 +144,8 @@
                     android:paddingBottom="5sp"
                     android:text="TextView"
                     android:textColor="@color/design_default_color_background"
-                    android:textSize="14sp" />
+                    android:textSize="@dimen/content_font_size"
+                    android:fontFamily="@string/font_family"/>
             </LinearLayout>
 
             <TextView
@@ -148,7 +157,8 @@
                 android:paddingBottom="2sp"
                 android:text="Ingredients:"
                 android:textColor="@color/design_default_color_background"
-                android:textSize="18sp"
+                android:textSize="@dimen/h2_font_size"
+                android:fontFamily="@string/font_family"
                 android:textStyle="bold" />
 
             <androidx.recyclerview.widget.RecyclerView
@@ -167,7 +177,8 @@
                 android:paddingBottom="2sp"
                 android:text="Equipments:"
                 android:textColor="@color/design_default_color_background"
-                android:textSize="18sp"
+                android:textSize="@dimen/h2_font_size"
+                android:fontFamily="@string/font_family"
                 android:textStyle="bold" />
 
             <androidx.recyclerview.widget.RecyclerView
