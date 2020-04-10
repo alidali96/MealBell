@@ -67,7 +67,7 @@ public class FavouriteRecipeAdapter extends RecyclerView.Adapter<FavouriteRecipe
             public boolean onLongClick(View v) {
                 AlertDialog.Builder alert = new AlertDialog.Builder(context);
                 alert.setIcon(R.drawable.ic_warning_black_24dp);
-                alert.setTitle("Remove Favourite Recipe");
+                alert.setTitle("Remove Recipe");
                 alert.setMessage("Are you sure you want to remove \"" + recipe.getTitle() + "\" from favourites?");
                 alert.setPositiveButton("Remove", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int which) {

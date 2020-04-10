@@ -4,7 +4,7 @@
 
     <!-- Permissions -->
     <uses-permission android:name="android.permission.INTERNET" />
-<!--    <uses-permission android:name="android.permission.SET_ALARM" />-->
+    <!--    <uses-permission android:name="android.permission.SET_ALARM" />-->
 
 
     <application
@@ -17,7 +17,8 @@
         <activity
             android:name=".MainActivity"
             android:label="@string/app_name"
-            android:theme="@style/AppTheme.NoActionBar">
+            android:theme="@style/AppTheme.NoActionBar"
+            android:windowSoftInputMode="adjustPan">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

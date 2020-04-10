@@ -30,7 +30,7 @@ public class BMIFragment extends Fragment {
 
     private SettingsFragment.Measurement unitSystem;
     private float weight;
-    private float height = (float) 1.69;
+    private float height;
     private float bmi;
 
     public BMIFragment() {
