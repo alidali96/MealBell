@@ -3,41 +3,83 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/mobile_navigation"
-    app:startDestination="@+id/nav_home">
+    app:startDestination="@id/nav_home">
+
 
     <fragment
         android:id="@+id/nav_home"
-        android:name="ca.mealbell.ui.home.HomeFragment"
+        android:name="ca.mealbell.ui.RandomRecipeFragment"
         android:label="@string/menu_home"
-        tools:layout="@layout/fragment_home" />
-
+        tools:layout="@layout/fragment_random_recipe" />
     <fragment
-        android:id="@+id/nav_gallery"
-        android:name="ca.mealbell.ui.gallery.GalleryFragment"
-        android:label="@string/menu_gallery"
-        tools:layout="@layout/fragment_gallery" />
-
+        android:id="@+id/nav_serach_recipes"
+        android:name="ca.mealbell.ui.SearchRecipesFragment"
+        android:label="@string/menu_search"
+        tools:layout="@layout/fragment_search_recipes">
+        <action
+            android:id="@+id/action_nav_serach_recipes_to_recipesResultsFragment"
+            app:destination="@id/recipesResultsFragment" />
+    </fragment>
     <fragment
-        android:id="@+id/nav_slideshow"
-        android:name="ca.mealbell.ui.slideshow.SlideshowFragment"
-        android:label="@string/menu_slideshow"
-        tools:layout="@layout/fragment_slideshow" />
-
+        android:id="@+id/recipesResultsFragment"
+        android:name="ca.mealbell.ui.RecipesResultsFragment"
+        android:label="@string/menu_recipes_results"
+        tools:layout="@layout/fragment_recipes_results" >
+        <action
+            android:id="@+id/action_nav_show_recipe_details"
+            app:destination="@id/nav_Recipe_details" />
+    </fragment>
     <fragment
-        android:id="@+id/nav_tools"
-        android:name="ca.mealbell.ui.tools.ToolsFragment"
-        android:label="@string/menu_tools"
-        tools:layout="@layout/fragment_tools" />
-
+        android:id="@+id/searchByIngredientsFragment"
+        android:name="ca.mealbell.ui.SearchByIngredientsFragment"
+        android:label="@string/search_by_ingredients_title"
+        tools:layout="@layout/fragment_search_by_ingredients" />
     <fragment
-        android:id="@+id/nav_share"
-        android:name="ca.mealbell.ui.share.ShareFragment"
-        android:label="@string/menu_share"
-        tools:layout="@layout/fragment_share" />
-
+        android:id="@+id/searchByNutritionFragment"
+        android:name="ca.mealbell.ui.SearchByNutritionFragment"
+        android:label="@string/search_by_nutrition_title"
+        tools:layout="@layout/fragment_search_by_nutrition" />
     <fragment
-        android:id="@+id/nav_send"
-        android:name="ca.mealbell.ui.send.SendFragment"
-        android:label="@string/menu_send"
-        tools:layout="@layout/fragment_send" />
+        android:id="@+id/nav_meal_planner"
+        android:name="ca.mealbell.ui.MealPlannerFragment"
+        android:label="@string/menu_meal_planner"
+        tools:layout="@layout/fragment_meal_planner">
+        <action
+            android:id="@+id/action_nav_meal_planner_to_createMealPlanFragment"
+            app:destination="@id/createMealPlanFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/createMealPlanFragment"
+        android:name="ca.mealbell.ui.CreateMealPlanFragment"
+        android:label="@string/create_meal_plan"
+        tools:layout="@layout/fragment_create_meal_plan" />
+    <fragment
+        android:id="@+id/settingsFragment"
+        android:name="ca.mealbell.ui.SettingsFragment"
+        android:label="@string/settings"
+        tools:layout="@layout/fragment_settings" />
+    <fragment
+        android:id="@+id/nav_Recipe_details"
+        android:name="ca.mealbell.ui.RecipeDetailsFragment"
+        android:label="Recipe Details"
+        tools:layout="@layout/fragment_recipe_details" />
+    <fragment
+        android:id="@+id/nav_favourite_recipes"
+        android:name="ca.mealbell.ui.FavouriteRecipes"
+        android:label="@string/favourite_recipes"
+        tools:layout="@layout/fragment_favourite_recipes" >
+        <action
+            android:id="@+id/action_nav_favourite_recipes_to_favouritesViewPager"
+            app:destination="@id/favouritesViewPager" />
+    </fragment>
+    <fragment
+        android:id="@+id/favouritesViewPager"
+        android:name="ca.mealbell.ui.FavouritesViewPager"
+        android:label="Favourite Recipe"
+        tools:layout="@layout/fragment_favourites_view_pager" />
+    <fragment
+        android:id="@+id/nav_bmi_fragment"
+        android:name="ca.mealbell.ui.BMIFragment"
+        android:label="BMI"
+        tools:layout="@layout/fragment_bmi" />
 </navigation>
