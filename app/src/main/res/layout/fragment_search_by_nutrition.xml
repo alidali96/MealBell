@@ -17,7 +17,9 @@
         android:layout_marginStart="24dp"
         android:layout_marginTop="16dp"
         android:text="Calories"
-        android:textSize="@dimen/labels_font_size"
+        android:textSize="@dimen/h2_font_size"
+        android:textStyle="bold"
+        android:fontFamily="@string/font_family"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -28,6 +30,8 @@
         android:layout_marginTop="16dp"
         android:layout_marginEnd="24dp"
         android:text="0 cals"
+        android:textSize="@dimen/content_font_size"
+        android:fontFamily="@string/font_family"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -51,7 +55,9 @@
         android:layout_marginStart="24dp"
         android:layout_marginTop="16dp"
         android:text="Fat"
-        android:textSize="@dimen/labels_font_size"
+        android:textSize="@dimen/h2_font_size"
+        android:textStyle="bold"
+        android:fontFamily="@string/font_family"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/calories_seekbar" />
 
@@ -62,6 +68,8 @@
         android:layout_marginTop="16dp"
         android:layout_marginEnd="24dp"
         android:text="0 gms"
+        android:textSize="@dimen/content_font_size"
+        android:fontFamily="@string/font_family"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/calories_seekbar" />
 
@@ -85,7 +93,9 @@
         android:layout_marginStart="24dp"
         android:layout_marginTop="16dp"
         android:text="Protein"
-        android:textSize="@dimen/labels_font_size"
+        android:textSize="@dimen/h2_font_size"
+        android:textStyle="bold"
+        android:fontFamily="@string/font_family"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/fat_seekbar" />
 
@@ -96,6 +106,8 @@
         android:layout_marginTop="16dp"
         android:layout_marginEnd="24dp"
         android:text="0 gms"
+        android:textSize="@dimen/content_font_size"
+        android:fontFamily="@string/font_family"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/fat_seekbar" />
 
@@ -118,7 +130,9 @@
         android:layout_marginStart="24dp"
         android:layout_marginTop="16dp"
         android:text="Carbohydrates"
-        android:textSize="@dimen/labels_font_size"
+        android:textSize="@dimen/h2_font_size"
+        android:textStyle="bold"
+        android:fontFamily="@string/font_family"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/protein_seekbar" />
 
@@ -129,6 +143,8 @@
         android:layout_marginTop="16dp"
         android:layout_marginEnd="24dp"
         android:text="0gms"
+        android:textSize="@dimen/content_font_size"
+        android:fontFamily="@string/font_family"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/protein_seekbar" />
 
@@ -149,10 +165,13 @@
         style="@style/Widget.AppCompat.Button.Colored"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="24dp"
+        android:layout_marginStart="64dp"
+        android:layout_marginEnd="64dp"
         android:layout_marginTop="12dp"
-        android:layout_marginEnd="24dp"
-        android:text="Search"
+        android:text="SEARCH"
+        android:textSize="@dimen/h2_font_size"
+        android:fontFamily="@string/font_family"
+        android:background="@drawable/rounded_bg"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"

@@ -44,7 +44,8 @@
         android:padding="2dp"
         android:text="Meal Number One"
         android:textColor="@color/design_default_color_background"
-        android:textSize="24sp"
+        android:textSize="@dimen/h2_font_size"
+        android:fontFamily="@string/font_family"
         app:layout_constraintBottom_toTopOf="@id/info"
         app:layout_constraintEnd_toEndOf="@id/meal"
         app:layout_constraintStart_toEndOf="@id/image"
@@ -78,6 +79,8 @@
             android:paddingStart="5dp"
             android:paddingEnd="5dp"
             android:text="5"
+            android:textSize="@dimen/content_font_size"
+            android:fontFamily="@string/font_family"
             android:textColor="@color/design_default_color_background" />
 
         <ImageView
@@ -95,6 +98,8 @@
             android:paddingStart="5dp"
             android:paddingEnd="5dp"
             android:text="30"
+            android:textSize="@dimen/content_font_size"
+            android:fontFamily="@string/font_family"
             android:textColor="@color/design_default_color_background" />
 
 
@@ -103,7 +108,7 @@
     <View
         android:id="@+id/divider"
         android:layout_width="0dp"
-        android:layout_height="1dp"
+        android:layout_height="3dp"
         android:background="@drawable/divider"
         android:elevation="2dp"
         app:layout_constraintBottom_toBottomOf="parent"

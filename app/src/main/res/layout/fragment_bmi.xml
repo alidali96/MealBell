@@ -11,11 +11,11 @@
         android:id="@+id/main_label"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:fontFamily="serif"
+        android:fontFamily="@string/font_family"
         android:paddingTop="16dp"
         android:paddingBottom="8dp"
         android:text="@string/bmi_title_textview"
-        android:textSize="@dimen/labels_font_size"
+        android:textSize="@dimen/h2_font_size"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -28,6 +28,8 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:paddingBottom="16dp"
+        android:paddingLeft="8dp"
+        android:paddingRight="8dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/main_label">
@@ -36,11 +38,11 @@
             android:id="@+id/weight_label"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:fontFamily="serif"
+            android:fontFamily="@string/font_family"
             android:paddingLeft="8dp"
             android:paddingTop="8dp"
             android:text="Weight:"
-            android:textSize="14sp"
+            android:textSize="@dimen/h2_font_size"
             android:textStyle="bold"
             android:textColor="@color/colorDarkBlue"/>
 
@@ -48,22 +50,22 @@
             android:id="@+id/weight_textView"
             android:layout_width="75dp"
             android:layout_height="wrap_content"
-            android:fontFamily="serif"
+            android:fontFamily="@string/font_family"
             android:lineSpacingExtra="14sp"
-            android:paddingLeft="16dp"
+            android:paddingLeft="8dp"
             android:paddingTop="8dp"
-            android:textSize="14sp"
+            android:textSize="@dimen/content_font_size"
             android:textColor="@color/colorDarkBlue"/>
 
         <TextView
             android:id="@+id/height_label"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:fontFamily="serif"
+            android:fontFamily="@string/font_family"
             android:paddingLeft="24dp"
             android:paddingTop="8dp"
             android:text="Height:"
-            android:textSize="14sp"
+            android:textSize="@dimen/h2_font_size"
             android:textStyle="bold"
             android:textColor="@color/colorDarkBlue"/>
 
@@ -71,10 +73,10 @@
             android:id="@+id/height_textView"
             android:layout_width="75dp"
             android:layout_height="wrap_content"
-            android:fontFamily="serif"
-            android:paddingLeft="16dp"
+            android:fontFamily="@string/font_family"
+            android:paddingLeft="8dp"
             android:paddingTop="8dp"
-            android:textSize="14sp"
+            android:textSize="@dimen/content_font_size"
             android:textColor="@color/colorDarkBlue"/>
 
     </LinearLayout>
@@ -83,11 +85,11 @@
         android:id="@+id/bmi_label"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:fontFamily="serif"
+        android:fontFamily="@string/font_family"
         android:paddingLeft="8dp"
         android:paddingTop="16dp"
         android:text="Your BMI equals:"
-        android:textSize="@dimen/labels_font_size"
+        android:textSize="@dimen/h2_font_size"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -98,10 +100,11 @@
         android:id="@+id/bmi_textView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:fontFamily="serif"
+        android:fontFamily="@string/font_family"
         android:paddingLeft="8dp"
         android:paddingTop="8dp"
-        android:textSize="@dimen/labels_font_size"
+        android:textSize="@dimen/h2_font_size"
+        android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/bmi_label"
@@ -111,11 +114,11 @@
         android:id="@+id/bmi_dif_label"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:fontFamily="serif"
+        android:fontFamily="@string/font_family"
         android:paddingLeft="8dp"
         android:paddingTop="16dp"
         android:text="Body Mass Index (BMI):"
-        android:textSize="@dimen/labels_font_size"
+        android:textSize="@dimen/h2_font_size"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/bmi_textView"
@@ -129,6 +132,8 @@
 divided by the square of the body height, resulting from mass in kilograms and height in metres.
 Weight status varies according to the BMI value as below:
 "
+        android:fontFamily="@string/font_family"
+        android:textSize="@dimen/content_font_size"
         android:paddingLeft="8dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/bmi_dif_label"
@@ -183,6 +188,8 @@ Weight status varies according to the BMI value as below:
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="Below 18.5"
+                android:fontFamily="@string/font_family"
+                android:textSize="@dimen/content_font_size"
                 android:textAlignment="center"
                 android:textColor="@color/colorDarkBlue"/>
 
@@ -192,6 +199,8 @@ Weight status varies according to the BMI value as below:
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="Underweight"
+                android:fontFamily="@string/font_family"
+                android:textSize="@dimen/content_font_size"
                 android:textAlignment="center"
                 android:textColor="@color/colorDarkBlue"/>
         </TableRow>
@@ -206,6 +215,8 @@ Weight status varies according to the BMI value as below:
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="18.5 – 24.9"
+                android:fontFamily="@string/font_family"
+                android:textSize="@dimen/content_font_size"
                 android:textAlignment="center"
                 android:textColor="@color/colorDarkBlue"/>
 
@@ -214,6 +225,8 @@ Weight status varies according to the BMI value as below:
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
+                android:fontFamily="@string/font_family"
+                android:textSize="@dimen/content_font_size"
                 android:text="Normal or Healthy Weight"
                 android:textAlignment="center"
                 android:textColor="@color/colorDarkBlue"/>
@@ -228,6 +241,8 @@ Weight status varies according to the BMI value as below:
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
+                android:fontFamily="@string/font_family"
+                android:textSize="@dimen/content_font_size"
                 android:text="25.0 – 29.9"
                 android:textAlignment="center"
                 android:textColor="@color/colorDarkBlue"/>
@@ -238,6 +253,8 @@ Weight status varies according to the BMI value as below:
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="Overweight"
+                android:fontFamily="@string/font_family"
+                android:textSize="@dimen/content_font_size"
                 android:textAlignment="center"
                 android:textColor="@color/colorDarkBlue"/>
         </TableRow>
@@ -252,6 +269,8 @@ Weight status varies according to the BMI value as below:
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
+                android:fontFamily="@string/font_family"
+                android:textSize="@dimen/content_font_size"
                 android:text="30.0 and Above"
                 android:textAlignment="center"
                 android:textColor="@color/colorDarkBlue"/>
@@ -261,6 +280,8 @@ Weight status varies according to the BMI value as below:
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
+                android:fontFamily="@string/font_family"
+                android:textSize="@dimen/content_font_size"
                 android:text="Obese"
                 android:textAlignment="center"
                 android:textColor="@color/colorDarkBlue"/>

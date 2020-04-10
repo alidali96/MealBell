@@ -57,12 +57,12 @@
                     android:id="@+id/calories"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:fontFamily="sans-serif"
                     android:gravity="center_vertical"
                     android:padding="2.5dp"
                     android:text="Calories"
                     android:textColor="@color/design_default_color_background"
-                    android:textSize="14sp" />
+                    android:fontFamily="@string/font_family"
+                    android:textSize="@dimen/content_font_size" />
 
             </LinearLayout>
 
@@ -84,12 +84,12 @@
                     android:id="@+id/protein"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:fontFamily="sans-serif"
                     android:gravity="center_vertical"
                     android:padding="2.5dp"
                     android:text="Protein"
                     android:textColor="@color/design_default_color_background"
-                    android:textSize="14sp" />
+                    android:fontFamily="@string/font_family"
+                    android:textSize="@dimen/content_font_size" />
             </LinearLayout>
 
             <LinearLayout
@@ -110,12 +110,12 @@
                     android:id="@+id/fat"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:fontFamily="sans-serif"
                     android:gravity="center_vertical"
                     android:padding="2.5dp"
                     android:text="Fat"
                     android:textColor="@color/design_default_color_background"
-                    android:textSize="14sp" />
+                    android:fontFamily="@string/font_family"
+                    android:textSize="@dimen/content_font_size" />
             </LinearLayout>
 
             <LinearLayout
@@ -136,12 +136,12 @@
                     android:id="@+id/carbohydrates"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:fontFamily="sans-serif"
                     android:gravity="center_vertical"
                     android:padding="2.5dp"
                     android:text="Carbs"
                     android:textColor="@color/design_default_color_background"
-                    android:textSize="14sp" />
+                    android:fontFamily="@string/font_family"
+                    android:textSize="@dimen/content_font_size" />
             </LinearLayout>
         </com.google.android.flexbox.FlexboxLayout>
 
@@ -166,6 +166,8 @@
                 android:padding="5dp"
                 android:text="Close"
                 android:textAlignment="center"
+                android:fontFamily="@string/font_family"
+                android:textSize="@dimen/content_font_size"
                 android:textColor="@color/design_default_color_background" />
         </LinearLayout>
     </LinearLayout>

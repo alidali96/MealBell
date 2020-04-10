@@ -49,7 +49,8 @@
         android:elevation="11dp"
         android:text="Recipe"
         android:textColor="@color/design_default_color_background"
-        android:textSize="18sp"
+        android:textSize="@dimen/h2_font_size"
+        android:fontFamily="@string/font_family"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="@id/card_view"
         app:layout_constraintStart_toStartOf="@id/card_view"
@@ -65,7 +66,8 @@
         android:elevation="11dp"
         android:text="Ingredients:"
         android:textColor="@color/design_default_color_background"
-        android:textSize="18sp"
+        android:textSize="@dimen/h2_font_size"
+        android:fontFamily="@string/font_family"
         app:layout_constraintBottom_toBottomOf="@+id/card_view"
         app:layout_constraintEnd_toStartOf="@id/ingredients_list"
         app:layout_constraintStart_toStartOf="@id/card_view"
@@ -100,6 +102,8 @@
                 android:gravity="center"
                 android:text="asdad ads"
                 android:textColor="@color/colorAccent"
+                android:fontFamily="@string/font_family"
+                android:textSize="@dimen/content_font_size"
                 android:visibility="visible" />
 
             <TextView
@@ -109,6 +113,8 @@
                 android:layout_weight="1"
                 android:gravity="center"
                 android:text="asdad ads"
+                android:fontFamily="@string/font_family"
+                android:textSize="@dimen/content_font_size"
                 android:textColor="@color/colorAccent"
                 android:visibility="visible" />
 
@@ -119,6 +125,8 @@
                 android:layout_weight="1"
                 android:gravity="center"
                 android:text="asdad ads"
+                android:fontFamily="@string/font_family"
+                android:textSize="@dimen/content_font_size"
                 android:textColor="@color/colorAccent"
                 android:visibility="visible" />
 
@@ -129,6 +137,8 @@
                 android:layout_weight="1"
                 android:gravity="center"
                 android:text="asdad ads"
+                android:fontFamily="@string/font_family"
+                android:textSize="@dimen/content_font_size"
                 android:textColor="@color/colorAccent"
                 android:visibility="visible" />
 
@@ -139,6 +149,8 @@
                 android:layout_weight="1"
                 android:gravity="center"
                 android:text="asdad ads"
+                android:fontFamily="@string/font_family"
+                android:textSize="@dimen/content_font_size"
                 android:textColor="@color/colorAccent"
                 android:visibility="visible" />
 
@@ -149,6 +161,8 @@
                 android:layout_weight="1"
                 android:gravity="center"
                 android:text="asdad ads"
+                android:fontFamily="@string/font_family"
+                android:textSize="@dimen/content_font_size"
                 android:textColor="@color/colorAccent"
                 android:visibility="visible" />
         </LinearLayout>

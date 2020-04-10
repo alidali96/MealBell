@@ -73,6 +73,7 @@ public class ResultsByIngredientsAdapter extends RecyclerView.Adapter<ResultsByI
             ingredient.setTextColor(ContextCompat.getColor(context, R.color.colorGreen));
 
 
+
             holder.ingredientsContainer.addView(ingredient);
             holder.ingredientsContainer.addView(getDivider());
         }
