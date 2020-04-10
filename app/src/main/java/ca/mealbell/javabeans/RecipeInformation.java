@@ -23,10 +23,24 @@ public class RecipeInformation implements Parcelable {
     private Equipement[] equipments;
     private int readyInMinutes;
     private int servings;
+    private String sourceUrl;
+    private String spoonacularSourceUrl;
 
-    public RecipeInformation(int id, String title, String image, String summary,
-                             String instructions, Ingredient[] extendedIngredients,
-                             Equipement[] equipments, int readyInMinutes, int servings) {
+    public RecipeInformation(int id, String title, String image, String summary, String instructions, Ingredient[] extendedIngredients, Equipement[] equipments, int readyInMinutes, int servings, String sourceUrl, String spoonacularSourceUrl) {
+        this.id = id;
+        this.title = title;
+        this.image = image;
+        this.summary = summary;
+        this.instructions = instructions;
+        this.extendedIngredients = extendedIngredients;
+        this.equipments = equipments;
+        this.readyInMinutes = readyInMinutes;
+        this.servings = servings;
+        this.sourceUrl = sourceUrl;
+        this.spoonacularSourceUrl = spoonacularSourceUrl;
+    }
+
+    public RecipeInformation(int id, String title, String image, String summary, String instructions, Ingredient[] extendedIngredients, Equipement[] equipments, int readyInMinutes, int servings) {
         this.id = id;
         this.title = title;
         this.image = image;
@@ -98,6 +112,14 @@ public class RecipeInformation implements Parcelable {
         return servings;
     }
 
+    public String getSourceUrl() {
+        return sourceUrl;
+    }
+
+    public String getSpoonacularSourceUrl() {
+        return spoonacularSourceUrl;
+    }
+
     public void setExtendedIngredients(Ingredient[] extendedIngredients) {
         this.extendedIngredients = extendedIngredients;
     }
@@ -122,6 +144,8 @@ public class RecipeInformation implements Parcelable {
         dest.writeTypedArray(equipments, flags);
         dest.writeInt(readyInMinutes);
         dest.writeInt(servings);
+        dest.writeString(sourceUrl);
+        dest.writeString(spoonacularSourceUrl);
     }
 
 
