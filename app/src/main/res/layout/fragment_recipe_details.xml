@@ -10,6 +10,7 @@
     android:visibility="gone"
     tools:context=".ui.RecipeDetailsFragment">
 
+
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent">
@@ -31,15 +32,35 @@
                 android:fontFamily="@string/font_family"
                 android:textStyle="bold" />
 
-            <ImageView
-                android:id="@+id/recipeImage_imageView"
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/container"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:adjustViewBounds="true"
-                android:src="@drawable/dish"
-                android:paddingRight="5sp"
-                android:paddingLeft="5sp"
-                />
+                android:layout_height="wrap_content">
+
+                <ImageView
+                    android:id="@+id/share_imageView"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:layout_marginEnd="8dp"
+                    android:layout_marginBottom="8dp"
+                    android:elevation="2dp"
+                    android:src="@drawable/share"
+                    app:layout_constraintBottom_toBottomOf="@id/container"
+                    app:layout_constraintEnd_toEndOf="@id/container" />
+
+                <ImageView
+                    android:id="@+id/recipeImage_imageView"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:adjustViewBounds="true"
+                    android:paddingLeft="5sp"
+                    android:paddingRight="5sp"
+                    android:src="@drawable/dish"
+                    app:layout_constraintBottom_toBottomOf="@id/container"
+                    app:layout_constraintEnd_toEndOf="@id/container"
+                    app:layout_constraintStart_toStartOf="@id/container"
+                    app:layout_constraintTop_toTopOf="@id/container" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
 
             <TextView
                 android:id="@+id/summery_label"

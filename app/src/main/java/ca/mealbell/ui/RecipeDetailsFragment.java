@@ -8,6 +8,7 @@ package ca.mealbell.ui;
  * @date: 03-29-2020
  */
 
+import android.content.Intent;
 import android.opengl.Visibility;
 import android.os.Bundle;
 
@@ -73,6 +74,8 @@ public class RecipeDetailsFragment extends Fragment implements APIResponse {
     TextView instructionsLabel;
     TextView equipmentsLabel;
     TextView summaruLabel;
+    ImageView shareImageView;
+    String sourceUrl;
 
     int id = 0;
 
@@ -121,6 +124,7 @@ public class RecipeDetailsFragment extends Fragment implements APIResponse {
         instructionsLabel = view.findViewById(R.id.instructions_label);
         equipmentsLabel = view.findViewById(R.id.equipments_label);
         summaruLabel = view.findViewById(R.id.summery_label);
+        shareImageView = view.findViewById(R.id.share_imageView);
 
         // Set the ingredients and equipments RecyclerViews
         LinearLayoutManager manager = new LinearLayoutManager(getContext());
@@ -144,6 +148,18 @@ public class RecipeDetailsFragment extends Fragment implements APIResponse {
             populateRecipe(recipe, view);
         }
 
+        shareImageView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                sourceUrl = recipe.getSourceUrl();
+                Intent shareIntent = new Intent(Intent.ACTION_SEND);
+                shareIntent.setType("text/plain");
+                //String shareSubText = "WhatsApp - The Great Chat App"
+                //shareIntent.putExtra(Intent.EXTRA_SUBJECT, shareSubText);
+                shareIntent.putExtra(Intent.EXTRA_TEXT, sourceUrl);
+                startActivity(Intent.createChooser(shareIntent, "Share With"));
+            }
+        });
         return view;
     }
 
