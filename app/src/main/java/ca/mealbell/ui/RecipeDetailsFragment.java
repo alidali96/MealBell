@@ -72,6 +72,7 @@ public class RecipeDetailsFragment extends Fragment implements APIResponse {
     TextView servingsTextView;
     TextView instructionsLabel;
     TextView equipmentsLabel;
+    TextView summaruLabel;
 
     int id = 0;
 
@@ -119,6 +120,7 @@ public class RecipeDetailsFragment extends Fragment implements APIResponse {
         servingsTextView = view.findViewById(R.id.servings_textView);
         instructionsLabel = view.findViewById(R.id.instructions_label);
         equipmentsLabel = view.findViewById(R.id.equipments_label);
+        summaruLabel = view.findViewById(R.id.summery_label);
 
         // Set the ingredients and equipments RecyclerViews
         LinearLayoutManager manager = new LinearLayoutManager(getContext());
@@ -183,9 +185,19 @@ public class RecipeDetailsFragment extends Fragment implements APIResponse {
 
         titleTextView.setText(recipe.getTitle());
         Picasso.get().load(recipe.getImage()).placeholder(R.drawable.dish).into(recipeImageView);
-        summaryTextView.setText(Html.fromHtml(recipe.getSummary(), Html.FROM_HTML_MODE_LEGACY));
+        if (recipe.getSummary() != null) {
+            summaryTextView.setText(Html.fromHtml(recipe.getSummary(), Html.FROM_HTML_MODE_LEGACY));
+        } else {
+            summaruLabel.setVisibility(view.GONE);
+            summaryTextView.setVisibility(view.GONE);
+        }
+        if (recipe.getInstructions() != null) {
+            instructionsTextView.setText(Html.fromHtml(recipe.getInstructions(), Html.FROM_HTML_MODE_LEGACY));
+        } else {
+            instructionsLabel.setVisibility(view.GONE);
+            instructionsTextView.setVisibility(view.GONE);
+        }
         summaryTextView.setMovementMethod(LinkMovementMethod.getInstance());
-        instructionsTextView.setText(Html.fromHtml(recipe.getInstructions(), Html.FROM_HTML_MODE_LEGACY));
         instructionsTextView.setMovementMethod(LinkMovementMethod.getInstance());
         readyInMinutesTextView.setText(recipe.getReadyInMinutes() + "");
         servingsTextView.setText(recipe.getServings() + "");

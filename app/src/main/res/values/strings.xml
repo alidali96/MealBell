@@ -8,7 +8,7 @@
     <string name="action_settings">Settings</string>
 
     <!-- menu items -->
-    <string name="menu_home">Meal Bell</string>
+    <string name="menu_home">Random Recipes</string>
     <string name="menu_search">Search Recipes</string>
     <string name="menu_meal_planner">Meal Planner</string>
     <string name="menu_bmi">BMI</string>
