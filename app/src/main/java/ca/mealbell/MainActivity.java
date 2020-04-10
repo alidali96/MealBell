@@ -71,7 +71,7 @@ public class MainActivity extends AppCompatActivity {
 
         // API Headers
         FOOD_API_HEADERS.put("x-rapidapi-host", "spoonacular-recipe-food-nutrition-v1.p.rapidapi.com");
-        FOOD_API_HEADERS.put("x-rapidapi-key", getString(R.string.api_key));
+        FOOD_API_HEADERS.put("x-rapidapi-key", "a939a7b9e7msh1c26761347024cbp18f6b1jsn61154bf53dbe");
 
         // Set Trivia Notification
         NotificationsManager triviaNotification = new NotificationsManager.Builder(this)
