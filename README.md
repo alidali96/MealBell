@@ -89,16 +89,15 @@ Another cool feature in MealBell is that you receive daily foods jokes and trivi
 
 [![](https://ffindakly.scweb.ca/MealBell/notifications.png)](https://ffindakly.scweb.ca/MealBell/notifications.png)
 
-## Credits and development tools:
-Icons made by [Freepik](https://www.flaticon.com/authors/freepik "Freepik") from [www.flaticon.com](www.flaticon.com "www.flaticon.com")
-Recipes results from: [Food API](https://spoonacular.com/ "Food API")
-API requests handling: [Volley](https://developer.android.com/training/volley "Volley") & [GSON](https://github.com/google/gson "GSON")
-Images handling: [Picasso](https://square.github.io/picasso/ "Picasso")
-Custom layout: [FlexBoxLayout](https://github.com/google/flexbox-layout/ "FlexBoxLayout")
-Folding cells: [Ramotion](https://github.com/Ramotion/folding-cell-android/ "Ramotion")
-Custom slider: [Android-Slidr](https://github.com/florent37/android-slidr/ "Android-Slidr")
-Custom toggle switch: [Android-Toggle-Switch](https://github.com/BelkaLab/Android-Toggle-Switch/ "Android-Toggle-Switch")
-ViewPager animations: [ViewPager animations](https://github.com/kungfucat/ViewPagerTransformerLibrary/ "ViewPager animations")
-Custom Tablayout support library: [Custom-Support-Library](https://developer.android.com/topic/libraries/support-library/packages/ "Custom-Support-Library")
+- Icons made by [Freepik](https://www.flaticon.com/authors/freepik "Freepik") from [www.flaticon.com](www.flaticon.com "www.flaticon.com")
+- Recipes results from: [Food API](https://spoonacular.com/ "Food API")
+- API requests handling: [Volley](https://developer.android.com/training/volley "Volley") & [GSON](https://github.com/google/gson "GSON")
+- Images handling: [Picasso](https://square.github.io/picasso/ "Picasso")
+- Custom layout: [FlexBoxLayout](https://github.com/google/flexbox-layout/ "FlexBoxLayout")
+- Folding cells: [Ramotion](https://github.com/Ramotion/folding-cell-android/ "Ramotion")
+- Custom slider: [Android-Slidr](https://github.com/florent37/android-slidr/ "Android-Slidr")
+- Custom toggle switch: [Android-Toggle-Switch](https://github.com/BelkaLab/Android-Toggle-Switch/ "Android-Toggle-Switch")
+- ViewPager animations: [ViewPager animations](https://github.com/kungfucat/ViewPagerTransformerLibrary/ "ViewPager animations")
+- Custom Tablayout support library: [Custom-Support-Library](https://developer.android.com/topic/libraries/support-library/packages/ "Custom-Support-Library")
 
 
