@@ -89,6 +89,7 @@ Another cool feature in MealBell is that you receive daily foods jokes and trivi
 
 [![](https://ffindakly.scweb.ca/MealBell/notifications.png)](https://ffindakly.scweb.ca/MealBell/notifications.png)
 
+## Credits and development tools:
 - Icons made by [Freepik](https://www.flaticon.com/authors/freepik "Freepik") from [www.flaticon.com](www.flaticon.com "www.flaticon.com")
 - Recipes results from: [Food API](https://spoonacular.com/ "Food API")
 - API requests handling: [Volley](https://developer.android.com/training/volley "Volley") & [GSON](https://github.com/google/gson "GSON")
