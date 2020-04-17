@@ -84,8 +84,9 @@ Through the settings screen, you can enter your data like your name, weight, and
 
 [![](https://ffindakly.scweb.ca/MealBell/units.gif)](https://ffindakly.scweb.ca/MealBell/units.gif)
 
-## Food Jokes and Trivia Notifications:
-Another cool feature in MealBell is that you receive daily foods jokes and trivia as notifications.
+## BMI Calculator:
+MealBell helps you calculate your BMI (Body Mass Index), through your data that you entered from the settings screen.​
+Also, there is a chart of weight status according to the BMI value.
 
 [![](https://ffindakly.scweb.ca/MealBell/notifications.png)](https://ffindakly.scweb.ca/MealBell/notifications.png)
 
